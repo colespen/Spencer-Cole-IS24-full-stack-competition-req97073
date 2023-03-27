@@ -1,28 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Head from "next/head";
-
-import styles from "../styles/Home.module.scss";
-
 import ProductTable from "../components/ProductTable";
 import ProductForm from "../components/ProductForm";
 
-import { fetchProducts, saveProduct } from "../services/products";
+import styles from "../styles/Home.module.scss";
 
-export default function Home() {
+import {
+  fetchInitialProducts,
+  fetchProducts,
+  saveProduct
+} from "../services/products";
+
+
+export async function getStaticProps() {
+  const initialProducts = await fetchInitialProducts();
+  return { props: { initialProducts } };
+}
+
+export default function Home({initialProducts}) {
   const [view, setView] = useState("TABLE");
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(initialProducts);
   console.log("products: ", products);
 
-  // const [newProduct, setNewProduct] = useState({
-  //   productId: "",
-  //   productName: "",
-  //   productOwnerName: "",
-  //   Developers: [],
-  //   scrumMasterName: "",
-  //   startDate: "",
-  //   methodology: ""
-  // });
+  // useEffect(() => {
+  //   fetchProducts(setProducts);
+  // }, []);
+
 
   const handleFetchProducts = () => {
     fetchProducts(setProducts);
@@ -40,7 +44,7 @@ export default function Home() {
         <header className={styles.header}>
           <nav className={styles.nav}>
             <button onClick={handleFetchProducts}>
-              Get Products
+              Update Products
             </button>
             <button onClick={() => setView("FORM")}>
               New Product
