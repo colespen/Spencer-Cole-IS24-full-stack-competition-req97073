@@ -1,28 +1,29 @@
 import { useState } from "react";
 
 import Head from "next/head";
-import Link from "next/link";
 
 import styles from "../styles/Home.module.css";
 
-import Table from "../components/Table";
-import Form from "../components/Form";
+import ProductTable from "../components/ProductTable";
+import ProductForm from "../components/ProductForm";
 
 export default function Home() {
+  const [view, setView] = useState("TABLE");
   const [products, setProducts] = useState([]);
   console.log("products: ", products);
 
-  const [newProduct, setNewProduct] = useState({
-    productId: "",
-    productName: "",
-    productOwnerName: "",
-    Developers: [],
-    scrumMasterName: "",
-    startDate: "",
-    methodology: ""
-  });
+  // const [newProduct, setNewProduct] = useState({
+  //   productId: "",
+  //   productName: "",
+  //   productOwnerName: "",
+  //   Developers: [],
+  //   scrumMasterName: "",
+  //   startDate: "",
+  //   methodology: ""
+  // });
 
   const fetchProducts = async () => {
+    setView("TABLE");
     const response = await fetch("/api/products"); // "Get" default
     if (!response.ok) {
       throw new Error("Failed to fetch data.");
@@ -33,10 +34,11 @@ export default function Home() {
 
   };
 
-  const saveProduct = async (e) => {
+  const saveProduct = async (dataObj) => {
+    console.log("dataObj: ", dataObj)
     const response = await fetch("/api/products", {
       method: "POST",
-      body: JSON.stringify(newProduct),
+      body: JSON.stringify(dataObj),
       headers: {
         "Content-Type": "application/json",
       },
@@ -44,6 +46,7 @@ export default function Home() {
     if (!response.ok) {
       throw new Error("Failed to fetch data.");
     }
+    // console.log("response: ", response)
     const data = await response.json();
     setProducts(data);
   };
@@ -56,19 +59,20 @@ export default function Home() {
         <link rel="icon" href="" />
       </Head>
       <main className={styles.main}>
-        {/* // Fetches the product items when clicked */}
-        <button onClick={fetchProducts}>Get Products</button>
-        <Link></Link>
-        <button>New Product</button>
+        <nav className={styles.nav}>
+          <button onClick={fetchProducts}>
+            Get Products
+          </button>
+          <button onClick={() => setView("FORM")}>
+            New Product
+          </button>
+        </nav >
 
         {/* // Saves a new product item when submitted */}
-        {/* <Form 
-          setNewProduct={setNewProduct}
-          saveProducts={saveProduct}
-          newProduct={newProduct}
-        /> */}
+        {view === "FORM" && <ProductForm saveProducts={saveProduct}
+        />}
         <div>
-          <Table products={products} />
+          {view === "TABLE" && <ProductTable products={products} />}
         </div>
       </main>
     </div>

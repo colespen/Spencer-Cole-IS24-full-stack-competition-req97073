@@ -3,11 +3,21 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 6rem;
+  padding: 3rem 6rem 6rem 6rem;
   min-height: 100vh;
 }
 .main {
   width: 100%;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  margin-top: 20px;
+}
+.nav > button {
+  margin-bottom: 20px;
 }
 
 .table {
@@ -26,4 +36,18 @@
 .tableData > td {
   padding-right: 10px;
   text-align: start;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+.form > label {
+  padding-top: 10px;
+  margin-bottom: 2px;
+  height: 60px;
+}
+.form > label > input {
+  margin-top: 5px;
+  height: 25px;
 }

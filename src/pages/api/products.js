@@ -1,4 +1,5 @@
 import { data } from '../../data/dummyData';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function handler(req, res) {
   res.setHeader("Content-Type", "application/json");
@@ -10,12 +11,12 @@ export default function handler(req, res) {
       break;
 
     case "POST":
-      const { todo, completed } = req.body;
+      // const { todo, completed } = req.body;
+      console.log("req.body: ", req.body)
       data.push({
-        id: data.length + 1,
-        todo,
-        completed: false,
-        userId: 0,
+        id: data.length,
+        productId: uuidv4(),
+        ...req.body,
       });
       res.status(200).json(data);
       break;
