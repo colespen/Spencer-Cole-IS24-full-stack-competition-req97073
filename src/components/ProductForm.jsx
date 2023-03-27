@@ -12,13 +12,12 @@ const ProductForm = ({ saveProducts }) => {
     startDate: "",
     methodology: "",
   });
-  console.log("product: ", newProduct);
+  console.log("newProduct.startDate: ", newProduct.startDate);
   const [errorMessage, setErrorMessage] = useState("");
 
 
-  const handleChange = (e) => {
+  const handleOnChange = (e) => {
     const { name, value } = e.target;
-
     // change date format to `YYYY/MM/DD`
     const newVal =
       name === "startDate" ? value.replace(/-/g, "/") : value;
@@ -27,8 +26,10 @@ const ProductForm = ({ saveProducts }) => {
       ...prev,
       [name]: name === "Developers" ? [newVal] : newVal,
     }));
+
   };
 
+  // max 5 dev's
   const handleAddDeveloper = () => {
     if (newProduct.Developers.length < 5) {
       setNewProduct(prev => ({
@@ -37,7 +38,7 @@ const ProductForm = ({ saveProducts }) => {
       }));
     }
   };
-
+  // remove dev
   const handleRemoveDeveloper = (index) => {
     setNewProduct(prev => ({
       ...prev,
@@ -56,8 +57,9 @@ const ProductForm = ({ saveProducts }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleOnSubmit = (e) => {
     e.preventDefault();
+    // check for empty fields and trigger Tooltip on submit
     if (
       !newProduct.productName ||
       !newProduct.productOwnerName ||
@@ -68,26 +70,40 @@ const ProductForm = ({ saveProducts }) => {
     ) {
       setErrorMessage("Please fill out all fields.");
       return;
+    } else {
+      saveProducts(newProduct);
+      setNewProduct({
+        productName: "",
+        productOwnerName: "",
+        Developers: [],
+        scrumMasterName: "",
+        startDate: "",
+        methodology: "",
+      });
     }
-    saveProducts(newProduct);
-    setNewProduct({
-      productName: "",
-      productOwnerName: "",
-      Developers: [],
-      scrumMasterName: "",
-      startDate: "",
-      methodology: "",
-    });
   };
 
+  const handleReset = (e) => {
+    if (e.target.type === "reset") {
+      setNewProduct({
+        productName: "",
+        productOwnerName: "",
+        Developers: [],
+        scrumMasterName: "",
+        startDate: "",
+        methodology: "",
+      });
+    }
+  }
+
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
+    <form onSubmit={handleOnSubmit} className={styles.form}>
       <label>
         Product Name:<br />
         <input
           name="productName"
-          // value={newProduct.productName}
-          onChange={handleChange}
+          value={newProduct.productName}
+          onChange={handleOnChange}
           required
         />
       </label>
@@ -95,8 +111,8 @@ const ProductForm = ({ saveProducts }) => {
         Product Owner Name:<br />
         <input
           name="productOwnerName"
-          // value={newProduct.productOwnerName}
-          onChange={handleChange}
+          value={newProduct.productOwnerName}
+          onChange={handleOnChange}
           required
         />
       </label>
@@ -133,8 +149,8 @@ const ProductForm = ({ saveProducts }) => {
         Scrum Master Name:<br />
         <input
           name="scrumMasterName"
-          // value={newProduct.scrumMasterName}
-          onChange={handleChange}
+          value={newProduct.scrumMasterName}
+          onChange={handleOnChange}
           required
         />
       </label>
@@ -142,8 +158,8 @@ const ProductForm = ({ saveProducts }) => {
         Start Date:<br />
         <input
           name="startDate"
-          // value={newProduct.startDate}
-          onChange={handleChange}
+          value={newProduct.startDate.replace(/\//g, "-")}
+          onChange={handleOnChange}
           type="date"
           required
         />
@@ -153,7 +169,7 @@ const ProductForm = ({ saveProducts }) => {
         <input
           name="methodology"
           value={newProduct.methodology}
-          onChange={handleChange}
+          onChange={handleOnChange}
           required
         />
       </label>
@@ -162,7 +178,7 @@ const ProductForm = ({ saveProducts }) => {
           Add Product
         </button>
         <Tooltip id="submit-tooltip" place="top" type="error" effect="solid" />
-        <button type="reset">Reset</button>
+        <button type="reset" onClick={handleReset}>Reset</button>
       </div>
     </form>
   );
