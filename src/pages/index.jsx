@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import Head from "next/head";
 
-import styles from "../styles/Home.module.css";
+import styles from "../styles/Home.module.scss";
 
 import ProductTable from "../components/ProductTable";
 import ProductForm from "../components/ProductForm";
@@ -52,23 +52,27 @@ export default function Home() {
   };
 
   return (
-    <div className={styles.mainDiv}>
+    <div className={styles.mainContainer}>
       <Head>
         <title>Product Tracker</title>
         <meta name="description" content="Track products..." />
         <link rel="icon" href="" />
       </Head>
       <main className={styles.main}>
-        <nav className={styles.nav}>
-          <button onClick={fetchProducts}>
-            Get Products
-          </button>
-          <button onClick={() => setView("FORM")}>
-            New Product
-          </button>
-        </nav >
+        <header className={styles.header}>
+          <nav className={styles.nav}>
+            <button onClick={fetchProducts}>
+              Get Products
+            </button>
+            <button onClick={() => setView("FORM")}>
+              New Product
+            </button>
+          </nav >
+          <div className={styles.productCount}>
+            <h1>Total Products: {products.length} </h1>
+          </div>
+        </header>
 
-        {/* // Saves a new product item when submitted */}
         {view === "FORM" && <ProductForm saveProducts={saveProduct}
         />}
         <div>

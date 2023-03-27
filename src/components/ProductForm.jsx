@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Tooltip } from "react-tooltip";
 import 'react-tooltip/dist/react-tooltip.css';
-import styles from "../styles/Home.module.css";
+import styles from "../styles/Home.module.scss";
 
 const ProductForm = ({ saveProducts }) => {
   const [newProduct, setNewProduct] = useState({
@@ -12,11 +12,12 @@ const ProductForm = ({ saveProducts }) => {
     startDate: "",
     methodology: "",
   });
-  console.log("newProduct.startDate: ", newProduct.startDate);
-  const [errorMessage, setErrorMessage] = useState("");
+  console.log("newProduct: ", newProduct);
+  // const [errorMessage, setErrorMessage] = useState("");
 
 
   const handleOnChange = (e) => {
+    // console.log("e.target.value: ", e.target.value)
     const { name, value } = e.target;
     // change date format to `YYYY/MM/DD`
     const newVal =
@@ -63,12 +64,13 @@ const ProductForm = ({ saveProducts }) => {
     if (
       !newProduct.productName ||
       !newProduct.productOwnerName ||
+      !newProduct.Developers.length ||
       newProduct.Developers.some((d) => !d) ||
       !newProduct.scrumMasterName ||
       !newProduct.startDate ||
       !newProduct.methodology
     ) {
-      setErrorMessage("Please fill out all fields.");
+      // setErrorMessage("Please fill out all fields.");
       return;
     } else {
       saveProducts(newProduct);
@@ -94,10 +96,11 @@ const ProductForm = ({ saveProducts }) => {
         methodology: "",
       });
     }
-  }
+  };
 
   return (
     <form onSubmit={handleOnSubmit} className={styles.form}>
+
       <label>
         Product Name:<br />
         <input
@@ -107,6 +110,7 @@ const ProductForm = ({ saveProducts }) => {
           required
         />
       </label>
+
       <label>
         Product Owner Name:<br />
         <input
@@ -116,35 +120,37 @@ const ProductForm = ({ saveProducts }) => {
           required
         />
       </label>
-      <label style={{ "height": "30px" }}>
+
+      <div className={styles.developers}>
         Developers
-      </label>
-      {newProduct.Developers.map((developer, index) => (
-        <div key={index}>
-          <small>
-            Developer {index + 1}:<br />
-            <input
-              name="Developers"
-              value={developer}
-              onChange={(e) => handleDeveloperChange(index, e.target.value)}
-              required
-            />
-          </small>
-          {newProduct.Developers.length > 1 && (
-            <button
-              type="button"
-              onClick={() => handleRemoveDeveloper(index)}
-            >
-              Remove Developer
-            </button>
-          )}
-        </div>
-      ))}
-      {newProduct.Developers.length < 5 && (
-        <button type="button" onClick={handleAddDeveloper}>
-          Add Developer
-        </button>
-      )}
+        {newProduct.Developers.map((developer, index) => (
+          <div key={index} className={styles.developersInner} >
+            <small>
+              Developer {index + 1}:<br />
+              <input
+                name="Developers"
+                value={developer}
+                onChange={(e) => handleDeveloperChange(index, e.target.value)}
+                required
+              />
+            </small>
+            {newProduct.Developers.length > 1 && (
+              <button
+                type="button"
+                onClick={() => handleRemoveDeveloper(index)}
+              >
+                <small>Remove Developer</small>
+              </button>
+            )}
+          </div>
+        ))}
+        {newProduct.Developers.length < 5 && (
+          <button type="button" onClick={handleAddDeveloper}>
+            Add Developer
+          </button>
+        )}
+      </div>
+
       <label>
         Scrum Master Name:<br />
         <input
@@ -154,6 +160,7 @@ const ProductForm = ({ saveProducts }) => {
           required
         />
       </label>
+
       <label>
         Start Date:<br />
         <input
@@ -164,15 +171,31 @@ const ProductForm = ({ saveProducts }) => {
           required
         />
       </label>
+
       <label>
         Methodology:<br />
-        <input
-          name="methodology"
-          value={newProduct.methodology}
-          onChange={handleOnChange}
-          required
-        />
+        <div>
+          <input
+            name="methodology"
+            id="agile"
+            value="Agile"
+            onChange={handleOnChange}
+            type="radio"
+            required
+          />
+          <label htmlFor="agile">Agile</label>
+          <input
+            name="methodology"
+            id="waterfall"
+            value="Waterfall"
+            onChange={handleOnChange}
+            type="radio"
+            required
+          />
+          <label htmlFor="waterfall">Waterfall</label>
+        </div>
       </label>
+
       <div className={styles.nav}>
         <button id="submit-btn" type="submit" data-tip data-for="submit-tooltip">
           Add Product
@@ -185,64 +208,3 @@ const ProductForm = ({ saveProducts }) => {
 };
 
 export default ProductForm;
-
-{/* <button id="submit-btn" type="submit" data-tip data-for="submit-tooltip">
-Add Product
-</button>
-<Tooltip id="submit-tooltip" place="top" type="error" effect="solid" /> */}
-
-
-// import styles from "../styles/Home.module.css";
-
-// const Form = ({ saveProducts }) => {
-
-//   // const handleChange = (e) => {
-//   //   setNewProduct({
-//   //     productName: e.target.value,
-//   //   });
-//   // };
-
-// const handleSubmit = (e) => {
-//   e.preventDefault();
-//   const form = e.target;
-//   const formData = new FormData(form);
-//   const dataObject = Object.fromEntries(formData.entries());
-//   console.log("dataObject: ", dataObject);
-//   saveProducts(dataObject);
-// };
-
-//   return (
-//     <form onSubmit={handleSubmit} className={styles.form}>
-//       <label>
-//         Product Name:<br />
-//         <input name="productName" />
-//       </label>
-//       <label>
-//         Product Owner Name:<br />
-//         <input name="productOwnerName" />
-//       </label>
-//       <label>
-//         Developers:<br />
-//         <input name="Developers" />
-//       </label>
-//       <label>
-//         Scrum Master Name:<br />
-//         <input name="scrumMasterName" />
-//       </label>
-//       <label>
-//         Start Date:<br />
-//         <input name="startDate" placeholder="YYYY/MM/DD" />
-//       </label>
-//       <label>
-//         Methodology:<br />
-//         <input name="methodology" />
-//       </label>
-//       <div className={styles.nav}>
-//         <button type="submit">Add Product</button>
-//         <button type="reset">Reset</button>
-//       </div>
-//     </form>
-//   );
-// };
-
-// export default Form;

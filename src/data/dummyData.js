@@ -562,7 +562,7 @@ export const data = [
   {
     "id": 35,
     "productId": "0f9a2f2a-23dc-44c8-9aaf-f361a6cf045b",
-    "productName": "duis labore sunt",
+    "productName": "Duis labore sunt",
     "productOwnerName": "Pratt Cobb",
     "Developers": [
       "Fanny Salas",
@@ -578,7 +578,7 @@ export const data = [
   {
     "id": 36,
     "productId": "62eabf9f-be0c-49e6-ae97-ddb3322386b3",
-    "productName": "sint pariatur ullamco",
+    "productName": "Sint pariatur ullamco",
     "productOwnerName": "Valarie Mcfarland",
     "Developers": [
       "Wilkerson Wynn",
@@ -594,7 +594,7 @@ export const data = [
   {
     "id": 37,
     "productId": "4b796ecf-c318-4fa1-af51-9c7878fb5317",
-    "productName": "fugiat ipsum magna",
+    "productName": "Fugiat ipsum magna",
     "productOwnerName": "Greene Holder",
     "Developers": [
       "Millicent Mcneil",
@@ -610,7 +610,7 @@ export const data = [
   {
     "id": 38,
     "productId": "85eb8a6c-ef4d-4712-9202-e78b8b1bdbdf",
-    "productName": "dolor quis elit",
+    "productName": "Dolor quis elit",
     "productOwnerName": "Welch Cleveland",
     "Developers": [
       "Anderson Thompson",
@@ -642,7 +642,7 @@ export const data = [
   {
     "id": 40,
     "productId": "29a13348-f2f2-404b-9a62-52c99471b6cd",
-    "productName": "proident ut fugiat",
+    "productName": "Proident ut fugiat",
     "productOwnerName": "Sadie Snyder",
     "Developers": [
       "Little Sanchez",

@@ -1,5 +1,5 @@
 import { dateSort } from "../helpers/sort";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/Home.module.scss";
 
 const ProductTable = ({ products }) => {
 
@@ -9,13 +9,19 @@ const ProductTable = ({ products }) => {
       defaultDateSort.map((product) => (
         <tbody key={product.id} className={styles.tableBody}>
           <tr className={styles.tableData}>
-            <td>{product.productId}</td>
-            <td>{product.productName}</td>
+            <td><strong>{product.productName}</strong></td>
             <td>{product.productOwnerName}</td>
-            <td>{product.Developers}</td>
+            <td>
+              <ul>
+                {product.Developers.map((dev, i) =>
+                  <li key={product.id + i}>{dev}</li>
+                )}
+              </ul>
+            </td>
             <td>{product.scrumMasterName}</td>
             <td>{product.startDate}</td>
             <td>{product.methodology}</td>
+            <td><small>{product.productId}</small></td>
           </tr>
         </tbody>)
       ));
@@ -25,13 +31,13 @@ const ProductTable = ({ products }) => {
     <table className={styles.table}>
       <thead>
         <tr className={styles.tableHeaders}>
-          <th>productId</th>
-          <th>productName</th>
-          <th>productOwnerName</th>
+          <th>Product</th>
+          <th>Owner</th>
           <th>Developers</th>
-          <th>scrumMasterName</th>
-          <th>startDate</th>
-          <th>methodology</th>
+          <th>ScrumMaster</th>
+          <th>Start Date</th>
+          <th>Methodology</th>
+          <th>ID</th>
         </tr>
       </thead>
       <ProductTableBodyItems />

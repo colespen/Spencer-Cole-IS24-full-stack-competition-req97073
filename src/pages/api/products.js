@@ -11,7 +11,6 @@ export default function handler(req, res) {
       break;
 
     case "POST":
-      // const { todo, completed } = req.body;
       console.log("req.body: ", req.body)
       data.push({
         id: data.length,
@@ -20,8 +19,9 @@ export default function handler(req, res) {
       });
       res.status(200).json(data);
       break;
-
-    case "PUT":
+      
+      case "PUT":
+      // const { } = req.body;
       res.status(200);
       break;
 
