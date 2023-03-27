@@ -35,7 +35,7 @@ export default function Home() {
   };
 
   const saveProduct = async (dataObj) => {
-    console.log("dataObj: ", dataObj)
+    console.log("dataObj: ", dataObj);
     const response = await fetch("/api/products", {
       method: "POST",
       body: JSON.stringify(dataObj),

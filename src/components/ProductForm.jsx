@@ -7,19 +7,53 @@ const ProductForm = ({ saveProducts }) => {
   const [newProduct, setNewProduct] = useState({
     productName: "",
     productOwnerName: "",
-    Developers: "",
+    Developers: [],
     scrumMasterName: "",
     startDate: "",
     methodology: "",
   });
-  console.log("product: ", newProduct)
+  console.log("product: ", newProduct);
   const [errorMessage, setErrorMessage] = useState("");
 
+
   const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    // change date format to `YYYY/MM/DD`
+    const newVal =
+      name === "startDate" ? value.replace(/-/g, "/") : value;
+    // set array of strings if Developers
     setNewProduct(prev => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: name === "Developers" ? [newVal] : newVal,
     }));
+  };
+
+  const handleAddDeveloper = () => {
+    if (newProduct.Developers.length < 5) {
+      setNewProduct(prev => ({
+        ...prev,
+        Developers: [...prev.Developers, ""],
+      }));
+    }
+  };
+
+  const handleRemoveDeveloper = (index) => {
+    setNewProduct(prev => ({
+      ...prev,
+      Developers: prev.Developers.filter((_, i) => i !== index),
+    }));
+  };
+
+  const handleDeveloperChange = (index, value) => {
+    setNewProduct(prev => {
+      const newDevelopers = [...prev.Developers];
+      newDevelopers[index] = value;
+      return {
+        ...prev,
+        Developers: newDevelopers,
+      };
+    });
   };
 
   const handleSubmit = (e) => {
@@ -27,7 +61,7 @@ const ProductForm = ({ saveProducts }) => {
     if (
       !newProduct.productName ||
       !newProduct.productOwnerName ||
-      !newProduct.developers ||
+      newProduct.Developers.some((d) => !d) ||
       !newProduct.scrumMasterName ||
       !newProduct.startDate ||
       !newProduct.methodology
@@ -39,7 +73,7 @@ const ProductForm = ({ saveProducts }) => {
     setNewProduct({
       productName: "",
       productOwnerName: "",
-      developers: "",
+      Developers: [],
       scrumMasterName: "",
       startDate: "",
       methodology: "",
@@ -52,7 +86,7 @@ const ProductForm = ({ saveProducts }) => {
         Product Name:<br />
         <input
           name="productName"
-          value={newProduct.productName}
+          // value={newProduct.productName}
           onChange={handleChange}
           required
         />
@@ -61,25 +95,45 @@ const ProductForm = ({ saveProducts }) => {
         Product Owner Name:<br />
         <input
           name="productOwnerName"
-          value={newProduct.productOwnerName}
+          // value={newProduct.productOwnerName}
           onChange={handleChange}
           required
         />
       </label>
-      <label>
-        Developers:<br />
-        <input
-          name="Developers"
-          value={newProduct.developers}
-          onChange={handleChange}
-          required
-        />
+      <label style={{ "height": "30px" }}>
+        Developers
       </label>
+      {newProduct.Developers.map((developer, index) => (
+        <div key={index}>
+          <small>
+            Developer {index + 1}:<br />
+            <input
+              name="Developers"
+              value={developer}
+              onChange={(e) => handleDeveloperChange(index, e.target.value)}
+              required
+            />
+          </small>
+          {newProduct.Developers.length > 1 && (
+            <button
+              type="button"
+              onClick={() => handleRemoveDeveloper(index)}
+            >
+              Remove Developer
+            </button>
+          )}
+        </div>
+      ))}
+      {newProduct.Developers.length < 5 && (
+        <button type="button" onClick={handleAddDeveloper}>
+          Add Developer
+        </button>
+      )}
       <label>
         Scrum Master Name:<br />
         <input
           name="scrumMasterName"
-          value={newProduct.scrumMasterName}
+          // value={newProduct.scrumMasterName}
           onChange={handleChange}
           required
         />
@@ -88,7 +142,7 @@ const ProductForm = ({ saveProducts }) => {
         Start Date:<br />
         <input
           name="startDate"
-          value={newProduct.startDate}
+          // value={newProduct.startDate}
           onChange={handleChange}
           type="date"
           required
@@ -104,11 +158,11 @@ const ProductForm = ({ saveProducts }) => {
         />
       </label>
       <div className={styles.nav}>
-      <button id="submit-btn" type="submit" data-tip data-for="submit-tooltip">
-        Add Product
-      </button>
-      <Tooltip id="submit-tooltip" place="top" type="error" effect="solid" />
-      <button type="reset">Reset</button>
+        <button id="submit-btn" type="submit" data-tip data-for="submit-tooltip">
+          Add Product
+        </button>
+        <Tooltip id="submit-tooltip" place="top" type="error" effect="solid" />
+        <button type="reset">Reset</button>
       </div>
     </form>
   );
