@@ -7,6 +7,8 @@ import styles from "../styles/Home.module.scss";
 import ProductTable from "../components/ProductTable";
 import ProductForm from "../components/ProductForm";
 
+import { fetchProducts, saveProduct } from "../services/products";
+
 export default function Home() {
   const [view, setView] = useState("TABLE");
   const [products, setProducts] = useState([]);
@@ -22,33 +24,9 @@ export default function Home() {
   //   methodology: ""
   // });
 
-  const fetchProducts = async () => {
+  const handleFetchProducts = () => {
+    fetchProducts(setProducts);
     setView("TABLE");
-    const response = await fetch("/api/products"); // "Get" default
-    if (!response.ok) {
-      throw new Error("Failed to fetch data.");
-    }
-    // console.log("response: ", response) 
-    const data = await response.json();
-    setProducts(data);
-
-  };
-
-  const saveProduct = async (dataObj) => {
-    console.log("dataObj: ", dataObj);
-    const response = await fetch("/api/products", {
-      method: "POST",
-      body: JSON.stringify(dataObj),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (!response.ok) {
-      throw new Error("Failed to fetch data.");
-    }
-    // console.log("response: ", response)
-    const data = await response.json();
-    setProducts(data);
   };
 
   return (
@@ -61,7 +39,7 @@ export default function Home() {
       <main className={styles.main}>
         <header className={styles.header}>
           <nav className={styles.nav}>
-            <button onClick={fetchProducts}>
+            <button onClick={handleFetchProducts}>
               Get Products
             </button>
             <button onClick={() => setView("FORM")}>
@@ -73,10 +51,14 @@ export default function Home() {
           </div>
         </header>
 
-        {view === "FORM" && <ProductForm saveProducts={saveProduct}
+        {view === "FORM" && <ProductForm
+          setProducts={setProducts}
+          saveProduct={saveProduct}
         />}
         <div>
-          {view === "TABLE" && <ProductTable products={products} />}
+          {view === "TABLE" && <ProductTable
+            products={products}
+          />}
         </div>
       </main>
     </div>

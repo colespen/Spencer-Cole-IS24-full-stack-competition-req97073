@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Tooltip } from "react-tooltip";
+
+
 import 'react-tooltip/dist/react-tooltip.css';
 import styles from "../styles/Home.module.scss";
 
-const ProductForm = ({ saveProducts }) => {
+const ProductForm = ({ saveProduct, setProducts }) => {
   const [newProduct, setNewProduct] = useState({
     productName: "",
     productOwnerName: "",
@@ -15,6 +17,10 @@ const ProductForm = ({ saveProducts }) => {
   console.log("newProduct: ", newProduct);
   // const [errorMessage, setErrorMessage] = useState("");
 
+  const handleSaveProduct = () => {
+    saveProduct(newProduct, setProducts)
+    // setView("TABLE")
+  };
 
   const handleOnChange = (e) => {
     // console.log("e.target.value: ", e.target.value)
@@ -73,7 +79,7 @@ const ProductForm = ({ saveProducts }) => {
       // setErrorMessage("Please fill out all fields.");
       return;
     } else {
-      saveProducts(newProduct);
+      handleSaveProduct();
       setNewProduct({
         productName: "",
         productOwnerName: "",
@@ -174,7 +180,7 @@ const ProductForm = ({ saveProducts }) => {
 
       <label>
         Methodology:<br />
-        <div>
+        <div className={styles.radioBtns}>
           <input
             name="methodology"
             id="agile"
@@ -182,6 +188,7 @@ const ProductForm = ({ saveProducts }) => {
             onChange={handleOnChange}
             type="radio"
             required
+            style={{width:"20px"}}
           />
           <label htmlFor="agile">Agile</label>
           <input
@@ -191,12 +198,13 @@ const ProductForm = ({ saveProducts }) => {
             onChange={handleOnChange}
             type="radio"
             required
+            style={{width:"20px"}}
           />
           <label htmlFor="waterfall">Waterfall</label>
         </div>
       </label>
 
-      <div className={styles.nav}>
+      <div className={styles.submitForm}>
         <button id="submit-btn" type="submit" data-tip data-for="submit-tooltip">
           Add Product
         </button>
