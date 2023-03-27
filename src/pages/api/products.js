@@ -7,11 +7,12 @@ export default function handler(req, res) {
 
   switch (method) {
     case "GET":
+      console.log("GET -- data: ", data);
       res.status(200).json(data);
       break;
 
     case "POST":
-      console.log("req.body: ", req.body)
+      console.log("POST -- req.body: ", req.body);
       data.push({
         id: data.length,
         productId: uuidv4(),
@@ -19,9 +20,18 @@ export default function handler(req, res) {
       });
       res.status(200).json(data);
       break;
-      
-      case "PUT":
-      // const { } = req.body;
+
+    case "PUT":
+      console.log("PUT -- req.body: ", req.body);
+      console.log("PUT -- req.params: ", req.params);
+      // const { } = req.params;
+      // const editedProd = {};
+      // const result =
+      //   Object.entries(data).map(
+      //     ([key, value]) => value.id === editedProd.id
+      //       ? { [key]: { ...value, ...editedProd } }
+      //       : { [key]: value });
+
       res.status(200);
       break;
 

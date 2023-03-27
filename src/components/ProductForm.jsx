@@ -5,7 +5,17 @@ import { Tooltip } from "react-tooltip";
 import 'react-tooltip/dist/react-tooltip.css';
 import styles from "../styles/Home.module.scss";
 
-const ProductForm = ({ saveProduct, setProducts }) => {
+const ProductForm = (props) => {
+  const {
+    saveProduct,
+    setProducts,
+    formType, 
+    id,
+    product
+  } = props;
+  console.log("ProductForm - id: ", id);
+  // console.log("product: ", product);
+
   const [newProduct, setNewProduct] = useState({
     productName: "",
     productOwnerName: "",
@@ -14,26 +24,24 @@ const ProductForm = ({ saveProduct, setProducts }) => {
     startDate: "",
     methodology: "",
   });
-  console.log("newProduct: ", newProduct);
+
+  // console.log("newProduct: ", newProduct);
   // const [errorMessage, setErrorMessage] = useState("");
 
   const handleSaveProduct = () => {
-    saveProduct(newProduct, setProducts)
+    saveProduct(newProduct, setProducts);
     // setView("TABLE")
   };
 
   const handleOnChange = (e) => {
-    // console.log("e.target.value: ", e.target.value)
     const { name, value } = e.target;
-    // change date format to `YYYY/MM/DD`
-    const newVal =
+    const newVal =  // change date format to `YYYY/MM/DD`
       name === "startDate" ? value.replace(/-/g, "/") : value;
     // set array of strings if Developers
     setNewProduct(prev => ({
       ...prev,
       [name]: name === "Developers" ? [newVal] : newVal,
     }));
-
   };
 
   // max 5 dev's
@@ -105,113 +113,124 @@ const ProductForm = ({ saveProduct, setProducts }) => {
   };
 
   return (
-    <form onSubmit={handleOnSubmit} className={styles.form}>
+    <>
+      <h2>{formType} Product</h2>
+      <form onSubmit={handleOnSubmit} className={styles.form}>
 
-      <label>
-        Product Name:<br />
-        <input
-          name="productName"
-          value={newProduct.productName}
-          onChange={handleOnChange}
-          required
-        />
-      </label>
-
-      <label>
-        Product Owner Name:<br />
-        <input
-          name="productOwnerName"
-          value={newProduct.productOwnerName}
-          onChange={handleOnChange}
-          required
-        />
-      </label>
-
-      <div className={styles.developers}>
-        Developers
-        {newProduct.Developers.map((developer, index) => (
-          <div key={index} className={styles.developersInner} >
-            <small>
-              Developer {index + 1}:<br />
-              <input
-                name="Developers"
-                value={developer}
-                onChange={(e) => handleDeveloperChange(index, e.target.value)}
-                required
-              />
-            </small>
-            {newProduct.Developers.length > 1 && (
-              <button
-                type="button"
-                onClick={() => handleRemoveDeveloper(index)}
-              >
-                <small>Remove Developer</small>
-              </button>
-            )}
-          </div>
-        ))}
-        {newProduct.Developers.length < 5 && (
-          <button type="button" onClick={handleAddDeveloper}>
-            Add Developer
-          </button>
-        )}
-      </div>
-
-      <label>
-        Scrum Master Name:<br />
-        <input
-          name="scrumMasterName"
-          value={newProduct.scrumMasterName}
-          onChange={handleOnChange}
-          required
-        />
-      </label>
-
-      <label>
-        Start Date:<br />
-        <input
-          name="startDate"
-          value={newProduct.startDate.replace(/\//g, "-")}
-          onChange={handleOnChange}
-          type="date"
-          required
-        />
-      </label>
-
-      <label>
-        Methodology:<br />
-        <div className={styles.radioBtns}>
+        <label>
+          Product Name:<br />
           <input
-            name="methodology"
-            id="agile"
-            value="Agile"
+            name="productName"
+            value={newProduct.productName}
             onChange={handleOnChange}
-            type="radio"
             required
-            style={{width:"20px"}}
           />
-          <label htmlFor="agile">Agile</label>
+        </label>
+
+        <label>
+          Product Owner Name:<br />
           <input
-            name="methodology"
-            id="waterfall"
-            value="Waterfall"
+            name="productOwnerName"
+            value={newProduct.productOwnerName}
             onChange={handleOnChange}
-            type="radio"
             required
-            style={{width:"20px"}}
           />
-          <label htmlFor="waterfall">Waterfall</label>
+        </label>
+
+        <div className={styles.developers}>
+          Developers
+          {newProduct.Developers.map((developer, index) => (
+            <div key={index} className={styles.developersInner} >
+              <small>
+                Developer {index + 1}:<br />
+                <input
+                  name="Developers"
+                  value={developer}
+                  onChange={(e) => handleDeveloperChange(index, e.target.value)}
+                  required
+                />
+              </small>
+              {newProduct.Developers.length > 1 && (
+                <button
+                  type="button"
+                  onClick={() => handleRemoveDeveloper(index)}
+                >
+                  <small>Remove Developer</small>
+                </button>
+              )}
+            </div>
+          ))}
+          {newProduct.Developers.length < 5 && (
+            <button type="button" onClick={handleAddDeveloper}>
+              Add Developer
+            </button>
+          )}
         </div>
-      </label>
 
-      <div className={styles.submitForm}>
-        <button id="submit-btn" type="submit" data-tip data-for="submit-tooltip">
-          Add Product
-        </button>
-        <Tooltip id="submit-tooltip" place="top" type="error" effect="solid" />
-        <button type="reset" onClick={handleReset}>Reset</button>
-      </div>
-    </form>
+        <label>
+          Scrum Master Name:<br />
+          <input
+            name="scrumMasterName"
+            value={newProduct.scrumMasterName}
+            onChange={handleOnChange}
+            required
+          />
+        </label>
+
+        {<label>
+          Start Date:<br />
+          <input
+            name="startDate"
+            value={newProduct.startDate.replace(/\//g, "-")}
+            onChange={handleOnChange}
+            type="date"
+            required
+            disabled={formType === "Edit"}
+          />
+        </label>}
+
+        <label>
+          Methodology:<br />
+          <div className={styles.radioBtns}>
+            <input
+              name="methodology"
+              id="agile"
+              value="Agile"
+              onChange={handleOnChange}
+              type="radio"
+              required
+              style={{ width: "20px", minWidth: "20px" }}
+            />
+            <label htmlFor="agile">Agile</label>
+            <input
+              name="methodology"
+              id="waterfall"
+              value="Waterfall"
+              onChange={handleOnChange}
+              type="radio"
+              required
+              style={{ width: "20px", minWidth: "20px" }}
+            />
+            <label htmlFor="waterfall">Waterfall</label>
+          </div>
+        </label>
+
+        <div className={styles.submitForm}>
+
+          {formType === "Create" &&
+            <button id="submit-btn" type="submit" data-tip data-for="submit-tooltip">
+              Add Product
+            </button>}
+
+          {formType === "Edit" &&
+            <button id="submit-btn" type="submit" data-tip data-for="submit-tooltip">
+              Edit Product
+            </button>}
+          <button type="reset" onClick={handleReset}>Reset</button>
+          <Tooltip id="submit-tooltip" place="top" type="error" effect="solid" />
+        </div>
+      </form>
+    </>
   );
 };
 

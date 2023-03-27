@@ -66,7 +66,7 @@ export const data = [
   {
     "id": 4,
     "productId": "43ecdf3e-f2c5-4368-be82-9133cf79e57b",
-    "productName": "elit laboris veniam",
+    "productName": "Elit Laboris Veniam",
     "productOwnerName": "Lidia Moran",
     "Developers": [
       "Bessie Burris",
@@ -82,7 +82,7 @@ export const data = [
   {
     "id": 5,
     "productId": "5d3f9972-6269-410f-a4ea-8a678a5df7b7",
-    "productName": "deserunt qui proident",
+    "productName": "Deserunt Qui Proident",
     "productOwnerName": "Colleen Hinton",
     "Developers": [
       "Vang Brock",
@@ -114,7 +114,7 @@ export const data = [
   {
     "id": 7,
     "productId": "8de57255-8648-40b7-af87-b3aeee66b1ba",
-    "productName": "ea velit aliquip",
+    "productName": "Ea Velit Aliquip",
     "productOwnerName": "Kaufman Copeland",
     "Developers": [
       "Dale Clements",
@@ -274,7 +274,7 @@ export const data = [
   {
     "id": 17,
     "productId": "702cd4ca-a674-48e5-a4f0-e949ce00a8f1",
-    "productName": "non ea eu",
+    "productName": "Non Ea Eu",
     "productOwnerName": "Singleton Barry",
     "Developers": [
       "Alana Cunningham",
@@ -386,7 +386,7 @@ export const data = [
   {
     "id": 24,
     "productId": "53205f75-030d-4b42-ba26-bcc39c257099",
-    "productName": "ad nulla minim",
+    "productName": "Ad Nulla Minim",
     "productOwnerName": "Montoya Stein",
     "Developers": [
       "Silva David",
@@ -450,7 +450,7 @@ export const data = [
   {
     "id": 28,
     "productId": "1f07fcf6-ab1b-4121-88e3-b3b3d92416f0",
-    "productName": "officia sint excepteur",
+    "productName": "Officia Sint Excepteur",
     "productOwnerName": "Love Wheeler",
     "Developers": [
       "Courtney Warren",
@@ -466,7 +466,7 @@ export const data = [
   {
     "id": 29,
     "productId": "cdcaa0f4-ee52-42d8-a278-b384bd03cea3",
-    "productName": "excepteur laboris ipsum",
+    "productName": "Excepteur Laboris Ipsum",
     "productOwnerName": "Celia Buckner",
     "Developers": [
       "Avila Christian",
@@ -482,7 +482,7 @@ export const data = [
   {
     "id": 30,
     "productId": "e6dc19b8-27c2-44e2-942c-44c5c60d6f52",
-    "productName": "dolore quis eiusmod",
+    "productName": "Dolore quis eiusmod",
     "productOwnerName": "Mindy Clarke",
     "Developers": [
       "Ortiz Garrett",
@@ -498,7 +498,7 @@ export const data = [
   {
     "id": 31,
     "productId": "25ea3dec-9aac-406a-abee-b08942df1ba9",
-    "productName": "non ipsum reprehenderit",
+    "productName": "Non ipsum reprehenderit",
     "productOwnerName": "Kara Booker",
     "Developers": [
       "Bettye Coleman",
@@ -514,7 +514,7 @@ export const data = [
   {
     "id": 32,
     "productId": "f93779ba-fd7a-4d13-ae9b-210cda6f0e53",
-    "productName": "amet irure ad",
+    "productName": "Amet irure ad",
     "productOwnerName": "Cote Mclaughlin",
     "Developers": [
       "Suarez Wells",
@@ -530,7 +530,7 @@ export const data = [
   {
     "id": 33,
     "productId": "51472ef3-b5ea-47e4-a320-0b00679cace5",
-    "productName": "aute anim proident",
+    "productName": "Aute anim proident",
     "productOwnerName": "Pam Bonner",
     "Developers": [
       "Aileen Whitfield",
@@ -546,7 +546,7 @@ export const data = [
   {
     "id": 34,
     "productId": "5a88b086-8a8b-45d8-84de-ddf9fcb81396",
-    "productName": "duis voluptate laboris",
+    "productName": "Duis voluptate laboris",
     "productOwnerName": "Vicki Marshall",
     "Developers": [
       "Short Nguyen",
@@ -578,7 +578,7 @@ export const data = [
   {
     "id": 36,
     "productId": "62eabf9f-be0c-49e6-ae97-ddb3322386b3",
-    "productName": "Sint pariatur ullamco",
+    "productName": "Sint Pariatur Ullamco",
     "productOwnerName": "Valarie Mcfarland",
     "Developers": [
       "Wilkerson Wynn",

@@ -25,9 +25,14 @@
 
 .table {
   width: 100%;
-  .tableHeaders > th {
-    padding-right: 10px;
-    text-align: start;
+  thead {
+    width: 100%
+  }
+  .tableHeaders {
+    th {
+      padding-right: 10px;
+      text-align: start;
+    }
   }
   .tableBody {
     height: 150px;
@@ -36,8 +41,11 @@
       text-align: start;
     }
   }
-  ul {
-    list-style: none;
+  .developerList {
+    width: 160px;
+    ul {
+      list-style: none;
+    }
   }
 }
 
@@ -52,7 +60,9 @@
     input {
       margin-top: 5px;
       height: 25px;
-      width: 90%;
+      width: 60%;
+      min-width: 150px;
+      max-width: 450px;
     }
   }
   .developers {

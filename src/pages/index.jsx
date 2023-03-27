@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
+import Layout from "../components/Layout";
 import Head from "next/head";
 import ProductTable from "../components/ProductTable";
 import ProductForm from "../components/ProductForm";
@@ -18,14 +19,11 @@ export async function getStaticProps() {
   return { props: { initialProducts } };
 }
 
-export default function Home({initialProducts}) {
-  const [view, setView] = useState("TABLE");
+export default function Home({ initialProducts }) {
   const [products, setProducts] = useState(initialProducts);
-  console.log("products: ", products);
-
-  // useEffect(() => {
-  //   fetchProducts(setProducts);
-  // }, []);
+  const [view, setView] = useState("TABLE");
+  const [formType, setFormType] = useState("");
+  // console.log("products: ", products);
 
 
   const handleFetchProducts = () => {
@@ -33,39 +31,36 @@ export default function Home({initialProducts}) {
     setView("TABLE");
   };
 
-  return (
-    <div className={styles.mainContainer}>
-      <Head>
-        <title>Product Tracker</title>
-        <meta name="description" content="Track products..." />
-        <link rel="icon" href="" />
-      </Head>
-      <main className={styles.main}>
-        <header className={styles.header}>
-          <nav className={styles.nav}>
-            <button onClick={handleFetchProducts}>
-              Update Products
-            </button>
-            <button onClick={() => setView("FORM")}>
-              New Product
-            </button>
-          </nav >
-          <div className={styles.productCount}>
-            <h1>Total Products: {products.length} </h1>
-          </div>
-        </header>
+  const handleNewProduct = () => {
+    setFormType("Create");
+    setView("FORM");
+  };
 
-        {view === "FORM" && <ProductForm
-          setProducts={setProducts}
-          saveProduct={saveProduct}
-        />}
-        <div>
-          {view === "TABLE" && <ProductTable
-            products={products}
-          />}
+  return (
+    <Layout>
+      <header className={styles.header}>
+        <nav className={styles.nav}>
+          <button onClick={handleFetchProducts}>
+            {view === "TABLE" ? "Update" : "View"} Products
+          </button>
+          <button onClick={handleNewProduct}>
+            New Product
+          </button>
+        </nav >
+        <div className={styles.productCount}>
+          <h1>Total Products: {products.length} </h1>
         </div>
-      </main>
-    </div>
+      </header>
+      {view === "FORM" && <ProductForm
+        setProducts={setProducts}
+        saveProduct={saveProduct}
+        formType={formType}
+      />}
+      {view === "TABLE" && <ProductTable
+        products={products}
+        setView={setView}
+        setFormType={setFormType}
+      />}
+    </Layout>
   );
 }
-

@@ -12,4 +12,11 @@ const dateSort = (allProductsData) => {
   });
 };
 
-export { dateSort }; 
+const kebabCase = (str) => {
+  return str
+    .replace(/([a-z])([A-Z])/g, "$1-$2")
+    .replace(/[\s_]+/g, '-')
+    .toLowerCase();
+};
+
+export { dateSort, kebabCase };
