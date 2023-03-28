@@ -9,14 +9,14 @@ const ProductForm = (props) => {
   const {
     saveProduct,
     setProducts,
-    formType, 
     id,
-    product
+    product,
+    formType, 
   } = props;
-  console.log("ProductForm - id: ", id);
-  // console.log("product: ", product);
+  console.log("ProductForm - product: ", product);
+  console.log("ProductForm - formType: ", formType);
 
-  const [newProduct, setNewProduct] = useState({
+  const [newProduct, setNewProduct] = useState(product || {
     productName: "",
     productOwnerName: "",
     Developers: [],
@@ -24,6 +24,8 @@ const ProductForm = (props) => {
     startDate: "",
     methodology: "",
   });
+
+  console.log("saveProduct", saveProduct)
 
   // console.log("newProduct: ", newProduct);
   // const [errorMessage, setErrorMessage] = useState("");

@@ -1,15 +1,32 @@
 import { data } from '../../data/dummyData';
 import { v4 as uuidv4 } from 'uuid';
 
+
 export default function handler(req, res) {
   res.setHeader("Content-Type", "application/json");
   const { method } = req;
 
   switch (method) {
+
     case "GET":
-      console.log("GET -- data: ", data);
+      // check for id then find and send match!
+      if (Object.keys(req.query).length) {
+        // TODO: -- fix
+        const id = parseInt(Object.keys(req.query)[0]);
+        const match = data.find((product) => product.id === id);
+        console.log("GET -- match: ", match);
+
+        if (!match) {
+          res.status(404).json({ message: `product with id ${req.query.id} was not found` });
+          return;
+        }
+        res.status(200).json(match);
+        return;
+      }
+
       res.status(200).json(data);
       break;
+
 
     case "POST":
       console.log("POST -- req.body: ", req.body);
@@ -20,6 +37,7 @@ export default function handler(req, res) {
       });
       res.status(200).json(data);
       break;
+
 
     case "PUT":
       console.log("PUT -- req.body: ", req.body);

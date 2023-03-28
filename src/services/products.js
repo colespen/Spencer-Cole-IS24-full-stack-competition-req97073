@@ -14,12 +14,21 @@ const fetchProducts = async (setProducts) => {
   if (!response.ok) {
     throw new Error("Failed to fetch data.");
   }
-  // console.log("response: ", response) 
   const data = await response.json();
+  // console.log("data in fetchProducts: ", data);
   setProducts(data);
 };
 
 
+const fetchProductById = async (id) => {
+  const response = await fetch(`http://localhost:3000/api/products?${id}`);
+  if (!response.ok) {
+    throw new Error("Failed to fetch data.");
+  }
+  const data = await response.json();
+  // console.log("data in fetchId: ", data);
+  return data;
+};
 
 const saveProduct = async (dataObj, setProducts) => {
   console.log("saveProduct -- dataObj: ", dataObj);
@@ -53,11 +62,12 @@ const editProduct = async (dataObj, setProducts) => {
   // console.log("response: ", response)
   const data = await response.json();
   setProducts(data);
-}
+};
 
 export {
   fetchInitialProducts,
   fetchProducts,
+  fetchProductById,
   saveProduct,
   editProduct
 };

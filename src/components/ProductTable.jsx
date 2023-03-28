@@ -3,22 +3,20 @@ import { dateSort, kebabCase } from "../helpers/sort";
 
 import styles from "../styles/Home.module.scss";
 
-const ProductTable = ({ products, setFormType, setView }) => {
+const ProductTable = (props) => {
+  const { products, setFormType, formType } = props
   const router = useRouter();
 
   const editTableByIdOnClick = (product) => {
-    console.log("product onClick: ", product);
-
-    setView("FORM")
     setFormType("Edit");
 
     router.push({
       pathname: "/product/[id]",
       query: {
         id: product.id,
-        product,
+        // formType,
       },
-      asPath: `product/${product.id}-${kebabCase(product.productName)}`
+      // asPath: `product/${product.id}-${kebabCase(product.productName)}`
     });
   };
 

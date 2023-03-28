@@ -1,7 +1,5 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
 import Layout from "../components/Layout";
-import Head from "next/head";
 import ProductTable from "../components/ProductTable";
 import ProductForm from "../components/ProductForm";
 
@@ -13,7 +11,6 @@ import {
   saveProduct
 } from "../services/products";
 
-
 export async function getStaticProps() {
   const initialProducts = await fetchInitialProducts();
   return { props: { initialProducts } };
@@ -23,8 +20,6 @@ export default function Home({ initialProducts }) {
   const [products, setProducts] = useState(initialProducts);
   const [view, setView] = useState("TABLE");
   const [formType, setFormType] = useState("");
-  // console.log("products: ", products);
-
 
   const handleFetchProducts = () => {
     fetchProducts(setProducts);
@@ -37,7 +32,12 @@ export default function Home({ initialProducts }) {
   };
 
   return (
-    <Layout>
+    <Layout
+      handleFetchProducts={handleFetchProducts}
+      handleNewProduct={handleNewProduct}
+      products={products}
+      view={view}
+    >
       <header className={styles.header}>
         <nav className={styles.nav}>
           <button onClick={handleFetchProducts}>
@@ -51,6 +51,7 @@ export default function Home({ initialProducts }) {
           <h1>Total Products: {products.length} </h1>
         </div>
       </header>
+
       {view === "FORM" && <ProductForm
         setProducts={setProducts}
         saveProduct={saveProduct}
@@ -60,6 +61,7 @@ export default function Home({ initialProducts }) {
         products={products}
         setView={setView}
         setFormType={setFormType}
+        formType={formType}
       />}
     </Layout>
   );

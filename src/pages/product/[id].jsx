@@ -1,22 +1,38 @@
+import Layout from "../../components/Layout";
 import ProductForm from "../../components/ProductForm";
+import { fetchProductById } from "../../services/products";
 
-export async function getServerSideProps (context) {
-  console.log("getServerSideProps: ", context.query);
+export async function getServerSideProps(context) {
+  const {id, formType } = context.query
+  
+  const product = await fetchProductById(id)
+  console.log("fetchProductById - product: ", product)
+  // console.log("getServerSideProps -- formType: ", formType);
   return {
     props: {
-      id: context.query.id,
-      product: context.query.product,
+      id,
+      product,
+      // formType,
     }
   };
 };
 
-const EditProduct = ({ id, product }) => {
+
+const EditProduct = (props) => {
+  const {
+    id,
+    product,
+    formType
+  } = props;
 
   return (
-    <ProductForm 
-    id={id} 
-    product={product} 
-    />
+    <Layout>
+      <ProductForm
+        id={id}
+        product={product}
+        // formType={formType}
+      />
+    </Layout>
   );
 };
 
