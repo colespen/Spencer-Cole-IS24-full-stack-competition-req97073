@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 
 import { useDebounce } from "../hooks/useDebounce";
 
-const SearchBar = ({ setQuery }) => {
+const SearchBar = ({ setQuery, filterKey }) => {
   const [value, setValue] = useState("");
   const term = useDebounce(value, 400);
 
@@ -27,7 +27,9 @@ const SearchBar = ({ setQuery }) => {
         <input
           className="search-input"
           spellCheck="false"
-          placeholder="search products"
+          placeholder={
+            !filterKey ? "select column to filter" : filterKey
+          }
           name="search"
           type="text"
           value={value}

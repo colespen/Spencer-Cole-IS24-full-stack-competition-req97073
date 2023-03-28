@@ -4,7 +4,12 @@ import { dateSort, kebabCase } from "../helpers/sort";
 import styles from "../styles/Home.module.scss";
 
 const ProductTable = (props) => {
-  const { products, setFormType, formType } = props
+  const { 
+    products, 
+    setFormType, 
+    formType,
+    setFilterKey 
+  } = props;
   const router = useRouter();
 
   const editTableByIdOnClick = (product) => {
@@ -19,7 +24,11 @@ const ProductTable = (props) => {
     });
   };
 
-  
+  const handleFilterName = (e) => {
+    setFilterKey(e.target.id)
+  } 
+
+
   const ProductTableBodyItems = () => {
     if (products) {
       const defaultDateSort = dateSort(products);
@@ -57,13 +66,35 @@ const ProductTable = (props) => {
     <table className={styles.table}>
       <thead>
         <tr className={styles.tableHeaders}>
-          <th>Product</th>
-          <th>Owner</th>
-          <th>Developers</th>
-          <th>ScrumMaster</th>
-          <th>Start Date</th>
-          <th>Methodology</th>
-          <th>ID</th>
+          <th
+           id="productName"
+           onClick={handleFilterName}
+          >Product</th>
+          <th
+           id="productOwnerName"
+           onClick={handleFilterName}
+          >Owner</th>
+          <th
+           id="Developers"
+           onClick={handleFilterName}
+          >Developers</th>
+          <th
+            id="scrumMasterName"
+            onClick={handleFilterName}
+            >ScrumMaster
+          </th>
+          <th
+           id="startDate"
+           onClick={handleFilterName}
+          >Start Date</th>
+          <th
+           id="methodology"
+           onClick={handleFilterName}
+          >Methodology</th>
+          <th
+           id="productId"
+           onClick={handleFilterName}
+          >ID</th>
         </tr>
       </thead>
       <ProductTableBodyItems />

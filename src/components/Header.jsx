@@ -8,7 +8,8 @@ const Header = (props) => {
     handleNewProduct,
     products,
     view,
-    setQuery
+    setQuery,
+    filterKey
   } = props;
 
   return (
@@ -28,7 +29,10 @@ const Header = (props) => {
         </h1>
       </div>
       {/* TODO: Only render for "TABLE" view */}
-      <SearchBar setQuery={setQuery} />
+      <SearchBar 
+      setQuery={setQuery}
+      filterKey={filterKey} 
+      />
 
     </header>
   );

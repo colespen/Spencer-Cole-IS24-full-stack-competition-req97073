@@ -21,20 +21,19 @@ export default function Home({ initialProducts }) {
   const [view, setView] = useState("TABLE");
   const [formType, setFormType] = useState("");
   const [query, setQuery] = useState("");
-  const [queryProducts, setQueryProducts] = useState([]);
-
-  console.log("queryProducts: ", queryProducts);
-  console.log("query: ", query);
+  const [filterKey, setFilterKey] = useState("");
 
   useEffect(() => {
     let filteredProducts;
     if (!query) {
+      // TODO: this shouldn't run on first render
       filteredProducts = initialProducts;
     } else {
-      filteredProducts = filterByKey(initialProducts, query, "scrumMasterName");
+      filteredProducts =
+        filterByKey(initialProducts, query, filterKey);
     }
     setProducts(filteredProducts);
-  }, [initialProducts, query]);
+  }, [initialProducts, query, filterKey]);
 
 
   const handleFetchProducts = () => {
@@ -56,13 +55,14 @@ export default function Home({ initialProducts }) {
       products={products}
       view={view}
       setQuery={setQuery}
+      filterKey={filterKey}
     >
       {view === "TABLE" && <ProductTable
         products={products}
         setView={setView}
         setFormType={setFormType}
         formType={formType}
-      // queryResults={queryResults}
+        setFilterKey={setFilterKey}
       />}
       {view === "FORM" && <EditProduct
         //props all work in Layout & ProductForm when UI renders Client Side 

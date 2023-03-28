@@ -9,7 +9,8 @@ export default function Layout(post) {
     handleNewProduct,
     products,
     view,
-    setQuery
+    setQuery,
+    filterKey
   } = post;
   return (
     <div className={styles.mainContainer}>
@@ -28,6 +29,7 @@ export default function Layout(post) {
           products={products}
           view={view}
           setQuery={setQuery}
+          filterKey={filterKey}
         />
 
         {children}
