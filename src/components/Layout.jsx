@@ -8,7 +8,8 @@ export default function Layout(post) {
     handleFetchProducts,
     handleNewProduct,
     products,
-    view
+    view,
+    setQuery
   } = post;
   return (
     <div className={styles.mainContainer}>
@@ -26,6 +27,7 @@ export default function Layout(post) {
           handleNewProduct={handleNewProduct}
           products={products}
           view={view}
+          setQuery={setQuery}
         />
 
         {children}

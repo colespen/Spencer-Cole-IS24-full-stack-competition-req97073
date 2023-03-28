@@ -19,7 +19,7 @@ const ProductTable = (props) => {
     });
   };
 
-
+  
   const ProductTableBodyItems = () => {
     if (products) {
       const defaultDateSort = dateSort(products);

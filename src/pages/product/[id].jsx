@@ -30,6 +30,7 @@ const EditProduct = (props) => {
     handleNewProduct, // **
     setProducts, // **
     products, // SSR
+    setQuery // **
   } = props;
 
   console.log("PROP:", formType)
@@ -39,8 +40,10 @@ const EditProduct = (props) => {
     <Layout 
       handleFetchProducts={handleFetchProducts} // **
       handleNewProduct={handleNewProduct} // **
+      setProducts={setProducts} // **
       products={products} //this works now
       view={view} // **
+      setQuery={setQuery} // **
     >
       <ProductForm
         id={id} 

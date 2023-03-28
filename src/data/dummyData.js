@@ -155,7 +155,7 @@ export const data = [
       "Alexandria Carroll",
       "Chris Foley"
     ],
-    "scrumMasterName": "Donovan Mcfadden",
+    "scrumMasterName": "Margie Ashley",
     "startDate": "2004/07/17",
     "methodology": "Waterfall"
   },
@@ -251,7 +251,7 @@ export const data = [
       "Ellison Carrillo",
       "Alba Moody"
     ],
-    "scrumMasterName": "Talley Long",
+    "scrumMasterName": "Margie Ashley",
     "startDate": "2004/06/15",
     "methodology": "Agile"
   },
@@ -331,7 +331,7 @@ export const data = [
       "Vasquez Grimes",
       "Smith Gray"
     ],
-    "scrumMasterName": "Lane Hooper",
+    "scrumMasterName": "Margie Ashley",
     "startDate": "1987/10/18",
     "methodology": "Agile"
   },
@@ -459,7 +459,7 @@ export const data = [
       "Melisa Malone",
       "Roslyn Galloway"
     ],
-    "scrumMasterName": "Carolina Mcdaniel",
+    "scrumMasterName": "Kathleen Juarez",
     "startDate": "2009/12/17",
     "methodology": "Agile"
   },
@@ -523,7 +523,7 @@ export const data = [
       "Hobbs Oneal",
       "Tanisha Kelly"
     ],
-    "scrumMasterName": "Angel Beasley",
+    "scrumMasterName": "Kathleen Juarez",
     "startDate": "2004/02/20",
     "methodology": "Agile"
   },

@@ -45,12 +45,12 @@ export default function handler(req, res) {
           data[i] = { ...product, ...req.body };
         }
       });
-      console.log("PUT -- data: ", data);
       if (editIndex === -1) {
         res.status(404).json({ message: `product with id ${id} was not found` });
       } else {
         res.status(200).json(data);
       }
+      console.log("PUT -- data: ", data);
       break;
 
     case "DELETE":

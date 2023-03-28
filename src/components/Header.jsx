@@ -1,11 +1,14 @@
 import styles from "../styles/Home.module.scss";
 
+import SearchBar from "./SearchBar";
+
 const Header = (props) => {
   const {
     handleFetchProducts,
     handleNewProduct,
     products,
-    view
+    view,
+    setQuery
   } = props;
 
   return (
@@ -19,9 +22,14 @@ const Header = (props) => {
         </button>
       </nav >
       <div className={styles.productCount}>
-        <h1>Total Products: {products.length-1} 
-          </h1>
+        <h1>
+          Total Products: {products.length - 1 === -1 ? 
+          0 : products.length - 1}
+        </h1>
       </div>
+      {/* TODO: Only render for "TABLE" view */}
+      <SearchBar setQuery={setQuery} />
+
     </header>
   );
 };

@@ -1,5 +1,5 @@
-const dateSort = (allProductsData) => {
-  return allProductsData.sort((a, b) => {
+const dateSort = (allProducts) => {
+  return allProducts.sort((a, b) => {
     let aStart = a.startDate.split('/').join('');
     let bStart = b.startDate.split('/').join('');
     let aa = parseInt(aStart);
@@ -19,4 +19,67 @@ const kebabCase = (str) => {
     .toLowerCase();
 };
 
-export { dateSort, kebabCase };
+// store requested keys in a hash
+function buildMap(data, filterKey) {
+  const map = {};
+  
+  for (const product of data) {
+    const keys = Object.keys(product);
+    
+    for (const key of keys) {
+      if (key === filterKey) {
+        const value = product[key]?.toString()?.toLowerCase() ?? "";
+        const names = value.split(" ");
+        for (const name of names) {
+          if (name.length) {
+            if (!map[name]) {
+              map[name] = [];
+            }
+            
+            map[name].push(product);
+          }
+        }
+      }
+    }
+  }
+  return map;
+}
+
+/**
+ * returns all articles containing matching character from selected filter key.
+ *  @param {object[]} allProducts
+ *  @param {string} searchTerm
+ *  @return {Array} results
+ */
+const filterByKey = (allProducts, searchTerm, filterKey) => {
+  const map = buildMap(allProducts, filterKey);
+  const resultsMap = {};
+  const searchArray = searchTerm?.toLowerCase().split(" ");
+  
+  if (!searchArray) {
+    return [];
+  }
+  for (const s of searchArray) {
+    const term = s;
+    if (!term.length) {
+      continue;
+    }
+    const keys = Object.keys(map);
+    
+    for (const key of keys) {
+      const value = key.toLowerCase();
+      
+      if (value.includes(term)) {
+        const products = map[key];
+        
+        for (const product of products) {
+          resultsMap[product.id] = product;
+        }
+      }
+    }
+  }
+  const results = Object.values(resultsMap);
+  return results
+};
+
+export { dateSort, kebabCase, filterByKey };

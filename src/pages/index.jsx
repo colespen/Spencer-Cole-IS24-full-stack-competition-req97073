@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import ProductTable from "../components/ProductTable";
+import EditProduct from "./product/[id]";
 
 import {
   fetchInitialProducts,
   fetchProducts
 } from "../services/products";
-import EditProduct from "./product/[id]";
+
+import { filterByKey } from "../helpers/sort";
 
 export async function getStaticProps() {
   const initialProducts = await fetchInitialProducts();
@@ -18,6 +20,22 @@ export default function Home({ initialProducts }) {
   const [products, setProducts] = useState(initialProducts);
   const [view, setView] = useState("TABLE");
   const [formType, setFormType] = useState("");
+  const [query, setQuery] = useState("");
+  const [queryProducts, setQueryProducts] = useState([]);
+
+  console.log("queryProducts: ", queryProducts);
+  console.log("query: ", query);
+
+  useEffect(() => {
+    let filteredProducts;
+    if (!query) {
+      filteredProducts = initialProducts;
+    } else {
+      filteredProducts = filterByKey(initialProducts, query, "scrumMasterName");
+    }
+    setProducts(filteredProducts);
+  }, [initialProducts, query]);
+
 
   const handleFetchProducts = () => {
     fetchProducts(setProducts);
@@ -28,9 +46,8 @@ export default function Home({ initialProducts }) {
     setFormType("Create");
     setView("FORM");
   };
-
-  console.log("view, formType: ", view, formType)
-  console.log("prodcuts.length - Home: ", products.length)
+  // console.log("products: ", products)
+  // console.log("view | formType: ", view + " | " + formType)
 
   return (
     <Layout
@@ -38,15 +55,17 @@ export default function Home({ initialProducts }) {
       handleNewProduct={handleNewProduct}
       products={products}
       view={view}
+      setQuery={setQuery}
     >
       {view === "TABLE" && <ProductTable
         products={products}
         setView={setView}
         setFormType={setFormType}
         formType={formType}
-      />} 
-      {view === "FORM" && <EditProduct 
-//props all work in Layout & ProductForm when UI renders Client Side 
+      // queryResults={queryResults}
+      />}
+      {view === "FORM" && <EditProduct
+        //props all work in Layout & ProductForm when UI renders Client Side 
         setProducts={setProducts}
         formType={formType}
         view={view}
@@ -56,6 +75,7 @@ export default function Home({ initialProducts }) {
         handleNewProduct={handleNewProduct}
         product={null}
         id={null}
+        setQuery={setQuery}
       />}
     </Layout>
   );
