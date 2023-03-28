@@ -9,13 +9,12 @@ export default function handler(req, res) {
   switch (method) {
 
     case "GET":
+      console.log(req.query)
       // check for id then find and send match!
       if (Object.keys(req.query).length) {
-        // TODO: -- fix
         const id = parseInt(req.query.id);
         const match = data.find((product) => product.id === id);
         // console.log("GET -- match: ", match);
-
         if (!match) {
           res.status(404).json({ message: `product with id ${req.query.id} was not found` });
           return;
@@ -23,7 +22,6 @@ export default function handler(req, res) {
         res.status(200).json(match);
         return;
       }
-
       res.status(200).json(data);
       break;
 

@@ -1,21 +1,19 @@
 import { useState } from "react";
 import { Tooltip } from "react-tooltip";
 
+import { saveProduct } from "../services/products";
 
 import 'react-tooltip/dist/react-tooltip.css';
 import styles from "../styles/Home.module.scss";
 
 const ProductForm = (props) => {
   const {
-    saveProduct,
     setProducts,
     id,
     product,
     formType,
-    setView
+    setView,
   } = props;
-  console.log("ProductForm - product: ", product);
-  // console.log("ProductForm - formType: ", formType);
 
   const [newProduct, setNewProduct] = useState(product || {
     productName: "",
@@ -26,15 +24,9 @@ const ProductForm = (props) => {
     methodology: "",
   });
 
-  console.log("newProduct.methodology", newProduct.methodology)
-
-  // console.log("newProduct: ", newProduct);
-  // const [errorMessage, setErrorMessage] = useState("");
-
   const handleSaveProduct = () => {
     saveProduct(newProduct, setProducts);
   };
-
   const handleOnChange = (e) => {
     const { name, value, id } = e.target;
     let newVal = value; 
@@ -46,7 +38,6 @@ const ProductForm = (props) => {
       [name]: name === "Developers" ? [newVal] : newVal,
     }));
   };
-
   // max 5 dev's
   const handleAddDeveloper = () => {
     if (newProduct.Developers.length < 5) {
@@ -63,7 +54,6 @@ const ProductForm = (props) => {
       Developers: prev.Developers.filter((_, i) => i !== index),
     }));
   };
-
   const handleDeveloperChange = (index, value) => {
     setNewProduct(prev => {
       const newDevelopers = [...prev.Developers];
@@ -91,7 +81,7 @@ const ProductForm = (props) => {
       return;
     } else {
       handleSaveProduct();
-      setView("TABLE")
+      // setView("TABLE")
       setNewProduct({
         productName: "",
         productOwnerName: "",

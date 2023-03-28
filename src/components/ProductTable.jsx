@@ -13,8 +13,7 @@ const ProductTable = (props) => {
     router.push({
       pathname: "/product/[id]",
       query: {
-        id: product.id,
-        // formType,
+        id: product.id
       },
       // asPath: `product/${product.id}-${kebabCase(product.productName)}`
     });
