@@ -25,19 +25,22 @@ const ProductForm = (props) => {
     startDate: "",
     methodology: "",
   });
+  const [isConfirm, setIsConfirm] = useState(false);
   const formRef = useRef(null);
+  // const addBtnRef = useRef(null);
+  // const editBtnRef = useRef(null);
   // console.log("ProductForm - newProduct: ", newProduct);
   // console.log("formType: ", formType);
   // console.log("newProduct: ", newProduct);
   // const [errorMessage, setErrorMessage] = useState("");
-  
+
   const handleSaveProduct = () => {
     saveProduct(newProduct, setProducts);
   };
   const handleEditProduct = () => {
     editProduct(newProduct);
   };
-  
+
   const handleOnChange = (e) => {
     const { name, value, id } = e.target;
     let newVal = value;
@@ -49,7 +52,7 @@ const ProductForm = (props) => {
       [name]: name === "Developers" ? [newVal] : newVal,
     }));
   };
-  
+
   // max 5 dev's
   const handleAddDeveloper = () => {
     if (newProduct.Developers.length < 5) {
@@ -66,7 +69,7 @@ const ProductForm = (props) => {
       Developers: prev.Developers.filter((_, i) => i !== index),
     }));
   };
-  
+
   const handleDeveloperChange = (index, value) => {
     setNewProduct(prev => {
       const newDevelopers = [...prev.Developers];
@@ -77,9 +80,10 @@ const ProductForm = (props) => {
       };
     });
   };
-  
-  console.log("formRef.current: ", formRef.current);
+
+
   const handleOnSubmit = (e) => {
+    const { btnId } = formRef.current;
     e.preventDefault();
     // check for empty fields and trigger Tooltip on submit
     if (
@@ -90,16 +94,16 @@ const ProductForm = (props) => {
       !newProduct.scrumMasterName ||
       !newProduct.startDate ||
       !newProduct.methodology
-      ) {
-        // setErrorMessage("Please fill out all fields.");
-        return;
-      } else {
-      if (formRef.current.id === "add-btn") {
-        console.log("SUBMITTED")
+    ) {
+      // setErrorMessage("Please fill out all fields.");
+      return;
+    } else {
+      if (btnId === "add-btn") {
+        console.log("SUBMITTED");
         handleSaveProduct();
       }
-      if (formRef.current.id === "edit-btn") {
-        console.log("EDITED")
+      if (btnId === "edit-btn") {
+        console.log("EDITED");
         handleEditProduct();
       }
       // setView("TABLE")
@@ -130,9 +134,9 @@ const ProductForm = (props) => {
   return (
     <>
       <h2>{formType} Product</h2>
-      <form 
-      onSubmit={handleOnSubmit} 
-      className={styles.form}
+      <form
+        onSubmit={handleOnSubmit}
+        className={styles.form}
       >
         <label>
           Product Name:<br />
@@ -197,6 +201,7 @@ const ProductForm = (props) => {
         {<label>
           Start Date:<br />
           <input
+            // TODO: DISABLE FOR EDIT
             name="startDate"
             value={newProduct.startDate.replace(/\//g, "-")}
             onChange={handleOnChange}
@@ -234,20 +239,22 @@ const ProductForm = (props) => {
           </div>
         </label>
 
-        <div className={styles.submitForm}>
+        <div className={styles.submitForm}
+          ref={formRef}
+        >
 
           {formType === "Create" &&
             <button id="add-btn" type="submit" data-tip data-for="submit-tooltip"
-            ref={formRef}
-            // onClick={handleOnSubmit}
+              onClick={(e) => formRef.current.btnId = e.target.id}
+            // ref={addBtnRef}
             >
               Add Product
             </button>}
 
           {/* {formType === "Edit" &&} */}
           <button id="edit-btn" type="submit" data-tip data-for="submit-tooltip"
-          ref={formRef}
-          // onClick={handleOnSubmit}
+            onClick={(e) => formRef.current.btnId = e.target.id}
+          // ref={editBtnRef}
           >
             Edit Product
           </button>

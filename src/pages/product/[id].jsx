@@ -4,6 +4,7 @@ import { fetchProductById, fetchInitialProducts } from "../../services/products"
 
 export async function getServerSideProps(context) {
   const { id } = context.query;
+  console.log("getServerSideProps -- id: ",id)
 
   const product = await fetchProductById(id);
   const products = await fetchInitialProducts();

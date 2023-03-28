@@ -19,7 +19,7 @@ const Header = (props) => {
         </button>
       </nav >
       <div className={styles.productCount}>
-        <h1>Total Products: {products.length} 
+        <h1>Total Products: {products.length-1} 
           </h1>
       </div>
     </header>

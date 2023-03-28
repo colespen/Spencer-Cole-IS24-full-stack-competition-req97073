@@ -1,7 +1,6 @@
 import { data } from '../../data/dummyData';
 import { v4 as uuidv4 } from 'uuid';
 
-
 export default function handler(req, res) {
   res.setHeader("Content-Type", "application/json");
   const { method } = req;
@@ -25,7 +24,6 @@ export default function handler(req, res) {
       res.status(200).json(data);
       break;
 
-
     case "POST":
       console.log("POST -- req.body: ", req.body);
       data.push({
@@ -36,11 +34,11 @@ export default function handler(req, res) {
       res.status(200).json(data);
       break;
 
-
     case "PUT":
       console.log("PUT -- req.body: ", req.body);
       const { id } = req.body;
       let editIndex = -1;
+      //replace obj with matching id
       data.forEach((product, i) => {
         if (product.id === id) {
           editIndex = i;
