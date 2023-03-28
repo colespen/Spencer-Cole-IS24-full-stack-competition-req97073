@@ -47,7 +47,8 @@ const saveProduct = async (dataObj, setProducts) => {
   setProducts(data);
 };
 
-const editProduct = async (dataObj, setProducts) => {
+// add (_, setProducts)
+const editProduct = async (dataObj) => {
   console.log("editProduct -- dataObj: ", dataObj);
   const response = await fetch("/api/products/", {
     method: "PUT",
@@ -61,7 +62,7 @@ const editProduct = async (dataObj, setProducts) => {
   }
   // console.log("response: ", response)
   const data = await response.json();
-  setProducts(data);
+  // setProducts(data);
 };
 
 export {

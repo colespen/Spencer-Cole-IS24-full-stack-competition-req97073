@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Tooltip } from "react-tooltip";
 
-import { saveProduct } from "../services/products";
+import { saveProduct, editProduct } from "../services/products";
 
 import 'react-tooltip/dist/react-tooltip.css';
 import styles from "../styles/Home.module.scss";
@@ -14,7 +14,7 @@ const ProductForm = (props) => {
     formType,
     setView,
   } = props;
-  console.log("ProductForm - product: ", product);
+  // console.log("ProductForm - product: ", product);
   // console.log("ProductForm - formType: ", formType);
 
   const [newProduct, setNewProduct] = useState(product || {
@@ -25,20 +25,22 @@ const ProductForm = (props) => {
     startDate: "",
     methodology: "",
   });
-
-  console.log("formType: ", formType)
-
-
+  const formRef = useRef(null);
+  // console.log("ProductForm - newProduct: ", newProduct);
+  // console.log("formType: ", formType);
   // console.log("newProduct: ", newProduct);
   // const [errorMessage, setErrorMessage] = useState("");
-
+  
   const handleSaveProduct = () => {
     saveProduct(newProduct, setProducts);
   };
-
+  const handleEditProduct = () => {
+    editProduct(newProduct);
+  };
+  
   const handleOnChange = (e) => {
     const { name, value, id } = e.target;
-    let newVal = value; 
+    let newVal = value;
     if (name === "startDate") newVal = value.replace(/-/g, "/");
     if (name === "methodology") newVal = id;
     // set as array of strings if Developers
@@ -47,7 +49,7 @@ const ProductForm = (props) => {
       [name]: name === "Developers" ? [newVal] : newVal,
     }));
   };
-
+  
   // max 5 dev's
   const handleAddDeveloper = () => {
     if (newProduct.Developers.length < 5) {
@@ -64,7 +66,7 @@ const ProductForm = (props) => {
       Developers: prev.Developers.filter((_, i) => i !== index),
     }));
   };
-
+  
   const handleDeveloperChange = (index, value) => {
     setNewProduct(prev => {
       const newDevelopers = [...prev.Developers];
@@ -75,7 +77,8 @@ const ProductForm = (props) => {
       };
     });
   };
-
+  
+  console.log("formRef.current: ", formRef.current);
   const handleOnSubmit = (e) => {
     e.preventDefault();
     // check for empty fields and trigger Tooltip on submit
@@ -87,11 +90,18 @@ const ProductForm = (props) => {
       !newProduct.scrumMasterName ||
       !newProduct.startDate ||
       !newProduct.methodology
-    ) {
-      // setErrorMessage("Please fill out all fields.");
-      return;
-    } else {
-      handleSaveProduct();
+      ) {
+        // setErrorMessage("Please fill out all fields.");
+        return;
+      } else {
+      if (formRef.current.id === "add-btn") {
+        console.log("SUBMITTED")
+        handleSaveProduct();
+      }
+      if (formRef.current.id === "edit-btn") {
+        console.log("EDITED")
+        handleEditProduct();
+      }
       // setView("TABLE")
       setNewProduct({
         productName: "",
@@ -120,8 +130,10 @@ const ProductForm = (props) => {
   return (
     <>
       <h2>{formType} Product</h2>
-      <form onSubmit={handleOnSubmit} className={styles.form}>
-
+      <form 
+      onSubmit={handleOnSubmit} 
+      className={styles.form}
+      >
         <label>
           Product Name:<br />
           <input
@@ -225,14 +237,20 @@ const ProductForm = (props) => {
         <div className={styles.submitForm}>
 
           {formType === "Create" &&
-            <button id="submit-btn" type="submit" data-tip data-for="submit-tooltip">
+            <button id="add-btn" type="submit" data-tip data-for="submit-tooltip"
+            ref={formRef}
+            // onClick={handleOnSubmit}
+            >
               Add Product
             </button>}
 
-          {formType === "Edit" &&
-            <button id="submit-btn" type="submit" data-tip data-for="submit-tooltip">
-              Edit Product
-            </button>}
+          {/* {formType === "Edit" &&} */}
+          <button id="edit-btn" type="submit" data-tip data-for="submit-tooltip"
+          ref={formRef}
+          // onClick={handleOnSubmit}
+          >
+            Edit Product
+          </button>
           <button type="reset" onClick={handleReset}>Reset</button>
           <Tooltip id="submit-tooltip" place="top" type="error" effect="solid" />
         </div>

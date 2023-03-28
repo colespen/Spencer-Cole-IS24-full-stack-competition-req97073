@@ -9,14 +9,14 @@ export default function handler(req, res) {
   switch (method) {
 
     case "GET":
-      console.log(req.query)
+      console.log(req.query);
       // check for id then find and send match!
       if (Object.keys(req.query).length) {
         const id = parseInt(req.query.id);
         const match = data.find((product) => product.id === id);
         // console.log("GET -- match: ", match);
         if (!match) {
-          res.status(404).json({ message: `product with id ${req.query.id} was not found` });
+          res.status(404).json({ message: `product with id ${id} was not found` });
           return;
         }
         res.status(200).json(match);
@@ -39,16 +39,20 @@ export default function handler(req, res) {
 
     case "PUT":
       console.log("PUT -- req.body: ", req.body);
-      console.log("PUT -- req.params: ", req.params);
-      // const { } = req.params;
-      // const editedProd = {};
-      // const result =
-      //   Object.entries(data).map(
-      //     ([key, value]) => value.id === editedProd.id
-      //       ? { [key]: { ...value, ...editedProd } }
-      //       : { [key]: value });
-
-      res.status(200);
+      const { id } = req.body;
+      let editIndex = -1;
+      data.forEach((product, i) => {
+        if (product.id === id) {
+          editIndex = i;
+          data[i] = { ...product, ...req.body };
+        }
+      });
+      console.log("PUT -- data: ", data);
+      if (editIndex === -1) {
+        res.status(404).json({ message: `product with id ${id} was not found` });
+      } else {
+        res.status(200).json(data);
+      }
       break;
 
     case "DELETE":

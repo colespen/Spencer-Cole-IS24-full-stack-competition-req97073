@@ -12,6 +12,7 @@ export async function getStaticProps() {
   const initialProducts = await fetchInitialProducts();
   return { props: { initialProducts } };
 }
+
 // all props I need to pass come from this parent component 
 export default function Home({ initialProducts }) {
   const [products, setProducts] = useState(initialProducts);

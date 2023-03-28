@@ -1,7 +1,7 @@
 import Layout from "../../components/Layout";
 import ProductForm from "../../components/ProductForm";
 import { fetchProductById, fetchInitialProducts } from "../../services/products";
-// when [id].jsx is dynamically rendered w SSProps props '*' are undefined
+
 export async function getServerSideProps(context) {
   const { id } = context.query;
 
@@ -35,14 +35,13 @@ const EditProduct = (props) => {
 
   return (
     // NEED ACCESS TO THESE PROPS BELOW
-
-    <Layout // <-- in '/src/components/'
+    <Layout 
       handleFetchProducts={handleFetchProducts} // **
       handleNewProduct={handleNewProduct} // **
       products={products} //this works now
       view={view} // **
     >
-      <ProductForm // < -- in '/src/components/'
+      <ProductForm
         id={id} 
         product={product}
         formType={formType} // **
