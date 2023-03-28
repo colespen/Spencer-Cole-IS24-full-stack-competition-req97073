@@ -12,9 +12,9 @@ export default function handler(req, res) {
       // check for id then find and send match!
       if (Object.keys(req.query).length) {
         // TODO: -- fix
-        const id = parseInt(Object.keys(req.query)[0]);
+        const id = parseInt(req.query.id);
         const match = data.find((product) => product.id === id);
-        console.log("GET -- match: ", match);
+        // console.log("GET -- match: ", match);
 
         if (!match) {
           res.status(404).json({ message: `product with id ${req.query.id} was not found` });

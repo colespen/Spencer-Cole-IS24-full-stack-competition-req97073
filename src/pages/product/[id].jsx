@@ -6,7 +6,7 @@ export async function getServerSideProps(context) {
   const {id, formType } = context.query
   
   const product = await fetchProductById(id)
-  console.log("fetchProductById - product: ", product)
+  // console.log("getServerSideProps - product: ", product)
   // console.log("getServerSideProps -- formType: ", formType);
   return {
     props: {

@@ -56,6 +56,7 @@ export default function Home({ initialProducts }) {
         setProducts={setProducts}
         saveProduct={saveProduct}
         formType={formType}
+        setView={setView}
       />}
       {view === "TABLE" && <ProductTable
         products={products}

@@ -11,10 +11,11 @@ const ProductForm = (props) => {
     setProducts,
     id,
     product,
-    formType, 
+    formType,
+    setView
   } = props;
   console.log("ProductForm - product: ", product);
-  console.log("ProductForm - formType: ", formType);
+  // console.log("ProductForm - formType: ", formType);
 
   const [newProduct, setNewProduct] = useState(product || {
     productName: "",
@@ -25,21 +26,21 @@ const ProductForm = (props) => {
     methodology: "",
   });
 
-  console.log("saveProduct", saveProduct)
+  console.log("newProduct.methodology", newProduct.methodology)
 
   // console.log("newProduct: ", newProduct);
   // const [errorMessage, setErrorMessage] = useState("");
 
   const handleSaveProduct = () => {
     saveProduct(newProduct, setProducts);
-    // setView("TABLE")
   };
 
   const handleOnChange = (e) => {
-    const { name, value } = e.target;
-    const newVal =  // change date format to `YYYY/MM/DD`
-      name === "startDate" ? value.replace(/-/g, "/") : value;
-    // set array of strings if Developers
+    const { name, value, id } = e.target;
+    let newVal = value; 
+    if (name === "startDate") newVal = value.replace(/-/g, "/");
+    if (name === "methodology") newVal = id;
+    // set as array of strings if Developers
     setNewProduct(prev => ({
       ...prev,
       [name]: name === "Developers" ? [newVal] : newVal,
@@ -90,6 +91,7 @@ const ProductForm = (props) => {
       return;
     } else {
       handleSaveProduct();
+      setView("TABLE")
       setNewProduct({
         productName: "",
         productOwnerName: "",
@@ -196,21 +198,23 @@ const ProductForm = (props) => {
           <div className={styles.radioBtns}>
             <input
               name="methodology"
-              id="agile"
-              value="Agile"
+              id="Agile"
+              value={newProduct.methodology}
               onChange={handleOnChange}
               type="radio"
               required
+              checked={newProduct.methodology === "Agile"}
               style={{ width: "20px", minWidth: "20px" }}
             />
             <label htmlFor="agile">Agile</label>
             <input
               name="methodology"
-              id="waterfall"
-              value="Waterfall"
+              id="Waterfall"
+              value={newProduct.methodology}
               onChange={handleOnChange}
               type="radio"
               required
+              checked={newProduct.methodology === "Waterfall"}
               style={{ width: "20px", minWidth: "20px" }}
             />
             <label htmlFor="waterfall">Waterfall</label>
