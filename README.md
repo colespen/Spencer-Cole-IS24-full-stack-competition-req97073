@@ -2,7 +2,24 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+First, install dependencies by running:
+
+```bash
+npm install
+```
+
+```JSON
+"eslint": "8.36.0",
+"eslint-config-next": "13.2.4",
+"next": "13.2.4",
+"react": "18.2.0",
+"react-dom": "18.2.0",
+"react-tooltip": "^5.10.1",
+"sass": "^1.60.0",
+"uuid": "^9.0.0"
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
@@ -16,7 +33,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/products](http://localhost:3000/api/products).
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 

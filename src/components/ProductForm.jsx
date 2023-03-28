@@ -14,6 +14,8 @@ const ProductForm = (props) => {
     formType,
     setView,
   } = props;
+  console.log("ProductForm - product: ", product);
+  // console.log("ProductForm - formType: ", formType);
 
   const [newProduct, setNewProduct] = useState(product || {
     productName: "",
@@ -24,9 +26,16 @@ const ProductForm = (props) => {
     methodology: "",
   });
 
+  console.log("formType: ", formType)
+
+
+  // console.log("newProduct: ", newProduct);
+  // const [errorMessage, setErrorMessage] = useState("");
+
   const handleSaveProduct = () => {
     saveProduct(newProduct, setProducts);
   };
+
   const handleOnChange = (e) => {
     const { name, value, id } = e.target;
     let newVal = value; 
@@ -38,6 +47,7 @@ const ProductForm = (props) => {
       [name]: name === "Developers" ? [newVal] : newVal,
     }));
   };
+
   // max 5 dev's
   const handleAddDeveloper = () => {
     if (newProduct.Developers.length < 5) {
@@ -54,6 +64,7 @@ const ProductForm = (props) => {
       Developers: prev.Developers.filter((_, i) => i !== index),
     }));
   };
+
   const handleDeveloperChange = (index, value) => {
     setNewProduct(prev => {
       const newDevelopers = [...prev.Developers];
