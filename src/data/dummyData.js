@@ -8,8 +8,7 @@ export const data = [
       "French Riddle",
       "Joanna Dunn",
       "Ramos Finley",
-      "Rosalyn Brennan",
-      "Mills Morgan"
+      "Rosalyn Brennan"
     ],
     "scrumMasterName": "Fox English",
     "startDate": "2002/11/08",
@@ -38,10 +37,7 @@ export const data = [
     "productOwnerName": "Roman Butler",
     "Developers": [
       "Houston Mcleod",
-      "Sellers Whitney",
-      "Banks Rodriquez",
-      "Gretchen Watts",
-      "Esmeralda Ballard"
+      "Sellers Whitney"
     ],
     "scrumMasterName": "Santana Henderson",
     "startDate": "2005/05/08",
@@ -55,9 +51,7 @@ export const data = [
     "Developers": [
       "Augusta Caldwell",
       "Clarke Pitts",
-      "Janelle Maldonado",
-      "Kent Terry",
-      "Terrell Anthony"
+      "Janelle Maldonado"
     ],
     "scrumMasterName": "Joni Sanders",
     "startDate": "1992/01/11",
@@ -119,9 +113,7 @@ export const data = [
     "Developers": [
       "Dale Clements",
       "Shari Winters",
-      "Vilma Arnold",
-      "Madge Tate",
-      "Sallie Scott"
+      "Vilma Arnold"
     ],
     "scrumMasterName": "Martinez Cameron",
     "startDate": "2019/05/15",
@@ -214,10 +206,7 @@ export const data = [
     "productOwnerName": "Eliza Guerra",
     "Developers": [
       "Poole Velez",
-      "Janis Fletcher",
-      "Randi Gentry",
-      "Walter Guthrie",
-      "Nixon Jones"
+      "Janis Fletcher"
     ],
     "scrumMasterName": "Grace Odom",
     "startDate": "1995/07/07",

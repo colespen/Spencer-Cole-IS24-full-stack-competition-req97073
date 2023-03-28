@@ -4,11 +4,11 @@ import { dateSort, kebabCase } from "../helpers/sort";
 import styles from "../styles/Home.module.scss";
 
 const ProductTable = (props) => {
-  const { 
-    products, 
-    setFormType, 
+  const {
+    products,
+    setFormType,
     formType,
-    setFilterKey 
+    setFilterKey
   } = props;
   const router = useRouter();
 
@@ -25,9 +25,8 @@ const ProductTable = (props) => {
   };
 
   const handleFilterName = (e) => {
-    setFilterKey(e.target.id)
-  } 
-
+    setFilterKey(e.target.id);
+  };
 
   const ProductTableBodyItems = () => {
     if (products) {
@@ -66,34 +65,26 @@ const ProductTable = (props) => {
     <table className={styles.table}>
       <thead>
         <tr className={styles.tableHeaders}>
-          <th
-           id="productName"
-           onClick={handleFilterName}
-          >Product</th>
-          <th
-           id="productOwnerName"
-           onClick={handleFilterName}
-          >Owner</th>
-          <th
-           id="Developers"
-           onClick={handleFilterName}
-          >Developers</th>
-          <th
-            id="scrumMasterName"
+          <th id="productName"
             onClick={handleFilterName}
-            >ScrumMaster
-          </th>
-          <th
-           id="startDate"
-           onClick={handleFilterName}
+          >Product</th>
+          <th id="productOwnerName"
+            onClick={handleFilterName}
+          >Owner</th>
+          <th id="Developers"
+            onClick={handleFilterName}
+          >Developers</th>
+          <th id="scrumMasterName"
+            onClick={handleFilterName}
+          >ScrumMaster</th>
+          <th id="startDate"
+            onClick={handleFilterName}
           >Start Date</th>
-          <th
-           id="methodology"
-           onClick={handleFilterName}
+          <th id="methodology"
+            onClick={handleFilterName}
           >Methodology</th>
-          <th
-           id="productId"
-           onClick={handleFilterName}
+          <th id="productId"
+            onClick={handleFilterName}
           >ID</th>
         </tr>
       </thead>

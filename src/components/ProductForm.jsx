@@ -25,14 +25,16 @@ const ProductForm = (props) => {
     startDate: "",
     methodology: "",
   });
+  // const [errorMessage, setErrorMessage] = useState("");
   const [isConfirm, setIsConfirm] = useState(false);
+  const [formTitle, setFormTitle] = useState("");
   const formRef = useRef(null);
   // const addBtnRef = useRef(null);
   // const editBtnRef = useRef(null);
   // console.log("ProductForm - newProduct: ", newProduct);
-  // console.log("formType: ", formType);
+  console.log("formType: ", formType);
   // console.log("newProduct: ", newProduct);
-  // const [errorMessage, setErrorMessage] = useState("");
+
 
   const handleSaveProduct = () => {
     saveProduct(newProduct, setProducts);
@@ -85,6 +87,9 @@ const ProductForm = (props) => {
   const handleOnSubmit = (e) => {
     const { btnId } = formRef.current;
     e.preventDefault();
+    if (e.target.type === "reset") {
+      handleReset();
+    }
     // check for empty fields and trigger Tooltip on submit
     if (
       !newProduct.productName ||
@@ -100,41 +105,40 @@ const ProductForm = (props) => {
     } else {
       if (btnId === "add-btn") {
         console.log("SUBMITTED");
+        setFormTitle("Added!");
         handleSaveProduct();
       }
       if (btnId === "edit-btn") {
         console.log("EDITED");
+        setFormTitle("Edited!");
         handleEditProduct();
       }
-      // setView("TABLE")
-      setNewProduct({
-        productName: "",
-        productOwnerName: "",
-        Developers: [],
-        scrumMasterName: "",
-        startDate: "",
-        methodology: "",
-      });
+      const tableViewDelay = setTimeout(() => {
+        // setView("TABLE"); // TODO: UNDEFINED 
+      }, 500);
+      handleReset();
+      return () => clearTimeout(tableViewDelay);
     }
   };
 
-  const handleReset = (e) => {
-    if (e.target.type === "reset") {
-      setNewProduct({
-        productName: "",
-        productOwnerName: "",
-        Developers: [],
-        scrumMasterName: "",
-        startDate: "",
-        methodology: "",
-      });
-    }
+  const handleReset = () => {
+    setNewProduct({
+      productName: "",
+      productOwnerName: "",
+      Developers: [],
+      scrumMasterName: "",
+      startDate: "",
+      methodology: "",
+    });
   };
 
   return (
     <>
-      <h2>{formType} Product</h2>
+      {!formTitle &&
+        <h2>{!formType ? "Edit Product" : "Create Product"}</h2>}
+      {formTitle && <h2>Product {formTitle}</h2>}
       <form
+        ref={formRef}
         onSubmit={handleOnSubmit}
         className={styles.form}
       >
@@ -147,7 +151,6 @@ const ProductForm = (props) => {
             required
           />
         </label>
-
         <label>
           Product Owner Name:<br />
           <input
@@ -197,8 +200,7 @@ const ProductForm = (props) => {
             required
           />
         </label>
-
-        {<label>
+        <label>
           Start Date:<br />
           <input
             // TODO: DISABLE FOR EDIT
@@ -209,8 +211,7 @@ const ProductForm = (props) => {
             required
             disabled={formType === "Edit"}
           />
-        </label>}
-
+        </label>
         <label>
           Methodology:<br />
           <div className={styles.radioBtns}>
@@ -239,25 +240,18 @@ const ProductForm = (props) => {
           </div>
         </label>
 
-        <div className={styles.submitForm}
-          ref={formRef}
-        >
+        <div className={styles.submitForm}>
 
-          {formType === "Create" &&
+          {formType &&
             <button id="add-btn" type="submit" data-tip data-for="submit-tooltip"
               onClick={(e) => formRef.current.btnId = e.target.id}
-            // ref={addBtnRef}
-            >
-              Add Product
+            >Add Product
             </button>}
-
-          {/* {formType === "Edit" &&} */}
-          <button id="edit-btn" type="submit" data-tip data-for="submit-tooltip"
+         {!formType && <button id="edit-btn" type="submit" data-tip data-for="submit-tooltip"
             onClick={(e) => formRef.current.btnId = e.target.id}
-          // ref={editBtnRef}
-          >
-            Edit Product
-          </button>
+          >Edit Product
+          </button>}
+
           <button type="reset" onClick={handleReset}>Reset</button>
           <Tooltip id="submit-tooltip" place="top" type="error" effect="solid" />
         </div>

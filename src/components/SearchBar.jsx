@@ -11,9 +11,9 @@ const SearchBar = ({ setQuery, filterKey }) => {
     [setQuery]
   );
 
+  // TODO: does this need a return () => cleanup? 
   useEffect(() => {
     // if (value) {
-
     // }
     // return () => {
     //   setQuery("");
@@ -28,7 +28,8 @@ const SearchBar = ({ setQuery, filterKey }) => {
           className="search-input"
           spellCheck="false"
           placeholder={
-            !filterKey ? "select column to filter" : filterKey
+            !filterKey ? 
+            "select column to filter" : "enter " + filterKey
           }
           name="search"
           type="text"

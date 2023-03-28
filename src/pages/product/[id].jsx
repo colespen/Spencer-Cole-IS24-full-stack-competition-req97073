@@ -33,7 +33,7 @@ const EditProduct = (props) => {
     setQuery // **
   } = props;
 
-  console.log("PROP:", formType)
+  // console.log("PROP:", formType)
 
   return (
     // NEED ACCESS TO THESE PROPS BELOW
@@ -41,7 +41,8 @@ const EditProduct = (props) => {
       handleFetchProducts={handleFetchProducts} // **
       handleNewProduct={handleNewProduct} // **
       setProducts={setProducts} // **
-      products={products} //this works now
+      products={products} //this works now since fetch in SSP
+      setView={setView} // **
       view={view} // **
       setQuery={setQuery} // **
     >

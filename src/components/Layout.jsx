@@ -8,6 +8,7 @@ export default function Layout(post) {
     handleFetchProducts,
     handleNewProduct,
     products,
+    setView,
     view,
     setQuery,
     filterKey
@@ -27,6 +28,7 @@ export default function Layout(post) {
           handleFetchProducts={handleFetchProducts}
           handleNewProduct={handleNewProduct}
           products={products}
+          setView={setView}
           view={view}
           setQuery={setQuery}
           filterKey={filterKey}

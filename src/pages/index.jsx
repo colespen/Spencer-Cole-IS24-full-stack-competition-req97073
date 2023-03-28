@@ -49,21 +49,24 @@ export default function Home({ initialProducts }) {
   // console.log("view | formType: ", view + " | " + formType)
 
   return (
-    <Layout
-      handleFetchProducts={handleFetchProducts}
-      handleNewProduct={handleNewProduct}
-      products={products}
-      view={view}
-      setQuery={setQuery}
-      filterKey={filterKey}
-    >
-      {view === "TABLE" && <ProductTable
+    <>
+      {view === "TABLE" && <Layout
+        handleFetchProducts={handleFetchProducts}
+        handleNewProduct={handleNewProduct}
         products={products}
         setView={setView}
-        setFormType={setFormType}
-        formType={formType}
-        setFilterKey={setFilterKey}
-      />}
+        view={view}
+        setQuery={setQuery}
+        filterKey={filterKey}
+      >
+        <ProductTable
+          products={products}
+          setView={setView}
+          setFormType={setFormType}
+          formType={formType}
+          setFilterKey={setFilterKey}
+        />
+      </Layout>}
       {view === "FORM" && <EditProduct
         //props all work in Layout & ProductForm when UI renders Client Side 
         setProducts={setProducts}
@@ -76,7 +79,8 @@ export default function Home({ initialProducts }) {
         product={null}
         id={null}
         setQuery={setQuery}
+        filterKey={filterKey}
       />}
-    </Layout>
+    </>
   );
 }
