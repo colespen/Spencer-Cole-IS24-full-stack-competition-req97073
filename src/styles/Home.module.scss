@@ -3,20 +3,46 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 3rem 4rem 6rem 4rem;
+  padding: 2.5rem 5% 6rem 5%;
   min-height: 100vh;
   .main {
     width: 100%;
+    max-width: 85rem;
     .header {
+      width: 100%;
       display: flex;
       .nav {
         display: flex;
         flex-direction: column;
         width: 150px;
-        margin-top: 5px;
         margin-right: 20px;
         button {
+          height: 25px;
           margin-bottom: 20px;
+        }
+      }
+      .productCount {
+        height: 70px;
+        border: 2px solid rgb(42 45 72);
+        display: flex;
+        align-items: center;
+        padding: 0 1rem 0 1rem;
+        margin-left: 1rem;
+      }
+      .searchBar {
+        width: 30%;
+        left: 2rem;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        margin-left: 2rem;
+        form {
+          width: 100%;
+          input {
+            height: 40px;
+            width: 100%;
+            padding-left: 10px;
+          }
         }
       }
     }
@@ -26,24 +52,43 @@
 .table {
   width: 100%;
   thead {
-    width: 100%
+    width: 100%;
+    height: 50px;
   }
   .tableHeaders {
+    color: #e5bf9f;
     th {
       padding-right: 10px;
       text-align: start;
+      cursor: pointer;
+      &:hover {
+        color: #efd9c7;
+      }
     }
   }
   .tableBody {
-    height: 150px;
-    // cursor: pointer;
+    height: 120px;
+    background-color: #292c4d;
+    cursor: pointer;
+    &:hover {
+      background-color: #282e5c;
+    }
+    .productName {
+      min-width: 140px;
+    }
     .tableData > td {
-      padding-right: 10px;
+      cursor: pointer;
+      padding-left: 5px;
+      padding-right: 5px;
       text-align: start;
+      small {
+        font-size: 10px;
+      }
     }
   }
   .developerList {
     width: 160px;
+    font-size: 15px;
     ul {
       list-style: none;
     }
@@ -56,12 +101,15 @@
   flex-direction: column;
   label {
     padding-top: 15px;
+    margin-top: 10px;
     margin-bottom: 2px;
     height: 60px;
+    color: #e5bf9f;
     input {
-      margin-top: 5px;
-      height: 25px;
+      height: 35px;
       width: 60%;
+      margin-top: 5px;
+      padding-left: 5px;
       min-width: 150px;
       max-width: 450px;
     }
@@ -69,11 +117,31 @@
   .developers {
     height: 100%;
     padding-top: 15px;
+    margin-top: 20px;
     margin-bottom: 2px;
     display: flex;
     flex-direction: column;
+    color: #e5bf9f;
+    .developersInner {
+      margin-top: 7px;
+      .developerHeader {
+        padding-left: 10px;
+      }
+      button {
+        padding: 5px;
+      }
+     
+      input {
+        height: 30px;
+        width: 12rem;
+        margin-top: 5px;
+        margin-right: 5px;
+        padding-left: 10px;
+      }
+    }
     > button {
       width: 150px;
+      padding: 2px;
       margin-top: 10px;
     }
   }
@@ -82,6 +150,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    
     input {
       margin: 0px 8px 0px 0px;
     }
@@ -91,6 +160,7 @@
       margin-right: 20px;
       display: flex;
       align-items: center;
+      color: #eeeeee;
     }
   }
   .submitForm {
@@ -100,12 +170,7 @@
     margin-top: 25px;
     button {
       margin-bottom: 20px;
+      height: 25px;
     }
   }
 }
-
-// .developersInner > button:nth-child(1){
-//     display: none;
-//
-
-// }

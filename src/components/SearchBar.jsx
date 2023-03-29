@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback } from "react";
 
 import { useDebounce } from "../hooks/useDebounce";
 
+import styles from "../styles/Home.module.scss";
+
 const SearchBar = ({ setQuery, filterKey }) => {
   const [value, setValue] = useState("");
   const term = useDebounce(value, 400);
@@ -22,14 +24,14 @@ const SearchBar = ({ setQuery, filterKey }) => {
   }, [onSearch, term]);
 
   return (
-    <section className="search">
+    <section className={styles.searchBar}>
       <form className="search-form" onSubmit={(e) => e.preventDefault()}>
         <input
           className="search-input"
           spellCheck="false"
           placeholder={
             !filterKey ? 
-            "select column to filter" : "enter " + filterKey
+            "select column title to filter" : "enter " + filterKey
           }
           name="search"
           type="text"

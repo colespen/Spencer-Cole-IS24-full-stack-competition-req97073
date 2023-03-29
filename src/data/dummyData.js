@@ -106,7 +106,7 @@ export const data = [
   {
     "id": 7,
     "productId": "8de57255-8648-40b7-af87-b3aeee66b1ba",
-    "productName": "Ea Velit Aliquip",
+    "productName": "Easygem App",
     "productOwnerName": "Kaufman Copeland",
     "Developers": [
       "Dale Clements",
@@ -261,7 +261,7 @@ export const data = [
   {
     "id": 17,
     "productId": "702cd4ca-a674-48e5-a4f0-e949ce00a8f1",
-    "productName": "Non Ea Eu",
+    "productName": "Public Systems",
     "productOwnerName": "Singleton Barry",
     "Developers": [
       "Alana Cunningham",
@@ -373,7 +373,7 @@ export const data = [
   {
     "id": 24,
     "productId": "53205f75-030d-4b42-ba26-bcc39c257099",
-    "productName": "Ad Nulla Minim",
+    "productName": "Service Enigma",
     "productOwnerName": "Montoya Stein",
     "Developers": [
       "Silva David",
@@ -565,7 +565,7 @@ export const data = [
   {
     "id": 36,
     "productId": "62eabf9f-be0c-49e6-ae97-ddb3322386b3",
-    "productName": "Sint Pariatur Ullamco",
+    "productName": "Rapid Transit App",
     "productOwnerName": "Valarie Mcfarland",
     "Developers": [
       "Rosalyn Brennan",

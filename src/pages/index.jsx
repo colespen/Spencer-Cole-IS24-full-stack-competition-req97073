@@ -84,6 +84,8 @@ export default function Home({ initialProducts }) {
       {view === "FORM" && <EditProduct
         // props all work in Layout & ProductForm 
         // when UI renders Client Side 
+        product={null} // getSSP
+        id={null}     // getSSP
         setProducts={setProducts}
         formType={formType}
         view={view}
@@ -91,8 +93,6 @@ export default function Home({ initialProducts }) {
         products={products}
         handleFetchProducts={handleFetchProducts}
         handleNewProduct={handleNewProduct}
-        product={null} // getSSP
-        id={null}     // getSSP
         setQuery={setQuery}
         filterKey={filterKey}
       />}

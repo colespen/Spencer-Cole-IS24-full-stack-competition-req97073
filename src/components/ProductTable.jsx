@@ -1,4 +1,3 @@
-import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import { dateSort, kebabCase, filterIdTop } from "../helpers/sort";
 
@@ -41,7 +40,7 @@ const ProductTable = (props) => {
             onClick={() => editTableByIdOnClick(product)}
           >
             <tr className={styles.tableData}>
-              <td>
+              <td className={styles.productName}>
                 <strong>{product.productName}</strong>
               </td>
               <td>{product.productOwnerName}</td>

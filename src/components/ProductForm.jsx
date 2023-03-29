@@ -142,7 +142,7 @@ const ProductForm = (props) => {
         className={styles.form}
       >
         <label>
-          Product Name:<br />
+          Product Name<br />
           <input
             name="productName"
             value={newProduct.productName}
@@ -151,7 +151,7 @@ const ProductForm = (props) => {
           />
         </label>
         <label>
-          Product Owner Name:<br />
+          Product Owner Name<br />
           <input
             name="productOwnerName"
             value={newProduct.productOwnerName}
@@ -164,8 +164,8 @@ const ProductForm = (props) => {
           Developers
           {newProduct.Developers.map((developer, index) => (
             <div key={index} className={styles.developersInner} >
-              <small>
-                Developer {index + 1}:<br />
+              <small className={styles.developerHeader}>
+                Developer {index + 1}<br />
                 <input
                   name="Developers"
                   value={developer}
@@ -191,7 +191,7 @@ const ProductForm = (props) => {
         </div>
 
         <label>
-          Scrum Master Name:<br />
+          Scrum Master Name<br />
           <input
             name="scrumMasterName"
             value={newProduct.scrumMasterName}
@@ -200,7 +200,7 @@ const ProductForm = (props) => {
           />
         </label>
         <label>
-          Start Date:<br />
+          Start Date<br />
           <input
             name="startDate"
             value={newProduct.startDate.replace(/\//g, "-")}
@@ -208,10 +208,11 @@ const ProductForm = (props) => {
             type="date"
             required
             disabled={!formType}
+            style={{ color: !formType ? "darkgrey" : "inherit" }}
           />
         </label>
         <label>
-          Methodology:<br />
+          Methodology<br />
           <div className={styles.radioBtns}>
             <input
               name="methodology"
