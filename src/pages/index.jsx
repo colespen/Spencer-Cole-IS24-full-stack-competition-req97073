@@ -22,7 +22,7 @@ export default function Home({ initialProducts }) {
   const [formType, setFormType] = useState("");
   const [query, setQuery] = useState("");
   const [filterKey, setFilterKey] = useState("");
-  const [currId, setCurrId] = useState(null);
+
 
   useEffect(() => {
     let filteredProducts;
@@ -66,8 +66,6 @@ export default function Home({ initialProducts }) {
           setFormType={setFormType}
           formType={formType}
           setFilterKey={setFilterKey}
-          currId={currId}
-          setCurrId={setCurrId}
         />
       </Layout>}
       {view === "FORM" && <EditProduct

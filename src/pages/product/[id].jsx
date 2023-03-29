@@ -52,6 +52,7 @@ const EditProduct = (props) => {
         formType={formType} // **
         setProducts={setProducts} // **
         setView={setView} // **
+        view={view} // **
       />
     </Layout>
   );

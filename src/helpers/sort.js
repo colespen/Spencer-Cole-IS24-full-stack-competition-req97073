@@ -1,5 +1,5 @@
-const dateSort = (allProducts, currId) => {
-  const byDate = allProducts.sort((a, b) => {
+const dateSort = (products) => {
+  const byDate = products.sort((a, b) => {
     let aStart = a.startDate.split('/').join('');
     let bStart = b.startDate.split('/').join('');
     let aa = parseInt(aStart);
@@ -10,22 +10,28 @@ const dateSort = (allProducts, currId) => {
       return -1;
     }
   });
+  return byDate;
+};
+
+const filterIdTop = (products, currId) => {
+  const original = products;
   if (!currId) {
-    return byDate;
+    return products;
   } else {
     let foundId = false;
-    byDate.forEach((product, i) => {
+    products.forEach((product, i) => {
       if (product.id === currId) {
-        byDate.splice(i, 1);
-        byDate.unshift(product);
+        products.splice(i, 1);
+        products.unshift(product);
         foundId = true;
       }
     });
     if (foundId) {
-      return byDate;
-    } 
+      return products;
+    } else {
+      original;
+    }
   }
-  return byDate;
 };
 
 const kebabCase = (str) => {
@@ -97,4 +103,4 @@ const filterByKey = (allProducts, searchTerm, filterKey) => {
   return results;
 };
 
-export { dateSort, kebabCase, filterByKey };
+export { dateSort, kebabCase, filterByKey, filterIdTop };

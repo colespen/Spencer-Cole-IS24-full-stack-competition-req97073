@@ -14,6 +14,7 @@ const ProductForm = (props) => {
     product,
     formType,
     setView,
+    view,
   } = props;
 
   const [newProduct, setNewProduct] = useState(product || {
@@ -103,20 +104,18 @@ const ProductForm = (props) => {
       return;
     } else {
       if (btnId === "add-btn") {
-        console.log("SUBMITTED");
         setFormTitle("Added!");
         handleSaveProduct();
       }
       if (btnId === "edit-btn") {
-        console.log("EDITED");
         setFormTitle("Edited!");
         handleEditProduct();
       }
       const tableViewDelay = setTimeout(() => {
         router.push("/");
-        setView("TABLE");
-      }, 500);
-      handleReset();
+        if (view === "FORM") setView("TABLE") 
+        if (view === "TABLE") handleReset();
+      }, 600);
       return () => clearTimeout(tableViewDelay);
     }
   };
@@ -244,16 +243,11 @@ const ProductForm = (props) => {
           {formType &&
             <button id="add-btn" type="submit" data-tip data-for="submit-tooltip"
               onClick={(e) => formRef.current.btnId = e.target.id}
-            >
-              Add Product
-              {/* <Link href="/">Add Product</Link> */}
-              {/* Trying To Exit on Submit */}
+            >Add Product
             </button>}
           {!formType && <button id="edit-btn" type="submit" data-tip data-for="submit-tooltip"
             onClick={(e) => formRef.current.btnId = e.target.id}
-          >
-            {/* <Link href="/">Edit Product</Link> */}
-            {/* Trying To Exit on Submit */}
+          >Edit Product
           </button>}
 
           <button type="reset" onClick={handleReset}>Reset</button>
