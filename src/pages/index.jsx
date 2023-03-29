@@ -9,6 +9,7 @@ import {
 } from "../services/products";
 
 import { filterByKey } from "../helpers/sort";
+// import { usePrevId } from "../hooks/usePrevId";
 
 export async function getStaticProps() {
   const initialProducts = await fetchInitialProducts();
@@ -22,6 +23,14 @@ export default function Home({ initialProducts }) {
   const [formType, setFormType] = useState("");
   const [query, setQuery] = useState("");
   const [filterKey, setFilterKey] = useState("");
+  const [currId, setCurrId] = useState(null);
+
+  useEffect(() => {
+    const id = JSON.parse(localStorage.getItem('prevId'));
+    setCurrId(id);
+  }, []);
+
+  console.log("currId -- Home: ", currId);
 
 
   useEffect(() => {
@@ -45,6 +54,7 @@ export default function Home({ initialProducts }) {
   const handleNewProduct = () => {
     setFormType("Create");
     setView("FORM");
+    setCurrId(null)
   };
   // console.log("products: ", products)
   // console.log("view | formType: ", view + " | " + formType)
@@ -66,6 +76,9 @@ export default function Home({ initialProducts }) {
           setFormType={setFormType}
           formType={formType}
           setFilterKey={setFilterKey}
+          currId={currId}
+          setCurrId={setCurrId}
+        // prevId={prevId}
         />
       </Layout>}
       {view === "FORM" && <EditProduct
@@ -78,8 +91,8 @@ export default function Home({ initialProducts }) {
         products={products}
         handleFetchProducts={handleFetchProducts}
         handleNewProduct={handleNewProduct}
-        product={null}
-        id={null}
+        product={null} // getSSP
+        id={null}     // getSSP
         setQuery={setQuery}
         filterKey={filterKey}
       />}

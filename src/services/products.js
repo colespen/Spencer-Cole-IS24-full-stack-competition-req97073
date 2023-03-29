@@ -26,7 +26,7 @@ const fetchProductById = async (id) => {
     throw new Error("Failed to fetch data.");
   }
   const data = await response.json();
-  // console.log("data in fetchId: ", data);
+  console.log("data in fetchId: ", data);
   return data;
 };
 
@@ -44,6 +44,7 @@ const saveProduct = async (dataObj, setProducts) => {
   }
   // console.log("response: ", response)
   const data = await response.json();
+  // console.log("data -- saveProduct: ", data);
   setProducts(data);
 };
 

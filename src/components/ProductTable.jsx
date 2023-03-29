@@ -1,26 +1,22 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
-import { dateSort, kebabCase } from "../helpers/sort";
+import { dateSort, kebabCase, filterIdTop } from "../helpers/sort";
 
 import styles from "../styles/Home.module.scss";
-// import { usePrevId } from "../hooks/usePrevId";
 
 const ProductTable = (props) => {
   const {
     products,
     setFormType,
     setFilterKey,
-    // currId,
-    // setCurrId
+    currId
   } = props;
-  const [currId, setCurrId] = useState(null);
   const router = useRouter();
-  // const prevId = usePrevId(currId);
-  
+  // console.log("currId -- ProductTable: ", currId)
+
   const editTableByIdOnClick = (product) => {
     setFormType("Edit");
-    setCurrId(product.id);
-    
+    localStorage.setItem("prevId", JSON.stringify(product.id));
     router.push({
       pathname: "/product/[id]",
       query: {
@@ -37,8 +33,9 @@ const ProductTable = (props) => {
   const ProductTableBodyItems = () => {
     if (products) {
       const defaultDateSort = dateSort(products);
+      const productIdSort = filterIdTop(defaultDateSort, currId);
       return (
-        defaultDateSort.map((product) => (
+        productIdSort.map((product) => (
           <tbody
             key={product.id} className={styles.tableBody}
             onClick={() => editTableByIdOnClick(product)}

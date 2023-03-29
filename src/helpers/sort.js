@@ -14,7 +14,7 @@ const dateSort = (products) => {
 };
 
 const filterIdTop = (products, currId) => {
-  const original = products;
+  const original = products; //return this if !foundId?
   if (!currId) {
     return products;
   } else {
@@ -28,9 +28,8 @@ const filterIdTop = (products, currId) => {
     });
     if (foundId) {
       return products;
-    } else {
-      original;
-    }
+    } 
+    return original;
   }
 };
 
@@ -41,6 +40,7 @@ const kebabCase = (str) => {
     .toLowerCase();
 };
 
+///////////////////////////////////////
 // first store requested keys in a hash
 function buildMap(data, filterKey) {
   const map = {};

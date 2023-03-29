@@ -1,18 +1,20 @@
-// import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 
-// const usePrevId = (currId) => {
-//   const prevIdRef = useRef(null);
+const usePrevId = (currId) => {
+  const [prev, setPrev] = useState(
+    JSON.parse(localStorage.getItem("prevId")) || null
+  );
 
-//   useEffect(() => {
-//     localStorage.setItem("prevId", JSON.stringify(currId));
-//     prevIdRef.current = currId;
-//   }, [currId]);
+  useEffect(() => {
+    localStorage.setItem("prevId", JSON.stringify(currId));
+  }, [currId]);
 
-//   useEffect(() => {
-//     prevIdRef.current = JSON.parse(localStorage.getItem("prevId"));
-//   }, []);
+  // useEffect(() => {
+  //   const id = JSON.parse(localStorage.getItem("prevId"));
+  //   setPrevId(id);
+  // }, []);
 
-//   return prevIdRef.current;
-// };
+  return prev;
+};
 
-// export { usePrevId };
+export { usePrevId };

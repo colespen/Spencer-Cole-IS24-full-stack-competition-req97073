@@ -15,10 +15,11 @@ const Header = (props) => {
   } = props;
 
   console.log("HEADER -- view: ", view);
+  // console.log("HEADER -- products: ", products);
 
   const handleViewProducts = () => {
     if (view === "FORM") {
-      setView("TABLE")
+      setView("TABLE");
     }
     return;
   };
@@ -28,7 +29,6 @@ const Header = (props) => {
       <nav className={styles.nav}>
 
         {view === "TABLE" ?
-
           <button onClick={handleFetchProducts}>
             Get Products
           </button>
@@ -37,9 +37,12 @@ const Header = (props) => {
             <Link href="/">View Products</Link>
           </button>
         }
-
-       { <button onClick={handleNewProduct}>
-          New Product
+        {<button
+          onClick={handleNewProduct}
+          style={{
+            visibility: view === "TABLE" ? "visible" : "hidden"
+          }}
+        >New Product
         </button>}
 
       </nav >

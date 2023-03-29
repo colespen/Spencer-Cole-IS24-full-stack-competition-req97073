@@ -113,7 +113,7 @@ const ProductForm = (props) => {
       }
       const tableViewDelay = setTimeout(() => {
         router.push("/");
-        if (view === "FORM") setView("TABLE") 
+        if (view === "FORM") setView("TABLE");
         if (view === "TABLE") handleReset();
       }, 600);
       return () => clearTimeout(tableViewDelay);
@@ -245,10 +245,11 @@ const ProductForm = (props) => {
               onClick={(e) => formRef.current.btnId = e.target.id}
             >Add Product
             </button>}
-          {!formType && <button id="edit-btn" type="submit" data-tip data-for="submit-tooltip"
-            onClick={(e) => formRef.current.btnId = e.target.id}
-          >Edit Product
-          </button>}
+          {!formType &&
+            <button id="edit-btn" type="submit" data-tip data-for="submit-tooltip"
+              onClick={(e) => formRef.current.btnId = e.target.id}
+            >Edit Product
+            </button>}
 
           <button type="reset" onClick={handleReset}>Reset</button>
           <Tooltip id="submit-tooltip" place="top" type="error" effect="solid" />
