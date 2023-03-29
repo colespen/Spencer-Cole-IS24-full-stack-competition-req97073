@@ -2,7 +2,7 @@ export const data = [
   {
     "id": 0,
     "productId": "1adbcbc1-cb01-47ca-9714-841ed17a9bcf",
-    "productName": "adipisicing duis laboris",
+    "productName": "Adipisicing duis laboris",
     "productOwnerName": "Lupe Parker",
     "Developers": [
       "French Riddle",
@@ -17,7 +17,7 @@ export const data = [
   {
     "id": 1,
     "productId": "35c2095a-081c-4651-ac4c-4ec3f0a99399",
-    "productName": "sit excepteur id",
+    "productName": "Sit excepteur id",
     "productOwnerName": "Margie Ashley",
     "Developers": [
       "Craft Osborne",
@@ -37,7 +37,7 @@ export const data = [
     "productOwnerName": "Roman Butler",
     "Developers": [
       "Houston Mcleod",
-      "Sellers Whitney"
+      "Rosalyn Brennan"
     ],
     "scrumMasterName": "Santana Henderson",
     "startDate": "2005/05/08",
@@ -64,8 +64,6 @@ export const data = [
     "productOwnerName": "Lidia Moran",
     "Developers": [
       "Bessie Burris",
-      "Stevens Sawyer",
-      "Brady Langley",
       "Lenore Green",
       "Pennington Fleming"
     ],
@@ -80,7 +78,7 @@ export const data = [
     "productOwnerName": "Colleen Hinton",
     "Developers": [
       "Vang Brock",
-      "Donna Chavez",
+      "Rosalyn Brennan",
       "Mcmillan Carey",
       "Aline Valencia",
       "Tabitha Boyd"
@@ -142,7 +140,7 @@ export const data = [
     "productOwnerName": "Byers Washington",
     "Developers": [
       "Stokes Barber",
-      "Cross Herman",
+      "Rosalyn Brennan",
       "Woodard Whitaker",
       "Alexandria Carroll",
       "Chris Foley"
@@ -219,7 +217,7 @@ export const data = [
     "productOwnerName": "Whitfield Dickson",
     "Developers": [
       "Martin Pittman",
-      "Durham Watson",
+      "Rosalyn Brennan",
       "Carter Delgado",
       "Hickman Olson",
       "Rhea Powell"
@@ -570,7 +568,7 @@ export const data = [
     "productName": "Sint Pariatur Ullamco",
     "productOwnerName": "Valarie Mcfarland",
     "Developers": [
-      "Wilkerson Wynn",
+      "Rosalyn Brennan",
       "Kirby Flowers",
       "Gay Torres",
       "Kerri Boone",

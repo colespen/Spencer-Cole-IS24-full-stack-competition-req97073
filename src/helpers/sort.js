@@ -1,5 +1,5 @@
-const dateSort = (allProducts) => {
-  return allProducts.sort((a, b) => {
+const dateSort = (allProducts, currId) => {
+  const byDate = allProducts.sort((a, b) => {
     let aStart = a.startDate.split('/').join('');
     let bStart = b.startDate.split('/').join('');
     let aa = parseInt(aStart);
@@ -10,6 +10,22 @@ const dateSort = (allProducts) => {
       return -1;
     }
   });
+  if (!currId) {
+    return byDate;
+  } else {
+    let foundId = false;
+    byDate.forEach((product, i) => {
+      if (product.id === currId) {
+        byDate.splice(i, 1);
+        byDate.unshift(product);
+        foundId = true;
+      }
+    });
+    if (foundId) {
+      return byDate;
+    } 
+  }
+  return byDate;
 };
 
 const kebabCase = (str) => {
@@ -19,13 +35,13 @@ const kebabCase = (str) => {
     .toLowerCase();
 };
 
-// store requested keys in a hash
+// first store requested keys in a hash
 function buildMap(data, filterKey) {
   const map = {};
-  
+
   for (const product of data) {
     const keys = Object.keys(product);
-    
+
     for (const key of keys) {
       if (key === filterKey) {
         const value = product[key]?.toString()?.toLowerCase() ?? "";
@@ -35,7 +51,7 @@ function buildMap(data, filterKey) {
             if (!map[name]) {
               map[name] = [];
             }
-            
+
             map[name].push(product);
           }
         }
@@ -44,7 +60,6 @@ function buildMap(data, filterKey) {
   }
   return map;
 }
-
 /**
  * returns all articles containing matching character from selected filter key.
  *  @param {object[]} allProducts
@@ -55,7 +70,7 @@ const filterByKey = (allProducts, searchTerm, filterKey) => {
   const map = buildMap(allProducts, filterKey);
   const resultsMap = {};
   const searchArray = searchTerm?.toLowerCase().split(" ");
-  
+
   if (!searchArray) {
     return [];
   }
@@ -65,13 +80,13 @@ const filterByKey = (allProducts, searchTerm, filterKey) => {
       continue;
     }
     const keys = Object.keys(map);
-    
+
     for (const key of keys) {
       const value = key.toLowerCase();
-      
+
       if (value.includes(term)) {
         const products = map[key];
-        
+
         for (const product of products) {
           resultsMap[product.id] = product;
         }
@@ -79,7 +94,7 @@ const filterByKey = (allProducts, searchTerm, filterKey) => {
     }
   }
   const results = Object.values(resultsMap);
-  return results
+  return results;
 };
 
 export { dateSort, kebabCase, filterByKey };

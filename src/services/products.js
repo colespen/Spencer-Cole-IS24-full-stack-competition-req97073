@@ -47,7 +47,7 @@ const saveProduct = async (dataObj, setProducts) => {
   setProducts(data);
 };
 
-// add (_, setProducts) *********
+// add (_, setProducts) ? *********
 const editProduct = async (dataObj) => {
   console.log("editProduct -- dataObj: ", dataObj);
   const response = await fetch("/api/products/", {
@@ -62,7 +62,7 @@ const editProduct = async (dataObj) => {
   }
   // console.log("response: ", response)
   const data = await response.json();
-  return data // return necessary? 
+  // return data // return not necessary... 
   // setProducts(data); // ************
 };
 

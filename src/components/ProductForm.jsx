@@ -14,9 +14,7 @@ const ProductForm = (props) => {
     formType,
     setView,
   } = props;
-  // console.log("ProductForm - product: ", product);
-  // console.log("ProductForm - formType: ", formType);
-
+  
   const [newProduct, setNewProduct] = useState(product || {
     productName: "",
     productOwnerName: "",
@@ -29,11 +27,10 @@ const ProductForm = (props) => {
   const [isConfirm, setIsConfirm] = useState(false);
   const [formTitle, setFormTitle] = useState("");
   const formRef = useRef(null);
-  // const addBtnRef = useRef(null);
-  // const editBtnRef = useRef(null);
+  
+  // console.log("ProductForm - product: ", product);
   // console.log("ProductForm - newProduct: ", newProduct);
-  console.log("formType: ", formType);
-  // console.log("newProduct: ", newProduct);
+  console.log("ProductForm -- formType: ", formType);
 
 
   const handleSaveProduct = () => {
@@ -209,7 +206,7 @@ const ProductForm = (props) => {
             onChange={handleOnChange}
             type="date"
             required
-            disabled={formType === "Edit"}
+            disabled={!formType}
           />
         </label>
         <label>

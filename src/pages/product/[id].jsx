@@ -4,7 +4,7 @@ import { fetchProductById, fetchInitialProducts } from "../../services/products"
 
 export async function getServerSideProps(context) {
   const { id } = context.query;
-  console.log("getServerSideProps -- id: ",id)
+  console.log("getServerSideProps -- id: ", id);
 
   const product = await fetchProductById(id);
   const products = await fetchInitialProducts();
@@ -23,13 +23,13 @@ const EditProduct = (props) => {
   const {
     id, // fetched with SSR
     product, // SSR
-    view, // **
-    setView, // **
-    formType, // **
+    products, // SSR
+    view, // ** using as undefined 
+    formType, // ** using as undefined 
     handleFetchProducts, // **
     handleNewProduct, // **
+    setView, // **
     setProducts, // **
-    products, // SSR
     setQuery // **
   } = props;
 
@@ -37,17 +37,17 @@ const EditProduct = (props) => {
 
   return (
     // NEED ACCESS TO THESE PROPS BELOW
-    <Layout 
+    <Layout
+      products={products} //this works now since fetch in SSP
       handleFetchProducts={handleFetchProducts} // **
       handleNewProduct={handleNewProduct} // **
       setProducts={setProducts} // **
-      products={products} //this works now since fetch in SSP
       setView={setView} // **
       view={view} // **
       setQuery={setQuery} // **
     >
       <ProductForm
-        id={id} 
+        id={id}
         product={product}
         formType={formType} // **
         setProducts={setProducts} // **

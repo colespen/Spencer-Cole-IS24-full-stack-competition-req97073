@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { dateSort, kebabCase } from "../helpers/sort";
 
@@ -7,13 +8,17 @@ const ProductTable = (props) => {
   const {
     products,
     setFormType,
-    formType,
-    setFilterKey
+    setFilterKey,
+    currId,
+    setCurrId
   } = props;
   const router = useRouter();
 
+  console.log("currId: ", currId);
+
   const editTableByIdOnClick = (product) => {
     setFormType("Edit");
+    setCurrId(product.id);
 
     router.push({
       pathname: "/product/[id]",
@@ -30,7 +35,7 @@ const ProductTable = (props) => {
 
   const ProductTableBodyItems = () => {
     if (products) {
-      const defaultDateSort = dateSort(products);
+      const defaultDateSort = dateSort(products, currId);
       return (
         defaultDateSort.map((product) => (
           <tbody
@@ -57,8 +62,9 @@ const ProductTable = (props) => {
           </tbody>
         ))
       );
+    } else {
+      return null;
     }
-    else return null;
   };
 
   return (

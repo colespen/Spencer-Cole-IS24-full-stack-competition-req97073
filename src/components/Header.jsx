@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "../styles/Home.module.scss";
 
 import SearchBar from "./SearchBar";
@@ -13,22 +14,32 @@ const Header = (props) => {
     filterKey
   } = props;
 
-  console.log("view: ", view);
+  console.log("HEADER -- view: ", view);
+
+  const handleViewProducts = () => {
+    if (view === "FORM") setView("TABLE");
+    return;
+  };
 
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
+
         {view === "TABLE" ?
+
           <button onClick={handleFetchProducts}>
-            Update Products
-          </button> :
-          <button onClick={() => setView("TABLE")}>
-            View Products
+            Get Products
+          </button>
+          :
+          <button onClick={handleViewProducts}>
+            <Link href="/">View Products</Link>
           </button>
         }
-        <button onClick={handleNewProduct}>
+
+       { <button onClick={handleNewProduct}>
           New Product
-        </button>
+        </button>}
+
       </nav >
       <div className={styles.productCount}>
         <h1>
@@ -38,10 +49,10 @@ const Header = (props) => {
       </div>
       {/* TODO: Only render for "TABLE" view 
       && current props undefined in /[id]  */}
-      {/* <SearchBar
+      {view === "TABLE" && <SearchBar
         setQuery={setQuery}
         filterKey={filterKey}
-      /> */}
+      />}
     </header>
   );
 };
