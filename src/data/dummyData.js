@@ -161,7 +161,7 @@ export const data = [
       "Bartlett Ferguson",
       "Luisa Yang"
     ],
-    "scrumMasterName": "Rose Curry",
+    "scrumMasterName": "Chandra Gill",
     "startDate": "1993/04/02",
     "methodology": "Agile"
   },
@@ -222,7 +222,7 @@ export const data = [
       "Hickman Olson",
       "Rhea Powell"
     ],
-    "scrumMasterName": "Ester Pacheco",
+    "scrumMasterName": "Chandra Gill",
     "startDate": "1992/06/03",
     "methodology": "Agile"
   },
@@ -366,7 +366,7 @@ export const data = [
       "Garner Palmer",
       "Thornton Chase"
     ],
-    "scrumMasterName": "Chasity Sparks",
+    "scrumMasterName": "Chandra Gill",
     "startDate": "1997/10/13",
     "methodology": "Waterfall"
   },
@@ -622,7 +622,7 @@ export const data = [
       "Deann Lynch",
       "Loretta Dale"
     ],
-    "scrumMasterName": "Lorie Valentine",
+    "scrumMasterName": "Chandra Gill",
     "startDate": "1992/02/02",
     "methodology": "Waterfall"
   },

@@ -31,7 +31,7 @@ yarn dev
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser
+Finally, open [http://localhost:3000](http://localhost:3000) with your browser
 
 [API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed at [http://localhost:3000/api/products](http://localhost:3000/api/products).
 

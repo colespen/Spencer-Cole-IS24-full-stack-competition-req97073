@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 2.5rem 5% 6rem 5%;
+  padding: 0 5% 6rem 5%;
   min-height: 100vh;
   .main {
     width: 100%;
@@ -11,6 +11,10 @@
     .header {
       width: 100%;
       display: flex;
+      position: fixed;
+      background-color: aliceblue;
+      padding-top: 2.5rem;
+      background-color: #22232e;
       .nav {
         display: flex;
         flex-direction: column;
@@ -51,6 +55,7 @@
 
 .table {
   width: 100%;
+  padding-top: 7.5rem;
   thead {
     width: 100%;
     height: 50px;
@@ -137,7 +142,7 @@
       button {
         padding: 5px;
       }
-     
+
       input {
         height: 30px;
         width: 12rem;
@@ -157,7 +162,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    
+
     input {
       margin: 0px 8px 0px 0px;
     }
@@ -178,7 +183,6 @@
     button {
       margin-bottom: 20px;
       height: 25px;
-      
     }
   }
 }
