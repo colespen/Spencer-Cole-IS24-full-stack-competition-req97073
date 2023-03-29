@@ -202,7 +202,6 @@ const ProductForm = (props) => {
         <label>
           Start Date:<br />
           <input
-            // TODO: DISABLE FOR EDIT
             name="startDate"
             value={newProduct.startDate.replace(/\//g, "-")}
             onChange={handleOnChange}
@@ -252,7 +251,7 @@ const ProductForm = (props) => {
          {!formType && <button id="edit-btn" type="submit" data-tip data-for="submit-tooltip"
             onClick={(e) => formRef.current.btnId = e.target.id}
             >
-            <Link href="/">Edit Product</Link>
+            {/* <Link href="/">Edit Product</Link> */}
             {/* Trying To Exit on Submit */}
           </button>}
 
