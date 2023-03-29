@@ -1,3 +1,4 @@
+import { useRouter, Link } from "next/router";
 import { useState, useRef } from "react";
 import { Tooltip } from "react-tooltip";
 
@@ -24,6 +25,7 @@ const ProductForm = (props) => {
     methodology: "",
   });
   // const [errorMessage, setErrorMessage] = useState("");
+  const router = useRouter();
   const [isConfirm, setIsConfirm] = useState(false);
   const [formTitle, setFormTitle] = useState("");
   const formRef = useRef(null);
@@ -111,7 +113,7 @@ const ProductForm = (props) => {
         handleEditProduct();
       }
       const tableViewDelay = setTimeout(() => {
-        // setView("TABLE"); // TODO: UNDEFINED 
+        router.push('/');
       }, 500);
       handleReset();
       return () => clearTimeout(tableViewDelay);
@@ -242,11 +244,15 @@ const ProductForm = (props) => {
           {formType &&
             <button id="add-btn" type="submit" data-tip data-for="submit-tooltip"
               onClick={(e) => formRef.current.btnId = e.target.id}
-            >Add Product
+            >
+              <Link href="/">Add Product</Link>
+              {/* Trying To Exit on Submit */}
             </button>}
          {!formType && <button id="edit-btn" type="submit" data-tip data-for="submit-tooltip"
             onClick={(e) => formRef.current.btnId = e.target.id}
-          >Edit Product
+            >
+            <Link href="/">Edit Product</Link>
+            {/* Trying To Exit on Submit */}
           </button>}
 
           <button type="reset" onClick={handleReset}>Reset</button>
