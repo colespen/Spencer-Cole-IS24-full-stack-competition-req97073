@@ -113,7 +113,7 @@ const ProductForm = (props) => {
         handleEditProduct();
       }
       const tableViewDelay = setTimeout(() => {
-        router.push('/');
+        router.push("/");
       }, 500);
       handleReset();
       return () => clearTimeout(tableViewDelay);
@@ -245,7 +245,8 @@ const ProductForm = (props) => {
             <button id="add-btn" type="submit" data-tip data-for="submit-tooltip"
               onClick={(e) => formRef.current.btnId = e.target.id}
             >
-              <Link href="/">Add Product</Link>
+              Add Product
+              {/* <Link href="/">Add Product</Link> */}
               {/* Trying To Exit on Submit */}
             </button>}
          {!formType && <button id="edit-btn" type="submit" data-tip data-for="submit-tooltip"
