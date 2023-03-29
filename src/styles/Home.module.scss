@@ -107,10 +107,14 @@
   }
 }
 
+.formTitle {
+  padding-top: 9rem;
+}
 .form {
   width: 50%;
   display: flex;
   flex-direction: column;
+  padding-top: 1rem;
   label {
     padding-top: 15px;
     margin-top: 10px;

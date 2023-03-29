@@ -7,7 +7,7 @@ const Form = (props) => {
   const { formRef, handleOnSubmit, newProduct,
     handleOnChange, handleDeveloperChange,
     handleRemoveDeveloper, handleAddDeveloper,
-    handleReset, formType,
+    handleReset, formType, formTitle
   } = props;
   const [btnColor, setBtnColor] = useState("#44455b");
 
@@ -17,6 +17,10 @@ const Form = (props) => {
   };
 
   return (
+    <>
+    {!formTitle &&
+      <h2 className={styles.formTitle}>{!formType ? "Edit Product" : "Create Product"}</h2>}
+    {formTitle && <h2>Product {formTitle}</h2>}
     <form
       ref={formRef}
       onSubmit={handleOnSubmit}
@@ -149,6 +153,8 @@ const Form = (props) => {
           type="error" effect="solid" />
       </div>
     </form>
+
+    </>
   );
 };
 export default Form;

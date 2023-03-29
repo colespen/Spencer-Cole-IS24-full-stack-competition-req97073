@@ -126,12 +126,13 @@ const ProductForm = (props) => {
 
   return (
     <>
-      {!formTitle &&
+      {/* {!formTitle &&
         <h2>{!formType ? "Edit Product" : "Create Product"}</h2>}
-      {formTitle && <h2>Product {formTitle}</h2>}
+      {formTitle && <h2>Product {formTitle}</h2>} */}
       <Form
         formRef={formRef}
         formType={formType}
+        formTitle={formTitle}
         handleOnSubmit={handleOnSubmit}
         newProduct={newProduct}
         handleOnChange={handleOnChange}
