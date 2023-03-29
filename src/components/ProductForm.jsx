@@ -15,7 +15,7 @@ const ProductForm = (props) => {
     formType,
     setView,
   } = props;
-  
+
   const [newProduct, setNewProduct] = useState(product || {
     productName: "",
     productOwnerName: "",
@@ -24,12 +24,12 @@ const ProductForm = (props) => {
     startDate: "",
     methodology: "",
   });
-  // const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
-  const [isConfirm, setIsConfirm] = useState(false);
   const [formTitle, setFormTitle] = useState("");
   const formRef = useRef(null);
-  
+  // const [errorMessage, setErrorMessage] = useState("");
+  // const [isConfirm, setIsConfirm] = useState(false);
+
   // console.log("ProductForm - product: ", product);
   // console.log("ProductForm - newProduct: ", newProduct);
   console.log("ProductForm -- formType: ", formType);
@@ -114,6 +114,7 @@ const ProductForm = (props) => {
       }
       const tableViewDelay = setTimeout(() => {
         router.push("/");
+        setView("TABLE");
       }, 500);
       handleReset();
       return () => clearTimeout(tableViewDelay);
@@ -248,9 +249,9 @@ const ProductForm = (props) => {
               {/* <Link href="/">Add Product</Link> */}
               {/* Trying To Exit on Submit */}
             </button>}
-         {!formType && <button id="edit-btn" type="submit" data-tip data-for="submit-tooltip"
+          {!formType && <button id="edit-btn" type="submit" data-tip data-for="submit-tooltip"
             onClick={(e) => formRef.current.btnId = e.target.id}
-            >
+          >
             {/* <Link href="/">Edit Product</Link> */}
             {/* Trying To Exit on Submit */}
           </button>}
