@@ -1,11 +1,10 @@
-import { useRouter, Link } from "next/router";
+import { useRouter } from "next/router";
 import { useState, useRef } from "react";
-import { Tooltip } from "react-tooltip";
+import Form from "./Form";
 
 import { saveProduct, editProduct } from "../services/products";
 
-import 'react-tooltip/dist/react-tooltip.css';
-import styles from "../styles/Home.module.scss";
+
 
 const ProductForm = (props) => {
   const {
@@ -20,19 +19,15 @@ const ProductForm = (props) => {
   const [newProduct, setNewProduct] = useState(product || {
     productName: "",
     productOwnerName: "",
-    Developers: [],
+    Developers: [""],
     scrumMasterName: "",
     startDate: "",
     methodology: "",
   });
-  const router = useRouter();
   const [formTitle, setFormTitle] = useState("");
+  const router = useRouter();
   const formRef = useRef(null);
-  // const [errorMessage, setErrorMessage] = useState("");
-  // const [isConfirm, setIsConfirm] = useState(false);
 
-  // console.log("ProductForm - product: ", product);
-  // console.log("ProductForm - newProduct: ", newProduct);
   console.log("ProductForm -- formType: ", formType);
 
 
@@ -83,7 +78,6 @@ const ProductForm = (props) => {
     });
   };
 
-
   const handleOnSubmit = (e) => {
     const { btnId } = formRef.current;
     e.preventDefault();
@@ -100,7 +94,6 @@ const ProductForm = (props) => {
       !newProduct.startDate ||
       !newProduct.methodology
     ) {
-      // setErrorMessage("Please fill out all fields.");
       return;
     } else {
       if (btnId === "add-btn") {
@@ -136,126 +129,17 @@ const ProductForm = (props) => {
       {!formTitle &&
         <h2>{!formType ? "Edit Product" : "Create Product"}</h2>}
       {formTitle && <h2>Product {formTitle}</h2>}
-      <form
-        ref={formRef}
-        onSubmit={handleOnSubmit}
-        className={styles.form}
-      >
-        <label>
-          Product Name<br />
-          <input
-            name="productName"
-            value={newProduct.productName}
-            onChange={handleOnChange}
-            required
-          />
-        </label>
-        <label>
-          Product Owner Name<br />
-          <input
-            name="productOwnerName"
-            value={newProduct.productOwnerName}
-            onChange={handleOnChange}
-            required
-          />
-        </label>
-
-        <div className={styles.developers}>
-          Developers
-          {newProduct.Developers.map((developer, index) => (
-            <div key={index} className={styles.developersInner} >
-              <small className={styles.developerHeader}>
-                Developer {index + 1}<br />
-                <input
-                  name="Developers"
-                  value={developer}
-                  onChange={(e) => handleDeveloperChange(index, e.target.value)}
-                  required
-                />
-              </small>
-              {newProduct.Developers.length > 1 && (
-                <button
-                  type="button"
-                  onClick={() => handleRemoveDeveloper(index)}
-                >
-                  <small>Remove Developer</small>
-                </button>
-              )}
-            </div>
-          ))}
-          {newProduct.Developers.length < 5 && (
-            <button type="button" onClick={handleAddDeveloper}>
-              Add Developer
-            </button>
-          )}
-        </div>
-
-        <label>
-          Scrum Master Name<br />
-          <input
-            name="scrumMasterName"
-            value={newProduct.scrumMasterName}
-            onChange={handleOnChange}
-            required
-          />
-        </label>
-        <label>
-          Start Date<br />
-          <input
-            name="startDate"
-            value={newProduct.startDate.replace(/\//g, "-")}
-            onChange={handleOnChange}
-            type="date"
-            required
-            disabled={!formType}
-            style={{ color: !formType ? "darkgrey" : "inherit" }}
-          />
-        </label>
-        <label>
-          Methodology<br />
-          <div className={styles.radioBtns}>
-            <input
-              name="methodology"
-              id="Agile"
-              value={newProduct.methodology}
-              onChange={handleOnChange}
-              type="radio"
-              required
-              checked={newProduct.methodology === "Agile"}
-              style={{ width: "20px", minWidth: "20px" }}
-            />
-            <label htmlFor="agile">Agile</label>
-            <input
-              name="methodology"
-              id="Waterfall"
-              value={newProduct.methodology}
-              onChange={handleOnChange}
-              type="radio"
-              required
-              checked={newProduct.methodology === "Waterfall"}
-              style={{ width: "20px", minWidth: "20px" }}
-            />
-            <label htmlFor="waterfall">Waterfall</label>
-          </div>
-        </label>
-
-        <div className={styles.submitForm}>
-
-          {formType &&
-            <button id="add-btn" type="submit" data-tip data-for="submit-tooltip"
-              onClick={(e) => formRef.current.btnId = e.target.id}
-            >Add Product
-            </button>}
-          {!formType &&
-            <button id="edit-btn" type="submit" data-tip data-for="submit-tooltip"
-              onClick={(e) => formRef.current.btnId = e.target.id}
-            >Edit Product
-            </button>}
-
-          <button type="reset" onClick={handleReset}>Reset</button>
-          <Tooltip id="submit-tooltip" place="top" type="error" effect="solid" />
-        </div>
-      </form>
+      <Form
+        formRef={formRef}
+        formType={formType}
+        handleOnSubmit={handleOnSubmit}
+        newProduct={newProduct}
+        handleOnChange={handleOnChange}
+        handleDeveloperChange={handleDeveloperChange}
+        handleRemoveDeveloper={handleRemoveDeveloper}
+        handleAddDeveloper={handleAddDeveloper}
+        handleReset={handleReset}
+      />
     </>
   );
 };

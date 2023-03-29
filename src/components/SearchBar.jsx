@@ -31,7 +31,7 @@ const SearchBar = ({ setQuery, filterKey }) => {
           spellCheck="false"
           placeholder={
             !filterKey ? 
-            "select column title to filter" : "enter " + filterKey
+            "click column title to filter" : "enter " + filterKey
           }
           name="search"
           type="text"
