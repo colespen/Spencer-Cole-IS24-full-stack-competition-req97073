@@ -13,9 +13,6 @@ const Header = (props) => {
     filterKey
   } = props;
 
-  console.log("HEADER -- view: ", view);
-  // console.log("HEADER -- products: ", products);
-
   const handleViewProducts = () => {
     if (view === "FORM") {
       setView("TABLE");
@@ -51,8 +48,6 @@ const Header = (props) => {
             0 : products.length - 1}
         </h1>
       </div>
-      {/* TODO: Only render for "TABLE" view 
-      && current props undefined in /[id]  */}
       {view === "TABLE" && <SearchBar
         setQuery={setQuery}
         filterKey={filterKey}

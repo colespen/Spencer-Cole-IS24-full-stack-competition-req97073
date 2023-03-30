@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { dateSort, kebabCase, filterIdTop } from "../helpers/sort";
+import { dateSort, kebabCase, filterIdTop, sortNewToTop } from "../helpers/sort";
 
 import styles from "../styles/Home.module.scss";
 
@@ -8,13 +8,14 @@ const ProductTable = (props) => {
     products,
     setFormType,
     setFilterKey,
-    currId
+    currId,
+    initLengthRef
   } = props;
   const router = useRouter();
-  // console.log("currId -- ProductTable: ", currId)
 
   const editTableByIdOnClick = (product) => {
     setFormType("Edit");
+    // set the id of selected table
     localStorage.setItem("prevId", JSON.stringify(product.id));
     router.push({
       pathname: "/product/[id]",
@@ -28,16 +29,26 @@ const ProductTable = (props) => {
   const handleFilterName = (e) => {
     setFilterKey(e.target.id);
   };
+  // change color for add 
+  const getBackgroundColor = (product, products) => {
+    if (product.id === products.length - 1) {
+      return "#23296a";
+    }
+    // return "#6a523e";
+    return "revert-layer"
+  };
 
   const ProductTableBodyItems = () => {
     if (products) {
       const defaultDateSort = dateSort(products);
       const productIdSort = filterIdTop(defaultDateSort, currId);
+      const newToTop = sortNewToTop(productIdSort, initLengthRef);
       return (
-        productIdSort.map((product) => (
+        newToTop.map((product) => (
           <tbody
             key={product.id} className={styles.tableBody}
             onClick={() => editTableByIdOnClick(product)}
+            style={{ backgroundColor: getBackgroundColor(product, products) }}
           >
             <tr className={styles.tableData}>
               <td className={styles.productName}>

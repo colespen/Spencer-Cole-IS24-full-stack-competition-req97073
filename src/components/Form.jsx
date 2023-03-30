@@ -7,20 +7,18 @@ const Form = (props) => {
   const { formRef, handleOnSubmit, newProduct,
     handleOnChange, handleDeveloperChange,
     handleRemoveDeveloper, handleAddDeveloper,
-    handleReset, formType, formTitle
+    handleReset, formType, formTitle, btnColor
   } = props;
-  const [btnColor, setBtnColor] = useState("#44455b");
 
   const handleButtonTypeSubmit = (e) => {
     formRef.current.btnId = e.target.id;
-    setBtnColor("#3f4db7");
   };
 
   return (
     <>
     {!formTitle &&
       <h2 className={styles.formTitle}>{!formType ? "Edit Product" : "Create Product"}</h2>}
-    {formTitle && <h2>Product {formTitle}</h2>}
+    {formTitle && <h2 className={styles.formTitle}>Product {formTitle}</h2>}
     <form
       ref={formRef}
       onSubmit={handleOnSubmit}
@@ -96,6 +94,7 @@ const Form = (props) => {
           required
           disabled={!formType}
           style={{ color: !formType ? "darkgrey" : "inherit" }}
+          className={styles.date}
         />
       </label>
       <label>

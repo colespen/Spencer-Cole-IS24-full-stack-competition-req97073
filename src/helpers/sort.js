@@ -1,3 +1,8 @@
+/**
+ * sorts by most recent date
+ *  @param {object[]} products
+ *  @return {object[]} products
+ */
 const dateSort = (products) => {
   const byDate = products.sort((a, b) => {
     let aStart = a.startDate.split('/').join('');
@@ -13,6 +18,12 @@ const dateSort = (products) => {
   return byDate;
 };
 
+/**
+ * sorts most recently edited product to top
+ *  @param {object[]} products
+ *  @param {number} currId
+ *  @return {object[]} products
+ */
 const filterIdTop = (products, currId) => {
   const original = products; //return this if !foundId?
   if (!currId) {
@@ -28,8 +39,30 @@ const filterIdTop = (products, currId) => {
     });
     if (foundId) {
       return products;
-    } 
+    }
     return original;
+  }
+};
+
+/**
+ * sorts most recently added product to top
+ *  @param {object[]} products
+ *  @param {object} initLengthRef
+ *  @return {object[]} products
+ */
+const sortNewToTop = (products, initLengthRef) => {
+  const currLength = products.length - 1;
+  const initLength = initLengthRef.current;
+  if (currLength === initLength || !initLength) {
+    return products;
+  } else {
+    products.forEach((product, i) => {
+      if (product.id === currLength) {
+        products.splice(i, 1);
+        products.unshift(product);
+      }
+    });
+    return products;
   }
 };
 
@@ -40,6 +73,7 @@ const kebabCase = (str) => {
     .toLowerCase();
 };
 
+// FOR SEARCH
 ///////////////////////////////////////
 // first store requested keys in a hash
 function buildMap(data, filterKey) {
@@ -103,4 +137,10 @@ const filterByKey = (allProducts, searchTerm, filterKey) => {
   return results;
 };
 
-export { dateSort, kebabCase, filterByKey, filterIdTop };
+export {
+  dateSort,
+  kebabCase,
+  filterByKey,
+  filterIdTop,
+  sortNewToTop
+};

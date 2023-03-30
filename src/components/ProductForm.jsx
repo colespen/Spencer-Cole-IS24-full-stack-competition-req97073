@@ -4,8 +4,6 @@ import Form from "./Form";
 
 import { saveProduct, editProduct } from "../services/products";
 
-
-
 const ProductForm = (props) => {
   const {
     setProducts,
@@ -16,6 +14,8 @@ const ProductForm = (props) => {
     view,
   } = props;
 
+  console.log("id: ", id)
+
   const [newProduct, setNewProduct] = useState(product || {
     productName: "",
     productOwnerName: "",
@@ -25,11 +25,9 @@ const ProductForm = (props) => {
     methodology: "",
   });
   const [formTitle, setFormTitle] = useState("");
+  const [btnColor, setBtnColor] = useState("#44455b");
   const router = useRouter();
   const formRef = useRef(null);
-
-  console.log("ProductForm -- formType: ", formType);
-
 
   const handleSaveProduct = () => {
     saveProduct(newProduct, setProducts);
@@ -37,7 +35,7 @@ const ProductForm = (props) => {
   const handleEditProduct = () => {
     editProduct(newProduct);
   };
-
+  // capture value change and set state
   const handleOnChange = (e) => {
     const { name, value, id } = e.target;
     let newVal = value;
@@ -81,11 +79,8 @@ const ProductForm = (props) => {
   const handleOnSubmit = (e) => {
     const { btnId } = formRef.current;
     e.preventDefault();
-    if (e.target.type === "reset") {
-      handleReset();
-    }
-    // check for empty fields and trigger Tooltip on submit
-    if (
+    if (e.target.type === "reset") handleReset();
+    if ( // check for empty fields and trigger Tooltip on submit
       !newProduct.productName ||
       !newProduct.productOwnerName ||
       !newProduct.Developers.length ||
@@ -97,10 +92,12 @@ const ProductForm = (props) => {
       return;
     } else {
       if (btnId === "add-btn") {
+        setBtnColor("#242431");
         setFormTitle("Added!");
         handleSaveProduct();
       }
       if (btnId === "edit-btn") {
+        setBtnColor("#332a22");
         setFormTitle("Edited!");
         handleEditProduct();
       }
@@ -125,10 +122,6 @@ const ProductForm = (props) => {
   };
 
   return (
-    <>
-      {/* {!formTitle &&
-        <h2>{!formType ? "Edit Product" : "Create Product"}</h2>}
-      {formTitle && <h2>Product {formTitle}</h2>} */}
       <Form
         formRef={formRef}
         formType={formType}
@@ -140,8 +133,8 @@ const ProductForm = (props) => {
         handleRemoveDeveloper={handleRemoveDeveloper}
         handleAddDeveloper={handleAddDeveloper}
         handleReset={handleReset}
+        btnColor={btnColor}
       />
-    </>
   );
 };
 
