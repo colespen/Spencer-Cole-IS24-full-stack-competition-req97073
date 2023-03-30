@@ -29,7 +29,7 @@ const ProductTable = (props) => {
   const handleFilterName = (e) => {
     setFilterKey(e.target.id);
   };
-  // change color for add 
+  // change color for last added
   const getBackgroundColor = (product, products) => {
     if (product.id === products.length - 1) {
       return "#23296a";

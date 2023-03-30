@@ -453,7 +453,7 @@ export const data = [
   {
     "id": 29,
     "productId": "cdcaa0f4-ee52-42d8-a278-b384bd03cea3",
-    "productName": "Excepteur Laboris Ipsum",
+    "productName": "BC Forests Trail Mapper",
     "productOwnerName": "Celia Buckner",
     "Developers": [
       "Avila Christian",
@@ -624,22 +624,6 @@ export const data = [
     ],
     "scrumMasterName": "Chandra Gill",
     "startDate": "1992/02/02",
-    "methodology": "Waterfall"
-  },
-  {
-    "id": 40,
-    "productId": "29a13348-f2f2-404b-9a62-52c99471b6cd",
-    "productName": "Proident ut fugiat",
-    "productOwnerName": "Sadie Snyder",
-    "Developers": [
-      "Little Sanchez",
-      "Dianne Jimenez",
-      "Pearson Vincent",
-      "Ramona Stevenson",
-      "Callie Alvarado"
-    ],
-    "scrumMasterName": "Orr Mccormick",
-    "startDate": "2000/07/03",
     "methodology": "Waterfall"
   }
 ];

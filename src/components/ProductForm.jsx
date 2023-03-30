@@ -14,8 +14,6 @@ const ProductForm = (props) => {
     view,
   } = props;
 
-  console.log("id: ", id)
-
   const [newProduct, setNewProduct] = useState(product || {
     productName: "",
     productOwnerName: "",

@@ -1,14 +1,15 @@
 import Layout from "../../components/Layout";
 import ProductForm from "../../components/ProductForm";
-import { fetchProductById, fetchInitialProducts } from "../../services/products";
+import {
+  fetchProductById,
+  fetchInitialProducts
+} from "../../services/products";
 
 export async function getServerSideProps(context) {
   const { id } = context.query;
-  console.log("getServerSideProps -- id: ", id);
-
+  console.log("ID -- getSSP:", id)
   const product = await fetchProductById(id);
   const products = await fetchInitialProducts();
-  // these work!
   return {
     props: {
       id,
@@ -19,40 +20,36 @@ export async function getServerSideProps(context) {
 };
 
 const EditProduct = (props) => {
-  //  ** = UNDEFINED
   const {
     id, // fetched with SSR
     product, // SSR
     products, // SSR
-    view, // ** using as undefined 
-    formType, // ** using as undefined 
-    handleFetchProducts, // **
-    handleNewProduct, // **
-    setView, // **
-    setProducts, // **
-    setQuery // **
+    view,
+    formType,
+    handleFetchProducts,
+    handleNewProduct,
+    setView,
+    setProducts,
+    setQuery
   } = props;
 
-  // console.log("PROP:", formType)
-
   return (
-    // NEED ACCESS TO THESE PROPS BELOW
     <Layout
-      products={products} //this works now since fetch in SSP
-      handleFetchProducts={handleFetchProducts} // **
-      handleNewProduct={handleNewProduct} // **
-      setProducts={setProducts} // **
-      setView={setView} // **
-      view={view} // **
-      setQuery={setQuery} // **
+      products={products}
+      handleFetchProducts={handleFetchProducts}
+      handleNewProduct={handleNewProduct}
+      setProducts={setProducts}
+      setView={setView}
+      view={view}
+      setQuery={setQuery}
     >
       <ProductForm
         id={id}
         product={product}
-        formType={formType} // **
-        setProducts={setProducts} // **
-        setView={setView} // **
-        view={view} // **
+        formType={formType}
+        setProducts={setProducts}
+        setView={setView}
+        view={view}
       />
     </Layout>
   );

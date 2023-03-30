@@ -26,7 +26,7 @@ const Header = (props) => {
 
         {view === "TABLE" ?
           <button onClick={handleFetchProducts}>
-            Get Products
+            Update Products
           </button>
           :
           <button onClick={handleViewProducts}>
@@ -45,7 +45,7 @@ const Header = (props) => {
       <div className={styles.productCount}>
         <h1>
           Total Products: {products.length - 1 === -1 ?
-            0 : products.length - 1}
+            0 : products.length}
         </h1>
       </div>
       {view === "TABLE" && <SearchBar

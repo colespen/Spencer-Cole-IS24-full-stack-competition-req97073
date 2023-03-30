@@ -7,21 +7,37 @@ export default function handler(req, res) {
 
   switch (method) {
 
+
     case "GET":
       // check for id then find and send match!
+      // console.log("data -- GET: ", data);
+
       if (Object.keys(req.query).length) {
         const id = parseInt(req.query.id);
-        const match = data.find((product) => product.id === id);
-        // console.log("GET -- match: ", match);
+
+        console.log("req.query.id IN GET -- api: ", id);
+        // console.log("data - GET if(): ", data);
+
+        const match = data.find((product) => {
+          // this data does not include last pushed obj
+          console.log("product.id: ", product.id);
+          console.log("id ", id);
+          return product.id === id;
+        });
+        console.log("match IN GET -- api: ", match);
+
         if (!match) {
+          console.log("!match");
           res.status(404).json({ message: `product with id ${id} was not found` });
           return;
         }
+
         res.status(200).json(match);
         return;
       }
       res.status(200).json(data);
       break;
+
 
     case "POST":
       console.log("POST -- req.body: ", req.body);
@@ -33,10 +49,12 @@ export default function handler(req, res) {
       res.status(200).json(data);
       break;
 
+
     case "PUT":
       console.log("PUT -- req.body: ", req.body);
       const { id } = req.body;
       let editIndex = -1;
+
       //replace obj with matching id
       data.forEach((product, i) => {
         if (product.id === id) {
@@ -49,8 +67,8 @@ export default function handler(req, res) {
       } else {
         res.status(200).json(data);
       }
-      console.log("PUT -- data: ", data);
       break;
+
 
     case "DELETE":
       res.status(200);

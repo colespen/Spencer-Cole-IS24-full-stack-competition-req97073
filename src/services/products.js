@@ -1,37 +1,43 @@
+//////  API Calls
+//////  Note: all endpoints originate from /api
+//////          - ex. to retrieve :id call is sent to 
+//////            `.../api/products?id=${id}`
+
+//  GET
 const fetchInitialProducts = async () => {
   const response = await fetch("http://localhost:3000/api/products");
   if (!response.ok) {
     throw new Error("Failed to fetch data.");
   }
-  // console.log("response: ", response) 
   const data = await response.json();
   return data;
 };
 
-
+//  GET
 const fetchProducts = async (setProducts) => {
-  const response = await fetch("/api/products"); // "Get" default
+  const response = await fetch("/api/products");
   if (!response.ok) {
     throw new Error("Failed to fetch data.");
   }
   const data = await response.json();
-  // console.log("data in fetchProducts: ", data);
   setProducts(data);
+  return data;
 };
 
-
+//  GET
 const fetchProductById = async (id) => {
   const response = await fetch(`http://localhost:3000/api/products?id=${id}`);
   if (!response.ok) {
     throw new Error("Failed to fetch data.");
   }
   const data = await response.json();
-  console.log("data in fetchId: ", data);
+  console.log("*** data in fetchId: ", data);
   return data;
 };
 
+//  POST
 const saveProduct = async (dataObj, setProducts) => {
-  console.log("saveProduct -- dataObj: ", dataObj);
+  console.log("dataObj -- saveProduct: ", dataObj);
   const response = await fetch("/api/products", {
     method: "POST",
     body: JSON.stringify(dataObj),
@@ -42,16 +48,16 @@ const saveProduct = async (dataObj, setProducts) => {
   if (!response.ok) {
     throw new Error("Failed to fetch data.");
   }
-  // console.log("response: ", response)
   const data = await response.json();
-  // console.log("data -- saveProduct: ", data);
+  console.log("data -- saveProduct: ", data);
   setProducts(data);
+  return data;
 };
 
-// add (_, setProducts) ? *********
+//  PUT
 const editProduct = async (dataObj) => {
   console.log("editProduct -- dataObj: ", dataObj);
-  const response = await fetch("/api/products/", {
+  const response = await fetch("/api/products", {
     method: "PUT",
     body: JSON.stringify(dataObj),
     headers: {
@@ -61,9 +67,8 @@ const editProduct = async (dataObj) => {
   if (!response.ok) {
     throw new Error("Failed to fetch data.");
   }
-  // console.log("response: ", response)
   const data = await response.json();
-  // return data // return not necessary... 
+  return data // return not necessary... 
   // setProducts(data); // ************
 };
 
