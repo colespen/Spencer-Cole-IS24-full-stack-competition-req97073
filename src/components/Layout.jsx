@@ -19,7 +19,7 @@ export default function Layout(post) {
 
         <Head>
           <link rel="icon" href="" />
-          <title>Product Tracker</title>
+          <title>App Tracker</title>
           <meta name="description" content="tool that tracks and manages web applications developed by the Province of BC" />
           <link rel="icon" href="" />
         </Head>
