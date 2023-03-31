@@ -23,7 +23,7 @@ yarn install
 "uuid": "^9.0.0"
 ```
 
-Please copy the `.env.example` to a new `.env.local` with your `HOST and PORT values
+Please copy the `.env.example` to a new `.env.local` with your `HOST` and `PORT` values
 ```js
 NEXT_PUBLIC_HOST=
 NEXT_PUBLIC_PORT=
