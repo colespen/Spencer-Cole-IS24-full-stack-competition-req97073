@@ -8,37 +8,27 @@ export default function handler(req, res) {
   switch (method) {
 
     case "GET":
-      // console.log("data -- GET: ", data);
       
       // check for id then find and send match!
       if (Object.keys(req.query).length) {
         const id = parseInt(req.query.id);
 
-        console.log("req.query.id IN GET -- api: ", id);
-        // console.log("data - GET if(): ", data);
-
+        // this data does not include last pushed obj when [fast refresh]
         const match = data.find((product) => {
-          // this data does not include last pushed obj
-          // console.log("product.id: ", product.id);
-          // console.log("id ", id);
           return product.id === id;
         });
-        console.log("match IN GET -- api: ", match);
-
         if (!match) {
-          console.log("!match");
           res.status(404).json({ message: `product with id ${id} was not found` });
           return;
         }
-
         res.status(200).json(match);
         return;
       }
       res.status(200).json(data);
       break;
 
+
     case "POST":
-      console.log("POST -- req.body: ", req.body);
       data.push({
         id: data.length,
         productId: uuidv4(),
@@ -47,8 +37,8 @@ export default function handler(req, res) {
       res.status(200).json(data);
       break;
 
+
     case "PUT":
-      console.log("PUT -- req.body: ", req.body);
       const { id } = req.body;
       let editIndex = -1;
 
@@ -66,6 +56,7 @@ export default function handler(req, res) {
       }
       break;
 
+      
     case "DELETE":
       res.status(200);
       break;

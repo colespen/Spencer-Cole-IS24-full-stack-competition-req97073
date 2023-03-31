@@ -9,10 +9,8 @@ import {
 // server-side data pre-rendered on each request 
 export async function getServerSideProps(context) {
   const { id } = context.query;
-  console.log("ID -- getSSP:", id)
   const product = await fetchProductById(id);
   const products = await fetchInitialProducts();
-  console.log("products -- getSSP: ", products);
   return {
     props: {
       id,
