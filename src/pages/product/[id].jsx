@@ -1,3 +1,4 @@
+// @refresh disable
 import Layout from "../../components/Layout";
 import ProductForm from "../../components/ProductForm";
 import {
@@ -58,5 +59,6 @@ const EditProduct = (props) => {
     </Layout>
   );
 };
+export const thisIsAnUnusedExport = "this export only exists to disable fast refresh for this file "
 
 export default EditProduct;

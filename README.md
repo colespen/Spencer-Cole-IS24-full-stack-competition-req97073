@@ -39,8 +39,16 @@ Finally, open [http://localhost:3000](http://localhost:3000) with your browser!
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-### NOTES
+## NOTES
 
+BUG: 
+- currently, the first client-side transition to pages/product/[id] (dynamic route) causes Next to perform a...
+```bash
+[Fast Refresh] rebuilding
+```
+...thus cause the state to reset to initial in-memory data.
+- unfortunately I didn't have to time fix this prior to submission
+- every subsequent transition/render functions exactly as intended! 
 
 ## Learn More
 
