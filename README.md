@@ -33,6 +33,8 @@ yarn dev
 pnpm dev
 ```
 
+Please simply copy the .env.example to a new .env.local with your HOST and PORT values
+
 Finally, open [http://localhost:3000](http://localhost:3000) with your browser!
 
 [API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed at [http://localhost:3000/api/products](http://localhost:3000/api/products).
