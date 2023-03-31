@@ -1,11 +1,14 @@
 //////  API Calls
+const port = process.env.NEXT_PUBLIC_PATH || 3000;
+const host = process.env.NEXT_PUBLIC_HOST;
 //////  Note: all endpoints originate from /api
 //////          - ex. to retrieve :id call is sent to 
 //////            `.../api/products?id=...`
+const path = host + port;
 
 //  GET
 const fetchInitialProducts = async () => {
-  const response = await fetch("http://localhost:3000/api/products");
+  const response = await fetch(path + "/api/products");
   if (!response.ok) {
     throw new Error("Failed to fetch data.");
   }
@@ -15,7 +18,7 @@ const fetchInitialProducts = async () => {
 
 //  GET
 const fetchProducts = async (setProducts) => {
-  const response = await fetch("/api/products");
+  const response = await fetch(path + "/api/products");
   if (!response.ok) {
     throw new Error("Failed to fetch data.");
   }
@@ -26,7 +29,9 @@ const fetchProducts = async (setProducts) => {
 
 //  GET
 const fetchProductById = async (id) => {
-  const response = await fetch(`http://localhost:3000/api/products?id=${id}`);
+  const response = await fetch(
+    path + '/api/products?id=' + id
+  );
   if (!response.ok) {
     throw new Error("Failed to fetch data.");
   }
@@ -38,7 +43,7 @@ const fetchProductById = async (id) => {
 //  POST
 const saveProduct = async (dataObj, setProducts) => {
   // console.log("dataObj -- saveProduct: ", dataObj);
-  const response = await fetch("/api/products", {
+  const response = await fetch(path + "/api/products", {
     method: "POST",
     body: JSON.stringify(dataObj),
     headers: {
@@ -57,7 +62,7 @@ const saveProduct = async (dataObj, setProducts) => {
 //  PUT
 const editProduct = async (dataObj) => {
   console.log("editProduct -- dataObj: ", dataObj);
-  const response = await fetch("/api/products", {
+  const response = await fetch(path + "/api/products", {
     method: "PUT",
     body: JSON.stringify(dataObj),
     headers: {
@@ -68,7 +73,7 @@ const editProduct = async (dataObj) => {
     throw new Error("Failed to fetch data.");
   }
   const data = await response.json();
-  return data // return not necessary... 
+  return data; // return not necessary... 
   // setProducts(data); // ************
 };
 

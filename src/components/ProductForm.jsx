@@ -90,12 +90,12 @@ const ProductForm = (props) => {
       return;
     } else {
       if (btnId === "add-btn") {
-        setBtnColor("#242431");
+        setBtnColor("#232c8d");
         setFormTitle("Added!");
         handleSaveProduct();
       }
       if (btnId === "edit-btn") {
-        setBtnColor("#332a22");
+        setBtnColor("#e39b6091");
         setFormTitle("Edited!");
         handleEditProduct();
       }

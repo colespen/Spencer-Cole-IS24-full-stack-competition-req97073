@@ -35,8 +35,8 @@ export default function Home({ initialProducts }) {
   // FIRST TIME only. subsequent rerenders after this error  
   // are fine...
 
-  // console.log("initialProducts -- HOME: ", initialProducts);
-  console.log("products -- HOME: ", products);
+  console.log("initialProducts -- HOME: ", initialProducts);
+  // console.log("products -- HOME: ", products);
 
   useEffect(() => {
     // store id from edit for filter
@@ -82,7 +82,6 @@ export default function Home({ initialProducts }) {
         >
           <ProductTable
             products={products}
-            setProducts={setProducts}
             setView={setView}
             setFormType={setFormType}
             formType={formType}

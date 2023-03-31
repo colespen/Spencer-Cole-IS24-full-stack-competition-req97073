@@ -10,7 +10,6 @@ const ProductTable = (props) => {
     setFilterKey,
     currId,
     initLengthRef,
-    setProducts
   } = props;
   const router = useRouter();
 
@@ -22,7 +21,6 @@ const ProductTable = (props) => {
       pathname: "/product/[id]",
       query: {
         id: product.id,
-        setProducts: setProducts,
       },
       // asPath: `product/${product.id}-${kebabCase(product.productName)}`
     });
