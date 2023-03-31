@@ -8,8 +8,8 @@ export default function Layout(post) {
     handleFetchProducts,
     handleNewProduct,
     products,
-    setView,
     view,
+    setView,
     setQuery,
     filterKey
   } = post;
@@ -20,16 +20,16 @@ export default function Layout(post) {
         <Head>
           <link rel="icon" href="" />
           <title>Product Tracker</title>
-          <meta name="description" content="Track products..." />
+          <meta name="description" content="tool that tracks and manages web applications developed by the Province of BC" />
           <link rel="icon" href="" />
         </Head>
-        
+
         <Header
           handleFetchProducts={handleFetchProducts}
           handleNewProduct={handleNewProduct}
           products={products}
-          setView={setView}
           view={view}
+          setView={setView}
           setQuery={setQuery}
           filterKey={filterKey}
         />

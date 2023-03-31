@@ -8,9 +8,9 @@ export default function handler(req, res) {
   switch (method) {
 
     case "GET":
-      // check for id then find and send match!
       // console.log("data -- GET: ", data);
-
+      
+      // check for id then find and send match!
       if (Object.keys(req.query).length) {
         const id = parseInt(req.query.id);
 

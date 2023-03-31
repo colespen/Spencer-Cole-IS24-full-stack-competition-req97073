@@ -23,7 +23,8 @@ export default function Home({ initialProducts }) {
   const [query, setQuery] = useState("");
   const [filterKey, setFilterKey] = useState("");
   const [currId, setCurrId] = useState(null);
-  // set init length to check when 1st new product added
+
+  // set init length for check when first new product added
   const initLengthRef = useRef(initialProducts.length - 1);
 
   // **************** PROBLEM ****************
@@ -31,10 +32,11 @@ export default function Home({ initialProducts }) {
   // Home-->editForm-->Home 
   // OR error if newly added table is clicked
   //
-  // FIRST TIME only. subsequent rerenders are fine...
+  // FIRST TIME only. subsequent rerenders after this error  
+  // are fine...
 
   // console.log("initialProducts -- HOME: ", initialProducts);
-  // console.log("products -- HOME: ", products);
+  console.log("products -- HOME: ", products);
 
   useEffect(() => {
     // store id from edit for filter
@@ -56,7 +58,6 @@ export default function Home({ initialProducts }) {
 
 
   const handleFetchProducts = () => {
-    // fetchProducts();
     fetchProducts(setProducts);
     setView("TABLE");
   };
@@ -81,6 +82,7 @@ export default function Home({ initialProducts }) {
         >
           <ProductTable
             products={products}
+            setProducts={setProducts}
             setView={setView}
             setFormType={setFormType}
             formType={formType}

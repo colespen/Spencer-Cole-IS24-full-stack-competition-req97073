@@ -7,7 +7,8 @@ import {
 
 // server-side data pre-rendered on each request 
 export async function getServerSideProps(context) {
-  const { id } = context.query;
+  const { id, setProducts } = context.query;
+  console.log("setProducts -- getSSP: ", setProducts)
   console.log("ID -- getSSP:", id)
   const product = await fetchProductById(id);
   const products = await fetchInitialProducts();
@@ -42,7 +43,7 @@ const EditProduct = (props) => {
       products={products}
       handleFetchProducts={handleFetchProducts}
       handleNewProduct={handleNewProduct}
-      setProducts={setProducts}
+      // setProducts={setProducts}
       setView={setView}
       view={view}
       setQuery={setQuery}

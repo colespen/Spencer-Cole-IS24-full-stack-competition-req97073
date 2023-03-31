@@ -14,10 +14,7 @@ const Header = (props) => {
   } = props;
 
   const handleViewProducts = () => {
-    if (view === "FORM") {
-      setView("TABLE");
-    }
-    return;
+    if (view === "FORM") setView("TABLE");
   };
 
   return (

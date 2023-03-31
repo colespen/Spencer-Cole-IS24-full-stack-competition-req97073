@@ -9,7 +9,8 @@ const ProductTable = (props) => {
     setFormType,
     setFilterKey,
     currId,
-    initLengthRef
+    initLengthRef,
+    setProducts
   } = props;
   const router = useRouter();
 
@@ -20,7 +21,8 @@ const ProductTable = (props) => {
     router.push({
       pathname: "/product/[id]",
       query: {
-        id: product.id
+        id: product.id,
+        setProducts: setProducts,
       },
       // asPath: `product/${product.id}-${kebabCase(product.productName)}`
     });

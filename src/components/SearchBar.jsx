@@ -37,6 +37,7 @@ const SearchBar = ({ setQuery, filterKey }) => {
           type="text"
           value={value}
           onChange={(e) => setValue(e.target.value)}
+          disabled={!filterKey}
         />
       </form>
     </section>

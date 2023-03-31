@@ -98,7 +98,7 @@
       flex-direction: column;
       justify-content: center;
       strong {
-        margin-bottom: 25px;
+        margin-bottom: 10px;
       }
     }
     .tableRow > td {
@@ -110,9 +110,9 @@
       }
     }
     button {
-      background-color: #e39b6091;
+      width: 75%;
       border: none;
-        width: 75%;
+      background-color: #e39b6091;
       visibility: hidden;
     }
   }

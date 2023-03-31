@@ -1,7 +1,7 @@
 //////  API Calls
 //////  Note: all endpoints originate from /api
 //////          - ex. to retrieve :id call is sent to 
-//////            `.../api/products?id=${id}`
+//////            `.../api/products?id=...`
 
 //  GET
 const fetchInitialProducts = async () => {
