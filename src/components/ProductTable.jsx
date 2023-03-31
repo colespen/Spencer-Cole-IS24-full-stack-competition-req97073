@@ -35,7 +35,7 @@ const ProductTable = (props) => {
       return "#23296a";
     }
     // return "#6a523e";
-    return "revert-layer"
+    return "revert-layer";
   };
 
   const ProductTableBodyItems = () => {
@@ -50,9 +50,10 @@ const ProductTable = (props) => {
             onClick={() => editTableByIdOnClick(product)}
             style={{ backgroundColor: getBackgroundColor(product, products) }}
           >
-            <tr className={styles.tableData}>
+            <tr className={styles.tableRow}>
               <td className={styles.productName}>
                 <strong>{product.productName}</strong>
+                <button>edit</button>
               </td>
               <td>{product.productOwnerName}</td>
               <td className={styles.developerList}>

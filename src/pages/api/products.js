@@ -7,7 +7,6 @@ export default function handler(req, res) {
 
   switch (method) {
 
-
     case "GET":
       // check for id then find and send match!
       // console.log("data -- GET: ", data);
@@ -20,8 +19,8 @@ export default function handler(req, res) {
 
         const match = data.find((product) => {
           // this data does not include last pushed obj
-          console.log("product.id: ", product.id);
-          console.log("id ", id);
+          // console.log("product.id: ", product.id);
+          // console.log("id ", id);
           return product.id === id;
         });
         console.log("match IN GET -- api: ", match);
@@ -38,7 +37,6 @@ export default function handler(req, res) {
       res.status(200).json(data);
       break;
 
-
     case "POST":
       console.log("POST -- req.body: ", req.body);
       data.push({
@@ -48,7 +46,6 @@ export default function handler(req, res) {
       });
       res.status(200).json(data);
       break;
-
 
     case "PUT":
       console.log("PUT -- req.body: ", req.body);
@@ -68,7 +65,6 @@ export default function handler(req, res) {
         res.status(200).json(data);
       }
       break;
-
 
     case "DELETE":
       res.status(200);

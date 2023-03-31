@@ -8,6 +8,7 @@ import {
 } from "../services/products";
 import { filterByKey } from "../helpers/sort";
 
+// static generation will pre-render at build time
 export async function getStaticProps() {
   const initialProducts = await fetchInitialProducts();
   return { props: { initialProducts } };
@@ -26,14 +27,14 @@ export default function Home({ initialProducts }) {
   const initLengthRef = useRef(initialProducts.length - 1);
 
   // **************** PROBLEM ****************
-  // 'products' is initial 'data' state after 
+  // 'products' is initial 'data' state after first
   // Home-->editForm-->Home 
   // OR error if newly added table is clicked
   //
   // FIRST TIME only. subsequent rerenders are fine...
 
   // console.log("initialProducts -- HOME: ", initialProducts);
-  console.log("initialProducts -- HOME: ", initialProducts);
+  // console.log("products -- HOME: ", products);
 
   useEffect(() => {
     // store id from edit for filter

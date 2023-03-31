@@ -8,6 +8,8 @@ First, install dependencies by running:
 
 ```bash
 npm install
+# or
+yarn install
 ```
 
 ```JSON

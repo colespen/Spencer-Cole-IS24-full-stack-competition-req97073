@@ -37,7 +37,7 @@ const fetchProductById = async (id) => {
 
 //  POST
 const saveProduct = async (dataObj, setProducts) => {
-  console.log("dataObj -- saveProduct: ", dataObj);
+  // console.log("dataObj -- saveProduct: ", dataObj);
   const response = await fetch("/api/products", {
     method: "POST",
     body: JSON.stringify(dataObj),

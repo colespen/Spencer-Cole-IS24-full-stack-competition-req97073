@@ -5,6 +5,7 @@ import {
   fetchInitialProducts
 } from "../../services/products";
 
+// server-side data pre-rendered on each request 
 export async function getServerSideProps(context) {
   const { id } = context.query;
   console.log("ID -- getSSP:", id)
@@ -18,6 +19,7 @@ export async function getServerSideProps(context) {
     }
   };
 };
+
 
 const EditProduct = (props) => {
   const {
@@ -33,6 +35,8 @@ const EditProduct = (props) => {
     setQuery
   } = props;
 
+  console.log("products -- EditProduct: ", products);
+  
   return (
     <Layout
       products={products}
