@@ -41,7 +41,7 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 ## NOTES
 
-BUG: 
+**BUG** -- 
 - currently, the first client-side transition to pages/product/[id] (dynamic route) causes Next to perform a...
 ```bash
 [Fast Refresh] rebuilding

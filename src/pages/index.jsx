@@ -35,8 +35,13 @@ export default function Home({ initialProducts }) {
   // FIRST TIME only. subsequent rerenders after this error  
   // are fine...
 
-  console.log("initialProducts -- HOME: ", initialProducts);
+  // console.log("initialProducts -- HOME: ", initialProducts);
   // console.log("products -- HOME: ", products);
+
+  useEffect(() => {
+    console.log ("fetchProducts in useEffect: ")
+    fetchProducts(setProducts)
+  }, [])
 
   useEffect(() => {
     // store id from edit for filter
