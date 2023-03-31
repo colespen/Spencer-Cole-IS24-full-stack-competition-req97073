@@ -23,9 +23,9 @@ export async function getServerSideProps(context) {
 
 const EditProduct = (props) => {
   const {
-    id, // fetched with SSR
-    product, // SSR
-    products, // SSR
+    id, // fetched with ServerSideProps
+    product, // ServerSideProps
+    products, // ServerSideProps || props
     view,
     formType,
     handleFetchProducts,
@@ -41,7 +41,6 @@ const EditProduct = (props) => {
       products={products}
       handleFetchProducts={handleFetchProducts}
       handleNewProduct={handleNewProduct}
-      // setProducts={setProducts}
       setView={setView}
       view={view}
       setQuery={setQuery}

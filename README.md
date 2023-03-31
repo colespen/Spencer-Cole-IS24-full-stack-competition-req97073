@@ -46,9 +46,9 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 ```bash
 [Fast Refresh] rebuilding
 ```
-...thus cause the state to reset to initial in-memory data.
+...which is a client/server rebuild thus causing state to reset to initial in-memory data.
 - unfortunately I didn't have to time fix this prior to submission
-- every subsequent transition/render functions exactly as intended! 
+- however, every subsequent transition/render functions exactly as intended! 
 
 ## Learn More
 

@@ -2,8 +2,8 @@
 const port = process.env.NEXT_PUBLIC_PATH || 3000;
 const host = process.env.NEXT_PUBLIC_HOST;
 //////  Note: all endpoints originate from /api
-//////          - ex. to retrieve :id call is sent to 
-//////            `.../api/products?id=...`
+//////        - ex. to retrieve :id call is sent to 
+//////          `.../api/products?id=...`
 const path = host + port;
 
 //  GET

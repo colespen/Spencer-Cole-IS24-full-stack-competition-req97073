@@ -23,18 +23,13 @@ export default function Home({ initialProducts }) {
   const [query, setQuery] = useState("");
   const [filterKey, setFilterKey] = useState("");
   const [currId, setCurrId] = useState(null);
+  /* 
+  **************** PROBLEM ****************
+  'products' reverts to initial 'data' state after first Home-->editForm transition due to Next.js performing a [Fast Refresh] client/server rebuild. 
+  FIRST TIME only. subsequent rerenders after this error are fine...  */
 
   // set init length for check when first new product added
   const initLengthRef = useRef(initialProducts.length - 1);
-
-  // **************** PROBLEM ****************
-  // 'products' is initial 'data' state after first
-  // Home-->editForm-->Home 
-  // OR error if newly added table is clicked
-  //
-  // FIRST TIME only. subsequent rerenders after this error  
-  // are fine...
-
 
   useEffect(() => {
     // store id from edit for filter
@@ -91,8 +86,8 @@ export default function Home({ initialProducts }) {
         </Layout>}
       {view === "FORM" &&
         <EditProduct
-          id={null}      // getSSP
-          product={null} // getSSP
+          id={null}      // getServerSideProps
+          product={null} // getServerSideProps
           products={products}
           setProducts={setProducts}
           formType={formType}

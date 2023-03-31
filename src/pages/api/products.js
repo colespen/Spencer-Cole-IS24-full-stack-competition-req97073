@@ -8,7 +8,7 @@ export default function handler(req, res) {
   switch (method) {
 
     case "GET":
-      
+
       // check for id then find and send match!
       if (Object.keys(req.query).length) {
         const id = parseInt(req.query.id);
@@ -56,13 +56,13 @@ export default function handler(req, res) {
       }
       break;
 
-      
+
     case "DELETE":
       res.status(200);
       break;
 
     default:
-      res.setHeader("Allow", ["GET", "POST"]);
+      res.setHeader("Allow", ["GET", "POST", "PUT", "DELETE"]);
       res.status(405).end(`Method ${method} Not Allowed`);
       break;
   }

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { dateSort, kebabCase, filterIdTop, sortNewToTop } from "../helpers/sort";
+import { dateSort, filterIdTop, sortNewToTop } from "../helpers/sort";
 
 import styles from "../styles/Home.module.scss";
 
@@ -22,19 +22,17 @@ const ProductTable = (props) => {
       query: {
         id: product.id,
       },
-      // asPath: `product/${product.id}-${kebabCase(product.productName)}`
     });
   };
 
   const handleFilterName = (e) => {
     setFilterKey(e.target.id);
   };
-  // change color for last added
+  // change color of table for last added
   const getBackgroundColor = (product, products) => {
     if (product.id === products.length - 1) {
       return "#23296a";
     }
-    // return "#6a523e";
     return "revert-layer";
   };
 
