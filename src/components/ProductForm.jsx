@@ -7,7 +7,6 @@ import { saveProduct, editProduct } from "../services/products";
 const ProductForm = (props) => {
   const {
     setProducts,
-    id,
     product,
     formType,
     setView,
@@ -26,6 +25,8 @@ const ProductForm = (props) => {
   const [btnColor, setBtnColor] = useState("#44455b");
   const router = useRouter();
   const formRef = useRef(null);
+
+  console.log("formType: ", formType)
 
   const handleSaveProduct = () => {
     saveProduct(newProduct, setProducts);
@@ -109,14 +110,14 @@ const ProductForm = (props) => {
   };
 
   const handleReset = () => {
-    setNewProduct({
+    setNewProduct(prev => ({
       productName: "",
       productOwnerName: "",
       Developers: [],
       scrumMasterName: "",
-      startDate: "",
+      startDate: !formType ? prev.startDate : "",
       methodology: "",
-    });
+    }));
   };
 
   return (

@@ -8,25 +8,34 @@ import {
 } from "../services/products";
 import { filterByKey } from "../helpers/sort";
 
+// import { data } from "../data/dummyData";
+
 // static generation will pre-render at build time
 export async function getStaticProps() {
   const initialProducts = await fetchInitialProducts();
-  return { props: { initialProducts } };
+  // const initialProducts = data;
+  return {
+    props: {
+      initialProducts
+    }
+  };
 }
-
 export default function Home({ initialProducts }) {
+
   const [products, setProducts] = useState(
-    initialProducts || null
+    initialProducts || [] // was null
   );
   const [view, setView] = useState("TABLE");
   const [formType, setFormType] = useState("");
   const [query, setQuery] = useState("");
   const [filterKey, setFilterKey] = useState("");
-  const [currId, setCurrId] = useState(null);
+  const [currId, setCurrId] = useState(""); // was (null)
   /* 
   **************** PROBLEM ****************
   'products' reverts to initial 'data' state after first Home-->editForm transition due to Next.js performing a [Fast Refresh] client/server rebuild. 
   FIRST TIME only. subsequent rerenders after this error are fine...  */
+
+  // console.log("products: ", products);
 
   // set init length for check when first new product added
   const initLengthRef = useRef(initialProducts.length - 1);
@@ -41,13 +50,14 @@ export default function Home({ initialProducts }) {
   useEffect(() => {
     let filteredProducts;
     if (!query) {
-      filteredProducts = initialProducts;
+      filteredProducts = products;
+      // all products was initialProducts
     } else {
       filteredProducts =
-        filterByKey(initialProducts, query, filterKey);
+        filterByKey(products, query, filterKey);
     }
     setProducts(filteredProducts);
-  }, [initialProducts, query, filterKey]);
+  }, [products, query, filterKey]);
 
 
   const handleFetchProducts = () => {
@@ -88,15 +98,15 @@ export default function Home({ initialProducts }) {
         <EditProduct
           id={null}      // getServerSideProps
           product={null} // getServerSideProps
-          products={products}
-          setProducts={setProducts}
-          formType={formType}
-          view={view}
-          setView={setView}
-          handleFetchProducts={handleFetchProducts}
-          handleNewProduct={handleNewProduct}
-          setQuery={setQuery}
-          filterKey={filterKey}
+          products={products || null}
+          setProducts={setProducts || null}
+          formType={formType || null}
+          view={view || null}
+          setView={setView || null}
+          handleFetchProducts={handleFetchProducts || null}
+          handleNewProduct={handleNewProduct || null}
+          setQuery={setQuery || null}
+          filterKey={filterKey || null}
         />}
     </>
   );
