@@ -30,8 +30,7 @@ const ProductForm = (props) => {
   // ABSTRACT HANDLERS
 
   const handleSaveProduct = async () => {
-    console.log("handleSaveProduct ***")
-    const newProducts = await saveProduct(newProduct)
+    const newProducts = await saveProduct(newProduct);
     setProducts(newProducts);
   };
 
@@ -126,19 +125,19 @@ const ProductForm = (props) => {
   };
 
   return (
-      <Form
-        formRef={formRef}
-        formType={formType}
-        formTitle={formTitle}
-        handleOnSubmit={handleOnSubmit}
-        newProduct={newProduct}
-        handleOnChange={handleOnChange}
-        handleDeveloperChange={handleDeveloperChange}
-        handleRemoveDeveloper={handleRemoveDeveloper}
-        handleAddDeveloper={handleAddDeveloper}
-        handleReset={handleReset}
-        btnColor={btnColor}
-      />
+    <Form
+      formRef={formRef}
+      formType={formType}
+      formTitle={formTitle}
+      handleOnSubmit={handleOnSubmit}
+      newProduct={newProduct}
+      handleOnChange={handleOnChange}
+      handleDeveloperChange={handleDeveloperChange}
+      handleRemoveDeveloper={handleRemoveDeveloper}
+      handleAddDeveloper={handleAddDeveloper}
+      handleReset={handleReset}
+      btnColor={btnColor}
+    />
   );
 };
 

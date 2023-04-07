@@ -12,7 +12,7 @@ import { filterByKey } from "../helpers/sort";
 
 // static generation will pre-render at build time
 export async function getStaticProps() {
-  console.log("getStaticProps ran")
+  console.log("getStaticProps ran");
   const initialProducts = await fetchInitialProducts();
   // const initialProducts = data;
   return {
@@ -24,7 +24,7 @@ export async function getStaticProps() {
 
 export default function Home({ initialProducts }) {
   // useEffect to set initial products
-  const [products, setProducts] = useState(initialProducts || []);
+  const [products, setProducts] = useState([]);
   const [view, setView] = useState("TABLE");
   const [formType, setFormType] = useState("");
   const [query, setQuery] = useState("");
@@ -35,15 +35,8 @@ export default function Home({ initialProducts }) {
   'products' reverts to initial 'data' state after first Home-->editForm transition due to Next.js performing a [Fast Refresh] client/server rebuild. 
   FIRST TIME only. subsequent rerenders after this error are fine...  */
 
-  // console.log("products: ", products);
-
   // set init length for check when first new product added
   const initLengthRef = useRef(initialProducts.length - 1);
-
-
-  // useEffect(() => {
-  //   setProducts(initialProducts);
-  // }, [initialProducts])
 
   useEffect(() => {
     // store id from edit for filter
@@ -55,23 +48,22 @@ export default function Home({ initialProducts }) {
   useEffect(() => {
     let filteredProducts;
     if (!query) {
-      filteredProducts = products;
-      // all products was initialProducts
+      filteredProducts = initialProducts;
     } else {
       filteredProducts =
         filterByKey(products, query, filterKey);
     }
+    // set initialProducts on first render
     setProducts(filteredProducts);
-  }, [products, query, filterKey]);
+  }, [initialProducts, products, query, filterKey]);
 
 
   const handleFetchProducts = async () => {
-    console.log("handleFetchProducts ***")
-    const products = await fetchProducts()
-    setProducts(products)
+    const products = await fetchProducts();
+    setProducts(products);
     setView("TABLE");
-    }
-  
+  };
+
   const handleNewProduct = () => {
     setFormType("Create");
     setView("FORM");

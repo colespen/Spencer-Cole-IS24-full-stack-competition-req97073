@@ -34,7 +34,7 @@ const EditProduct = (props) => {
     setQuery
   } = props;
 
-  
+
   return (
     <Layout
       products={products}
