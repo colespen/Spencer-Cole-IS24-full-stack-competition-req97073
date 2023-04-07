@@ -8,11 +8,8 @@ import {
 } from "../services/products";
 import { filterByKey } from "../helpers/sort";
 
-// import { data } from "../data/dummyData";
-
 // static generation will pre-render at build time
 export async function getStaticProps() {
-  console.log("getStaticProps ran");
   const initialProducts = await fetchInitialProducts();
   // const initialProducts = data;
   return {
