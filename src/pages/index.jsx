@@ -29,11 +29,13 @@ export default function Home({ initialProducts }) {
   const [formType, setFormType] = useState("");
   const [query, setQuery] = useState("");
   const [filterKey, setFilterKey] = useState("");
-  const [currId, setCurrId] = useState(""); // was (null)
+  const [currId, setCurrId] = useState("");
+
   /* 
-  **************** PROBLEM ****************
+  ****************  PROBLEM  ****************
   'products' reverts to initial 'data' state after first Home-->editForm transition due to Next.js performing a [Fast Refresh] client/server rebuild. 
-  FIRST TIME only. subsequent rerenders after this error are fine...  */
+  FIRST TIME only. subsequent rerenders after this error are fine...  
+  */
 
   // set init length for check when first new product added
   const initLengthRef = useRef(initialProducts.length - 1);
@@ -46,15 +48,15 @@ export default function Home({ initialProducts }) {
 
   // for search query
   useEffect(() => {
-    let filteredProducts;
+    let initOrFilterProducts;
     if (!query) {
-      filteredProducts = initialProducts;
+      initOrFilterProducts = initialProducts;
     } else {
-      filteredProducts =
+      initOrFilterProducts =
         filterByKey(products, query, filterKey);
     }
-    // set initialProducts on first render
-    setProducts(filteredProducts);
+    // this sets initialProducts on first render
+    setProducts(initOrFilterProducts);
   }, [initialProducts, products, query, filterKey]);
 
 
