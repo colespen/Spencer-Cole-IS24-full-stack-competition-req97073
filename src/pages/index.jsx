@@ -12,6 +12,7 @@ import { filterByKey } from "../helpers/sort";
 
 // static generation will pre-render at build time
 export async function getStaticProps() {
+  console.log("getStaticProps ran")
   const initialProducts = await fetchInitialProducts();
   // const initialProducts = data;
   return {
@@ -20,11 +21,10 @@ export async function getStaticProps() {
     }
   };
 }
-export default function Home({ initialProducts }) {
 
-  const [products, setProducts] = useState(
-    initialProducts || [] // was null
-  );
+export default function Home({ initialProducts }) {
+  // useEffect to set initial products
+  const [products, setProducts] = useState(initialProducts || []);
   const [view, setView] = useState("TABLE");
   const [formType, setFormType] = useState("");
   const [query, setQuery] = useState("");
@@ -39,6 +39,11 @@ export default function Home({ initialProducts }) {
 
   // set init length for check when first new product added
   const initLengthRef = useRef(initialProducts.length - 1);
+
+
+  // useEffect(() => {
+  //   setProducts(initialProducts);
+  // }, [initialProducts])
 
   useEffect(() => {
     // store id from edit for filter
@@ -60,11 +65,13 @@ export default function Home({ initialProducts }) {
   }, [products, query, filterKey]);
 
 
-  const handleFetchProducts = () => {
-    fetchProducts(setProducts);
+  const handleFetchProducts = async () => {
+    console.log("handleFetchProducts ***")
+    const products = await fetchProducts()
+    setProducts(products)
     setView("TABLE");
-  };
-
+    }
+  
   const handleNewProduct = () => {
     setFormType("Create");
     setView("FORM");

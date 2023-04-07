@@ -17,13 +17,12 @@ const fetchInitialProducts = async () => {
 };
 
 //  GET
-const fetchProducts = async (setProducts) => {
+const fetchProducts = async () => {
   const response = await fetch(path + "/api/products");
   if (!response.ok) {
     throw new Error("Failed to fetch data.");
   }
   const data = await response.json();
-  setProducts(data);
   return data;
 };
 
@@ -40,7 +39,7 @@ const fetchProductById = async (id) => {
 };
 
 //  POST
-const saveProduct = async (dataObj, setProducts) => {
+const saveProduct = async (dataObj) => {
   const response = await fetch(path + "/api/products", {
     method: "POST",
     body: JSON.stringify(dataObj),
@@ -52,7 +51,6 @@ const saveProduct = async (dataObj, setProducts) => {
     throw new Error("Failed to fetch data.");
   }
   const data = await response.json();
-  setProducts(data);
   return data;
 };
 

@@ -13,6 +13,7 @@ const ProductForm = (props) => {
     view,
   } = props;
 
+  // product in form values separately 
   const [newProduct, setNewProduct] = useState(product || {
     productName: "",
     productOwnerName: "",
@@ -26,14 +27,18 @@ const ProductForm = (props) => {
   const router = useRouter();
   const formRef = useRef(null);
 
-  console.log("formType: ", formType)
+  // ABSTRACT HANDLERS
 
-  const handleSaveProduct = () => {
-    saveProduct(newProduct, setProducts);
+  const handleSaveProduct = async () => {
+    console.log("handleSaveProduct ***")
+    const newProducts = await saveProduct(newProduct)
+    setProducts(newProducts);
   };
+
   const handleEditProduct = () => {
     editProduct(newProduct);
   };
+
   // capture value change and set state
   const handleOnChange = (e) => {
     const { name, value, id } = e.target;
