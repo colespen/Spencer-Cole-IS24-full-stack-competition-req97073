@@ -12,7 +12,7 @@ export async function getServerSideProps(context) {
   const products = await fetchInitialProducts();
   return {
     props: {
-      id,
+      // id,
       product,
       products
     }
@@ -45,7 +45,7 @@ const EditProduct = (props) => {
       setQuery={setQuery}
     >
       <ProductForm
-        id={id}
+        // id={id}
         product={product}
         formType={formType}
         setProducts={setProducts}

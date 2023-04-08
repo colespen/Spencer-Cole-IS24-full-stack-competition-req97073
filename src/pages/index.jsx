@@ -1,12 +1,13 @@
 import { useState, useEffect, useRef } from "react";
-import Layout from "../components/Layout";
-import ProductTable from "../components/ProductTable";
-import EditProduct from "./product/[id]";
 import {
   fetchInitialProducts,
   fetchProducts
 } from "../services/products";
 import { filterByKey } from "../helpers/sort";
+
+import Layout from "../components/Layout";
+import ProductTable from "../components/ProductTable";
+import EditProduct from "./product/[id]";
 
 // static generation will pre-render at build time
 export async function getStaticProps() {
@@ -20,12 +21,12 @@ export async function getStaticProps() {
 }
 
 export default function Home({ initialProducts }) {
-  // useEffect to set initial products
   const [products, setProducts] = useState([]);
   const [view, setView] = useState("TABLE");
   const [formType, setFormType] = useState("");
   const [query, setQuery] = useState("");
   const [filterKey, setFilterKey] = useState("");
+  const [filterProduct, setFilterProducts] = useState(products)
   const [currId, setCurrId] = useState("");
 
   /* 
@@ -38,6 +39,11 @@ export default function Home({ initialProducts }) {
   const initLengthRef = useRef(initialProducts.length - 1);
 
   useEffect(() => {
+    setProducts(initialProducts);
+  }, [initialProducts, setProducts]);
+
+
+  useEffect(() => {
     // store id from edit for filter
     const prevId = JSON.parse(localStorage.getItem('prevId'));
     setCurrId(prevId);
@@ -45,16 +51,16 @@ export default function Home({ initialProducts }) {
 
   // for search query
   useEffect(() => {
-    let initOrFilterProducts;
+    let filteredProducts;
     if (!query) {
-      initOrFilterProducts = initialProducts;
+      filteredProducts = products;
     } else {
-      initOrFilterProducts =
+      filteredProducts =
         filterByKey(products, query, filterKey);
     }
     // this sets initialProducts on first render
-    setProducts(initOrFilterProducts);
-  }, [initialProducts, products, query, filterKey]);
+    setFilterProducts(filteredProducts);
+  }, [products, query, filterKey]);
 
 
   const handleFetchProducts = async () => {
@@ -82,7 +88,7 @@ export default function Home({ initialProducts }) {
           filterKey={filterKey}
         >
           <ProductTable
-            products={products}
+            products={filterProduct}
             setView={setView}
             setFormType={setFormType}
             formType={formType}
