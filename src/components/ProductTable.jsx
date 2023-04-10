@@ -3,22 +3,22 @@ import { dateSort, filterIdTop, sortNewToTop } from "../helpers/sort";
 
 import styles from "../styles/Home.module.scss";
 
+
 const ProductTable = (props) => {
   const {
     products,
-    setFormType,
     setFilterKey,
     currId,
     initLengthRef,
   } = props;
   const router = useRouter();
+  
 
   const editTableByIdOnClick = (product) => {
-    setFormType("Edit");
     // set the id of selected table
     localStorage.setItem("prevId", JSON.stringify(product.id));
     router.push({
-      pathname: "/product/[id]",
+      pathname: "/edit/[id]",
       query: {
         id: product.id,
       },

@@ -51,7 +51,7 @@ const filterIdTop = (products, currId) => {
  *  @return {object[]} products
  */
 const sortNewToTop = (products, initLengthRef) => {
-  const currLength = products.length - 1;
+  const currLength = products.length;
   const initLength = initLengthRef.current;
   if (currLength === initLength || !initLength) {
     return products;

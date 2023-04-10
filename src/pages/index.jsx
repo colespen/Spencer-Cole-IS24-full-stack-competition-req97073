@@ -1,18 +1,13 @@
-import { useState, useEffect, useRef } from "react";
-import {
-  fetchInitialProducts,
-  fetchProducts
-} from "../services/products";
+import { useContext, useState, useEffect, useRef } from "react";
+import { GlobalContext } from "../context/GlobalState";
+import { fetchInitialProducts } from "../services/products";
 import { filterByKey } from "../helpers/sort";
 
-import Layout from "../components/Layout";
 import ProductTable from "../components/ProductTable";
-import EditProduct from "./product/[id]";
 
 // static generation will pre-render at build time
 export async function getStaticProps() {
   const initialProducts = await fetchInitialProducts();
-  // const initialProducts = data;
   return {
     props: {
       initialProducts
@@ -21,27 +16,25 @@ export async function getStaticProps() {
 }
 
 export default function Home({ initialProducts }) {
-  const [products, setProducts] = useState([]);
-  const [view, setView] = useState("TABLE");
-  const [formType, setFormType] = useState("");
-  const [query, setQuery] = useState("");
-  const [filterKey, setFilterKey] = useState("");
-  const [filterProduct, setFilterProducts] = useState(products)
+  const {
+    productsContext,
+    queryContext,
+    filterKeyContext
+  } = useContext(GlobalContext);
+  const [products, setProducts] = productsContext;
+  const [query] = queryContext;
+  const [filterKey, setFilterKey] = filterKeyContext;
+  // this is the last clicked product id
   const [currId, setCurrId] = useState("");
-
-  /* 
-  ****************  PROBLEM  ****************
-  'products' reverts to initial 'data' state after first Home-->editForm transition due to Next.js performing a [Fast Refresh] client/server rebuild. 
-  FIRST TIME only. subsequent rerenders after this error are fine...  
-  */
+  // filter products state for query or default products
+  const [filterProducts, setFilterProducts] = useState(products);
 
   // set init length for check when first new product added
-  const initLengthRef = useRef(initialProducts.length - 1);
+  const initLengthRef = useRef(initialProducts.length);
 
   useEffect(() => {
     setProducts(initialProducts);
   }, [initialProducts, setProducts]);
-
 
   useEffect(() => {
     // store id from edit for filter
@@ -49,69 +42,28 @@ export default function Home({ initialProducts }) {
     setCurrId(prevId);
   }, []);
 
-  // for search query
+  // for search query 
+  // -- this works and no longer resets state between renders :)
   useEffect(() => {
-    let filteredProducts;
+    let filterProducts;
     if (!query) {
-      filteredProducts = products;
+      filterProducts = products;
     } else {
-      filteredProducts =
+      filterProducts =
         filterByKey(products, query, filterKey);
     }
-    // this sets initialProducts on first render
-    setFilterProducts(filteredProducts);
+    setFilterProducts(filterProducts);
   }, [products, query, filterKey]);
 
 
-  const handleFetchProducts = async () => {
-    const products = await fetchProducts();
-    setProducts(products);
-    setView("TABLE");
-  };
-
-  const handleNewProduct = () => {
-    setFormType("Create");
-    setView("FORM");
-    setCurrId(null);
-  };
-
   return (
     <>
-      {view === "TABLE" &&
-        <Layout
-          handleFetchProducts={handleFetchProducts}
-          handleNewProduct={handleNewProduct}
-          products={products}
-          setView={setView}
-          view={view}
-          setQuery={setQuery}
-          filterKey={filterKey}
-        >
-          <ProductTable
-            products={filterProduct}
-            setView={setView}
-            setFormType={setFormType}
-            formType={formType}
-            setFilterKey={setFilterKey}
-            currId={currId}
-            setCurrId={setCurrId}
-            initLengthRef={initLengthRef}
-          />
-        </Layout>}
-      {view === "FORM" &&
-        <EditProduct
-          id={null}      // getServerSideProps
-          product={null} // getServerSideProps
-          products={products || null}
-          setProducts={setProducts || null}
-          formType={formType || null}
-          view={view || null}
-          setView={setView || null}
-          handleFetchProducts={handleFetchProducts || null}
-          handleNewProduct={handleNewProduct || null}
-          setQuery={setQuery || null}
-          filterKey={filterKey || null}
-        />}
+      <ProductTable
+        products={filterProducts}
+        setFilterKey={setFilterKey}
+        currId={currId}
+        initLengthRef={initLengthRef}
+      />
     </>
   );
 }

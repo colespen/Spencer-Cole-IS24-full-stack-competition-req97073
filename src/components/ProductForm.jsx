@@ -1,19 +1,13 @@
 import { useRouter } from "next/router";
-import { useState, useRef } from "react";
+import { useContext, useState, useRef } from "react";
+import { saveProduct, editProduct } from "../services/products";
+import { GlobalContext } from "../context/GlobalState";
+
 import Form from "./Form";
 
-import { saveProduct, editProduct } from "../services/products";
-
 const ProductForm = (props) => {
-  const {
-    setProducts,
-    product,
-    formType,
-    setView,
-    view,
-  } = props;
+  const { product } = props;
 
-  // product in form values separately 
   const [newProduct, setNewProduct] = useState(product || {
     productName: "",
     productOwnerName: "",
@@ -24,18 +18,25 @@ const ProductForm = (props) => {
   });
   const [formTitle, setFormTitle] = useState("");
   const [btnColor, setBtnColor] = useState("#44455b");
-  const router = useRouter();
+  const { productsContext } = useContext(GlobalContext);
+  const [_, setProducts] = productsContext;
   const formRef = useRef(null);
 
-  // ABSTRACT HANDLERS
+  const router = useRouter();
+  const { asPath } = useRouter();
+  const isCreate = (asPath === "/new");
+  const isHome = (asPath === "/");
+
 
   const handleSaveProduct = async () => {
     const newProducts = await saveProduct(newProduct);
     setProducts(newProducts);
   };
 
-  const handleEditProduct = () => {
-    editProduct(newProduct);
+  const handleEditProduct = async () => {
+    const newProducts = await editProduct(newProduct);
+    console.log("newProduct -- handleEditProduct: ", newProduct);
+    setProducts(newProducts);
   };
 
   // capture value change and set state
@@ -106,8 +107,7 @@ const ProductForm = (props) => {
       }
       const tableViewDelay = setTimeout(() => {
         router.push("/");
-        if (view === "FORM") setView("TABLE");
-        if (view === "TABLE") handleReset();
+        isHome && handleReset();
       }, 600);
       return () => clearTimeout(tableViewDelay);
     }
@@ -115,11 +115,12 @@ const ProductForm = (props) => {
 
   const handleReset = () => {
     setNewProduct(prev => ({
+      ...prev,
       productName: "",
       productOwnerName: "",
-      Developers: [],
+      Developers: [""],
       scrumMasterName: "",
-      startDate: !formType ? prev.startDate : "",
+      startDate: !isCreate ? prev.startDate : "",
       methodology: "",
     }));
   };
@@ -127,7 +128,7 @@ const ProductForm = (props) => {
   return (
     <Form
       formRef={formRef}
-      formType={formType}
+      isCreate={isCreate}
       formTitle={formTitle}
       handleOnSubmit={handleOnSubmit}
       newProduct={newProduct}
