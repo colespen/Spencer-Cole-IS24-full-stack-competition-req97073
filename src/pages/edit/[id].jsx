@@ -7,8 +7,6 @@ export async function getServerSideProps(context) {
 
   const product = await fetchProductById(id);
 
-  console.log("product -- getServerSideProps", product);
-
   return {
     props: {
       product
@@ -18,7 +16,7 @@ export async function getServerSideProps(context) {
 
 
 const EditProduct = ({ product }) => {
-  
+
   return (
     <>
       <ProductForm product={product} />

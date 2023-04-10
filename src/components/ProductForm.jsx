@@ -35,7 +35,6 @@ const ProductForm = (props) => {
 
   const handleEditProduct = async () => {
     const newProducts = await editProduct(newProduct);
-    console.log("newProduct -- handleEditProduct: ", newProduct);
     setProducts(newProducts);
   };
 

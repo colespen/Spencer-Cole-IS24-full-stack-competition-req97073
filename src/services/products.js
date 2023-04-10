@@ -36,7 +36,6 @@ const fetchProductById = async (id) => {
     throw new Error(`Failed to fetch data. ${status}: ${statusText}. hmm..`);
   }
   const data = await response.json();
-  console.log("data.length -- fetchProductById: ", data.length);
   // this `data` contains the updated object when the return is commented out!!!!!!!!
   return data; // <-- try commenting this out
 };

@@ -2,8 +2,6 @@ import { data } from '../../lib/dummyData';
 import { v4 as uuidv4 } from 'uuid';
 import { addProductToList, updateProduct } from '../../lib/products';
 
-console.log("data.length (init: 40) -- /api/products", data.length);
-
 export default function handler(req, res) {
   res.setHeader("Content-Type", "application/json");
   const { method } = req;
@@ -14,16 +12,12 @@ export default function handler(req, res) {
       // if query, check for id then find and send match!
       if (Object.keys(req.query).length) {
 
-        // init length is 40 (id 0 - 39)
-        console.log("data.length (init: 40) -- GET: ", data.length);
-
         const id = parseInt(req.query.id);
         // this data does not include last pushed obj when [fast refresh]
         const match = data.find((product) => {
           return product.id === id;
         });
         if (!match) {
-          console.log("!match -- inner 'GET");
           res.status(404).json({ message: `Product with id ${id} was not found` });
           return;
         }
@@ -50,8 +44,7 @@ export default function handler(req, res) {
 
 
     case "PUT":
-      const {data, editIndex} = updateProduct(req.body)
-      console.log("data -- PUT: ", data)
+      const { data, editIndex } = updateProduct(req.body);
       if (editIndex === -1) {
         res.status(404).json({ message: `Product # ${id} could not be edited.` });
       } else {
