@@ -1,41 +1,49 @@
+import { useContext } from "react";
+import { GlobalContext } from "../context/GlobalState";
+import { fetchProducts } from "../services/products";
+import { useRouter } from "next/router";
+
 import Link from "next/link";
-import styles from "../styles/Home.module.scss";
 import SearchBar from "./SearchBar";
 
-const Header = (props) => {
-  const {
-    handleFetchProducts,
-    handleNewProduct,
-    products,
-    setView,
-    view,
-    setQuery,
-    filterKey
-  } = props;
+import styles from "../styles/Home.module.scss";
 
-  const handleViewProducts = () => {
-    if (view === "FORM") setView("TABLE");
+const Header = () => {
+  const {
+    productsContext,
+    queryContext,
+    filterKeyContext
+  } = useContext(GlobalContext);
+  const [products, setProducts] = productsContext;
+  const [_, setQuery] = queryContext;
+  const [filterKey] = filterKeyContext;
+
+  const { asPath } = useRouter();
+  const isHome = asPath === "/";
+
+  const handleFetchProducts = async () => {
+    const products = await fetchProducts();
+    setProducts(products);
   };
 
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
-
-        {view === "TABLE" ?
+        {isHome ?
           <button onClick={handleFetchProducts}>
             Update Products
           </button>
           :
-          <button onClick={handleViewProducts}>
+          <button >
             <Link href="/">View Products</Link>
           </button>
         }
         {<button
-          onClick={handleNewProduct}
           style={{
-            visibility: view === "TABLE" ? "visible" : "hidden"
+            visibility: isHome ? "visible" : "hidden"
           }}
-        >New Product
+        >
+          <Link href="/new">New Products</Link>
         </button>}
 
       </nav >
@@ -45,10 +53,10 @@ const Header = (props) => {
             0 : products.length}
         </h1>
       </div>
-      {view === "TABLE" && <SearchBar
+      <SearchBar
         setQuery={setQuery}
         filterKey={filterKey}
-      />}
+      />
     </header>
   );
 };

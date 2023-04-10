@@ -6,7 +6,7 @@ const host = process.env.NEXT_PUBLIC_HOST;
 //////          `.../api/products?id=...`
 const path = host + port;
 
-//  GET
+//  GET  (only used in getStaticProps in Home)
 const fetchInitialProducts = async () => {
   const response = await fetch(path + "/api/products");
   if (!response.ok) {
@@ -16,14 +16,13 @@ const fetchInitialProducts = async () => {
   return data;
 };
 
-//  GET
-const fetchProducts = async (setProducts) => {
+//  GET  (only used in 'Update' button)
+const fetchProducts = async () => {
   const response = await fetch(path + "/api/products");
   if (!response.ok) {
     throw new Error("Failed to fetch data.");
   }
   const data = await response.json();
-  setProducts(data);
   return data;
 };
 
@@ -32,15 +31,17 @@ const fetchProductById = async (id) => {
   const response = await fetch(
     path + '/api/products?id=' + id
   );
+  const { status, statusText } = response;
   if (!response.ok) {
-    throw new Error("Failed to fetch data.");
+    throw new Error(`Failed to fetch data. ${status}: ${statusText}. hmm..`);
   }
   const data = await response.json();
-  return data;
+  // this `data` contains the updated object when the return is commented out!!!!!!!!
+  return data; // <-- try commenting this out
 };
 
 //  POST
-const saveProduct = async (dataObj, setProducts) => {
+const saveProduct = async (dataObj) => {
   const response = await fetch(path + "/api/products", {
     method: "POST",
     body: JSON.stringify(dataObj),
@@ -52,7 +53,6 @@ const saveProduct = async (dataObj, setProducts) => {
     throw new Error("Failed to fetch data.");
   }
   const data = await response.json();
-  setProducts(data);
   return data;
 };
 
@@ -69,7 +69,7 @@ const editProduct = async (dataObj) => {
     throw new Error("Failed to fetch data.");
   }
   const data = await response.json();
-  return data; 
+  return data;
 };
 
 export {

@@ -1,18 +1,12 @@
 import { useRouter } from "next/router";
-import { useState, useRef } from "react";
+import { useContext, useState, useRef } from "react";
+import { saveProduct, editProduct } from "../services/products";
+import { GlobalContext } from "../context/GlobalState";
+
 import Form from "./Form";
 
-import { saveProduct, editProduct } from "../services/products";
-
 const ProductForm = (props) => {
-  const {
-    setProducts,
-    id,
-    product,
-    formType,
-    setView,
-    view,
-  } = props;
+  const { product } = props;
 
   const [newProduct, setNewProduct] = useState(product || {
     productName: "",
@@ -24,15 +18,26 @@ const ProductForm = (props) => {
   });
   const [formTitle, setFormTitle] = useState("");
   const [btnColor, setBtnColor] = useState("#44455b");
-  const router = useRouter();
+  const { productsContext } = useContext(GlobalContext);
+  const [_, setProducts] = productsContext;
   const formRef = useRef(null);
 
-  const handleSaveProduct = () => {
-    saveProduct(newProduct, setProducts);
+  const router = useRouter();
+  const { asPath } = useRouter();
+  const isCreate = (asPath === "/new");
+  const isHome = (asPath === "/");
+
+
+  const handleSaveProduct = async () => {
+    const newProducts = await saveProduct(newProduct);
+    setProducts(newProducts);
   };
-  const handleEditProduct = () => {
-    editProduct(newProduct);
+
+  const handleEditProduct = async () => {
+    const newProducts = await editProduct(newProduct);
+    setProducts(newProducts);
   };
+
   // capture value change and set state
   const handleOnChange = (e) => {
     const { name, value, id } = e.target;
@@ -101,38 +106,38 @@ const ProductForm = (props) => {
       }
       const tableViewDelay = setTimeout(() => {
         router.push("/");
-        if (view === "FORM") setView("TABLE");
-        if (view === "TABLE") handleReset();
+        isHome && handleReset();
       }, 600);
       return () => clearTimeout(tableViewDelay);
     }
   };
 
   const handleReset = () => {
-    setNewProduct({
+    setNewProduct(prev => ({
+      ...prev,
       productName: "",
       productOwnerName: "",
-      Developers: [],
+      Developers: [""],
       scrumMasterName: "",
-      startDate: "",
+      startDate: !isCreate ? prev.startDate : "",
       methodology: "",
-    });
+    }));
   };
 
   return (
-      <Form
-        formRef={formRef}
-        formType={formType}
-        formTitle={formTitle}
-        handleOnSubmit={handleOnSubmit}
-        newProduct={newProduct}
-        handleOnChange={handleOnChange}
-        handleDeveloperChange={handleDeveloperChange}
-        handleRemoveDeveloper={handleRemoveDeveloper}
-        handleAddDeveloper={handleAddDeveloper}
-        handleReset={handleReset}
-        btnColor={btnColor}
-      />
+    <Form
+      formRef={formRef}
+      isCreate={isCreate}
+      formTitle={formTitle}
+      handleOnSubmit={handleOnSubmit}
+      newProduct={newProduct}
+      handleOnChange={handleOnChange}
+      handleDeveloperChange={handleDeveloperChange}
+      handleRemoveDeveloper={handleRemoveDeveloper}
+      handleAddDeveloper={handleAddDeveloper}
+      handleReset={handleReset}
+      btnColor={btnColor}
+    />
   );
 };
 

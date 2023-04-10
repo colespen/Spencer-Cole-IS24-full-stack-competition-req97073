@@ -3,10 +3,10 @@ import 'react-tooltip/dist/react-tooltip.css';
 import styles from "../styles/Home.module.scss";
 
 const Form = (props) => {
-  const { formRef, handleOnSubmit, newProduct,
-    handleOnChange, handleDeveloperChange,
+  const { formRef, handleOnSubmit, 
+    newProduct, handleOnChange, handleDeveloperChange,
     handleRemoveDeveloper, handleAddDeveloper,
-    handleReset, formType, formTitle, btnColor
+    handleReset, isCreate, formTitle, btnColor
   } = props;
 
   const handleButtonTypeSubmit = (e) => {
@@ -17,7 +17,7 @@ const Form = (props) => {
     <>
       {!formTitle &&
         <h2 className={styles.formTitle}>
-          {!formType ? "Edit Product" : "Create Product"}
+          {!isCreate ? "Edit Product" : "Create Product"}
         </h2>}
       {formTitle && <h2 className={styles.formTitle}>Product {formTitle}</h2>}
       <form
@@ -93,8 +93,8 @@ const Form = (props) => {
             onChange={handleOnChange}
             type="date"
             required
-            disabled={!formType}
-            style={{ color: !formType ? "darkgrey" : "inherit" }}
+            disabled={!isCreate}
+            style={{ color: !isCreate ? "darkgrey" : "inherit" }}
             className={styles.date}
           />
         </label>
@@ -127,7 +127,7 @@ const Form = (props) => {
         </label>
 
         <div className={styles.submitForm}>
-          {formType &&
+          {isCreate &&
             <button
               id="add-btn"
               type="submit"
@@ -136,7 +136,7 @@ const Form = (props) => {
               style={{ backgroundColor: btnColor }}
             >Add Product
             </button>}
-          {!formType &&
+          {!isCreate &&
             <button
               id="edit-btn"
               type="submit"

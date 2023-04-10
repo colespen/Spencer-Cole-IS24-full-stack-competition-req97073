@@ -2,17 +2,7 @@ import Head from "next/head";
 import Header from "./Header";
 import styles from '../styles/Home.module.scss';
 
-export default function Layout(post) {
-  const {
-    children,
-    handleFetchProducts,
-    handleNewProduct,
-    products,
-    view,
-    setView,
-    setQuery,
-    filterKey
-  } = post;
+export default function Layout({ children }) {
   return (
     <div className={styles.mainContainer}>
       <main className={styles.main}>
@@ -24,15 +14,7 @@ export default function Layout(post) {
           <link rel="icon" href="" />
         </Head>
 
-        <Header
-          handleFetchProducts={handleFetchProducts}
-          handleNewProduct={handleNewProduct}
-          products={products}
-          view={view}
-          setView={setView}
-          setQuery={setQuery}
-          filterKey={filterKey}
-        />
+        <Header />
 
         {children}
 
