@@ -33,7 +33,7 @@ const fetchProductById = async (id) => {
   );
   const { status, statusText } = response;
   if (!response.ok) {
-    throw new Error(`Failed to fetch data. ${status}: ${statusText}. hmm..`);
+    throw new Error(`Failed to fetch data. ${status}: ${statusText}. hmm... Nico?`);
   }
   const data = await response.json();
   // this `data` contains the updated object when the return is commented out!!!!!!!!
@@ -53,6 +53,7 @@ const saveProduct = async (dataObj) => {
     throw new Error("Failed to fetch data.");
   }
   const data = await response.json();
+  console.log("data", data);
   return data;
 };
 

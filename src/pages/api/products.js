@@ -1,6 +1,4 @@
-import { data } from '../../lib/dummyData';
-import { v4 as uuidv4 } from 'uuid';
-import { addProductToList, updateProduct } from '../../lib/products';
+import { getInitialProducts, addProductToList, updateProduct } from '../../lib/products';
 
 export default function handler(req, res) {
   res.setHeader("Content-Type", "application/json");
@@ -9,12 +7,15 @@ export default function handler(req, res) {
   switch (method) {
 
     case "GET":
+      const dataInit = getInitialProducts();
       // if query, check for id then find and send match!
       if (Object.keys(req.query).length) {
 
         const id = parseInt(req.query.id);
-        // this data does not include last pushed obj when [fast refresh]
-        const match = data.find((product) => {
+        //  this data does not include last pushed obj when [fast refresh]
+        //  only the initial data, not the lates state change.
+        //  updated data array (in-memor) DOES update after first server error
+        const match = dataInit.find((product) => {
           return product.id === id;
         });
         if (!match) {
@@ -25,7 +26,7 @@ export default function handler(req, res) {
         return;
       }
       // else, normal GET
-      res.status(200).json(data);
+      res.status(200).json(dataInit);
       break;
 
 
@@ -40,13 +41,17 @@ export default function handler(req, res) {
       }
       const newProducts = addProductToList(req.body);
       res.status(200).json(newProducts);
+      // *** send anything else so latest data availble for GET???
+
+      // const { data: updatedData, newProduct } = addProductToList(req.body);
+      // res.status(200).json({ data: updatedData, newProduct });
       break;
 
 
     case "PUT":
       const { data, editIndex } = updateProduct(req.body);
       if (editIndex === -1) {
-        res.status(404).json({ message: `Product # ${id} could not be edited.` });
+        res.status(404).json({ message: `Product #${id} could not be edited.` });
       } else {
         res.status(200).json(data);
       }

@@ -30,6 +30,7 @@ const ProductForm = (props) => {
 
   const handleSaveProduct = async () => {
     const newProducts = await saveProduct(newProduct);
+    console.log("newProducts", newProducts);
     setProducts(newProducts);
   };
 

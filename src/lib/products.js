@@ -1,6 +1,10 @@
 import { data } from './dummyData';
 import { v4 as uuidv4 } from 'uuid';
 
+export function getInitialProducts() {
+  return data;
+}
+
 export function addProductToList(newProduct) {
   data.push({
     id: data.length,
@@ -8,6 +12,8 @@ export function addProductToList(newProduct) {
     ...newProduct,
   });
   return data;
+  // *** this data is not updated when the first GET is made after first POST
+  // return { data, newProduct };
 }
 
 export function updateProduct(productEdit) {
