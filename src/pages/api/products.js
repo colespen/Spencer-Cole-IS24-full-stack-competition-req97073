@@ -10,8 +10,8 @@ export default function handler(req, res) {
       const dataInit = getInitialProducts();
       // if query, check for id then find and send match!
       if (Object.keys(req.query).length) {
-
         const id = parseInt(req.query.id);
+        console.log("********** id in 'GET': ", id)
         //  this data does not include last pushed obj when [fast refresh]
         //  only the initial data, not the lates state change.
         //  updated data array (in-memor) DOES update after first server error

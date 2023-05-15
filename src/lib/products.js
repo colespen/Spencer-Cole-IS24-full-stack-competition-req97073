@@ -1,5 +1,5 @@
-import { data } from './dummyData';
-import { v4 as uuidv4 } from 'uuid';
+import { data } from "./dummyData";
+import { v4 as uuidv4 } from "uuid";
 
 export function getInitialProducts() {
   return data;
@@ -11,6 +11,7 @@ export function addProductToList(newProduct) {
     productId: uuidv4(),
     ...newProduct,
   });
+  console.log("********** new product id in addProductToList: ", data.length);
   return data;
   // *** this data is not updated when the first GET is made after first POST
   // return { data, newProduct };

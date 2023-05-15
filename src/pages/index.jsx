@@ -8,19 +8,17 @@ import ProductTable from "../components/ProductTable";
 // static generation will pre-render at build time
 export async function getStaticProps() {
   const initialProducts = await fetchInitialProducts();
+  console.log("initialProducts.length (40): ", initialProducts.length)
   return {
     props: {
-      initialProducts
-    }
+      initialProducts,
+    },
   };
 }
 
 export default function Home({ initialProducts }) {
-  const {
-    productsContext,
-    queryContext,
-    filterKeyContext
-  } = useContext(GlobalContext);
+  const { productsContext, queryContext, filterKeyContext } =
+    useContext(GlobalContext);
   const [products, setProducts] = productsContext;
   const [query] = queryContext;
   const [filterKey, setFilterKey] = filterKeyContext;
@@ -32,29 +30,29 @@ export default function Home({ initialProducts }) {
   // set init length for check when first new product added
   const initLengthRef = useRef(initialProducts.length);
 
+  console.log("products.length (refer to browser console): ", products.length)
+
   useEffect(() => {
     setProducts(initialProducts);
   }, [initialProducts, setProducts]);
 
   useEffect(() => {
     // store id from edit for filter
-    const prevId = JSON.parse(localStorage.getItem('prevId'));
+    const prevId = JSON.parse(localStorage.getItem("prevId"));
     setCurrId(prevId);
   }, []);
 
-  // for search query 
+  // for search query
   // -- this works and no longer resets state between renders :)
   useEffect(() => {
     let filterProducts;
     if (!query) {
       filterProducts = products;
     } else {
-      filterProducts =
-        filterByKey(products, query, filterKey);
+      filterProducts = filterByKey(products, query, filterKey);
     }
     setFilterProducts(filterProducts);
   }, [products, query, filterKey]);
-
 
   return (
     <>

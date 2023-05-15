@@ -2,7 +2,7 @@
 const port = process.env.NEXT_PUBLIC_PATH || 3000;
 const host = process.env.NEXT_PUBLIC_HOST;
 //////  Note: all endpoints originate from /api
-//////        - ex. to retrieve :id call is sent to 
+//////        - ex. to retrieve :id call is sent to
 //////          `.../api/products?id=...`
 const path = host + port;
 
@@ -28,12 +28,12 @@ const fetchProducts = async () => {
 
 //  GET
 const fetchProductById = async (id) => {
-  const response = await fetch(
-    path + '/api/products?id=' + id
-  );
+  const response = await fetch(path + "/api/products?id=" + id);
   const { status, statusText } = response;
   if (!response.ok) {
-    throw new Error(`Failed to fetch data. ${status}: ${statusText}. hmm... Nico?`);
+    throw new Error(
+      `Failed to fetch data. ${status}: ${statusText}. *** THIS IS THE BUG *** `
+    );
   }
   const data = await response.json();
   // this `data` contains the updated object when the return is commented out!!!!!!!!
@@ -53,7 +53,7 @@ const saveProduct = async (dataObj) => {
     throw new Error("Failed to fetch data.");
   }
   const data = await response.json();
-  console.log("data", data);
+  console.log("data: ", data);
   return data;
 };
 
@@ -78,5 +78,5 @@ export {
   fetchProducts,
   fetchProductById,
   saveProduct,
-  editProduct
+  editProduct,
 };
