@@ -1,10 +1,11 @@
 import { createContext, useState } from 'react';
+import { data } from '../lib/dummyData';
 
 const GlobalContext = createContext(null);
 
 const GlobalState = ({ children }) => {
-  // useReducer???
-  const [products, setProducts] = useState([]);
+  // use dummydata at default state temporarily!!!!!
+  const [products, setProducts] = useState(data);
 
   // this searchBar stuff can go somewhere else 
   const [query, setQuery] = useState("");

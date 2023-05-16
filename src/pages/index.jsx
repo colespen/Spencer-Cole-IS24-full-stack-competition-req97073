@@ -30,11 +30,6 @@ export default function Home({initialProducts}) {
   const initLengthRef = useRef(initialProducts.length);
 
   useEffect(() => {
-    // this does not work, it removes new product when returning to ProductTable
-    // setProducts(initialProducts);
-  }, [initialProducts, setProducts]);
-
-  useEffect(() => {
     // store id from edit for filter
     const prevId = JSON.parse(localStorage.getItem("prevId"));
     setCurrId(prevId);
