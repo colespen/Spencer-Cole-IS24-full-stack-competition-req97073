@@ -18,15 +18,10 @@ export async function getServerSideProps(context) {
 const EditProduct = ({ id }) => {
   const { productsContext } = useContext(GlobalContext);
   const [products] = productsContext;
-  const [prod, setProd] = useState(null)
-
-  console.log("productsContext: ", productsContext)
-  // console.log("products: ", products)
+  const [prod, setProd] = useState(null);
 
   useEffect(() => {
-    const product = products.find(
-      (product) => product.id === parseInt(id)
-    ); 
+    const product = products.find((product) => product.id === parseInt(id));
     setProd(product);
   }, [id, products]);
 

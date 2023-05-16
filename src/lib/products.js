@@ -14,16 +14,21 @@ export function addProductToList(newProduct) {
   return data;
 }
 
-export function updateProduct(productEdit) {
+export function updateProduct(products, productEdit) {
   const { id } = productEdit;
   let editIndex = -1;
 
   //replace obj with matching id
-  data.forEach((product, i) => {
+  products.forEach((product, i) => {
     if (product.id === id) {
       editIndex = i;
-      data[i] = { ...product, ...productEdit };
+      products[i] = { ...product, ...productEdit };
+      console.log("editIndex: ", editIndex);
     }
   });
-  return { data, editIndex };
+
+  // return products is a temporary solution but not good
+  // 
+
+  return { data: products, editIndex };
 }

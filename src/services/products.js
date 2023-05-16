@@ -58,10 +58,10 @@ const saveProduct = async (dataObj) => {
 };
 
 //  PUT
-const editProduct = async (dataObj) => {
+const editProduct = async (products, dataObj) => {
   const response = await fetch(path + "/api/products", {
     method: "PUT",
-    body: JSON.stringify(dataObj),
+    body: JSON.stringify({products, dataObj}),
     headers: {
       "Content-Type": "application/json",
     },

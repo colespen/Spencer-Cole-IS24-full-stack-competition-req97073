@@ -1,13 +1,16 @@
-import { getInitialProducts, addProductToList, updateProduct } from '../../lib/products';
+import {
+  getInitialProducts,
+  addProductToList,
+  updateProduct,
+} from "../../lib/products";
 
 export default function handler(req, res) {
   res.setHeader("Content-Type", "application/json");
   const { method } = req;
 
   switch (method) {
-
     case "GET":
-      const dataInit = getInitialProducts();
+      const dataInit = getInitialProducts(); // this is not very good
       // if query, check for id then find and send match!
       if (Object.keys(req.query).length) {
         const id = parseInt(req.query.id);
@@ -15,7 +18,9 @@ export default function handler(req, res) {
           return product.id === id;
         });
         if (!match) {
-          res.status(404).json({ message: `Product with id ${id} was not found` });
+          res
+            .status(404)
+            .json({ message: `Product with id ${id} was not found` });
           return;
         }
         res.status(200).json(match);
@@ -24,7 +29,6 @@ export default function handler(req, res) {
       // else, normal GET
       res.status(200).json(dataInit);
       break;
-
 
     case "POST":
       if (!req.body) {
@@ -43,16 +47,17 @@ export default function handler(req, res) {
       // res.status(200).json({ data: updatedData, newProduct });
       break;
 
-
     case "PUT":
-      const { data, editIndex } = updateProduct(req.body);
+      const { products, dataObj } = req.body;
+      const { data, editIndex } = updateProduct(products, dataObj);
       if (editIndex === -1) {
-        res.status(404).json({ message: `Product #${id} could not be edited.` });
+        res
+          .status(404)
+          .json({ message: `Product #${editIndex} could not be edited.` });
       } else {
         res.status(200).json(data);
       }
       break;
-
 
     case "DELETE":
       res.status(200);

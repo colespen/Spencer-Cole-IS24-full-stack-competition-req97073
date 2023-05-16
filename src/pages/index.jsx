@@ -15,7 +15,7 @@ export async function getStaticProps() {
   };
 }
 
-export default function Home({ initialProducts }) {
+export default function Home({initialProducts}) {
   const { productsContext, queryContext, filterKeyContext } =
     useContext(GlobalContext);
   const [products, setProducts] = productsContext;
@@ -30,7 +30,8 @@ export default function Home({ initialProducts }) {
   const initLengthRef = useRef(initialProducts.length);
 
   useEffect(() => {
-    setProducts(initialProducts);
+    // this does not work, it removes new product when returning to ProductTable
+    // setProducts(initialProducts);
   }, [initialProducts, setProducts]);
 
   useEffect(() => {
@@ -57,6 +58,7 @@ export default function Home({ initialProducts }) {
         setFilterKey={setFilterKey}
         currId={currId}
         initLengthRef={initLengthRef}
+        // initialProducts={initialProducts}
       />
     </>
   );

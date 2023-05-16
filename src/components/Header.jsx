@@ -21,8 +21,9 @@ const Header = () => {
   const { asPath } = useRouter();
   const isHome = asPath === "/";
 
-  const handleFetchProducts = async () => {
-    const products = await fetchProducts();
+  const handleFetchProducts = () => {
+    // currently disabled because edits not writing to memory
+    // const products = await fetchProducts();
     setProducts(products);
   };
 

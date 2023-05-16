@@ -19,7 +19,7 @@ const ProductForm = ({ product }) => {
   const [formTitle, setFormTitle] = useState("");
   const [btnColor, setBtnColor] = useState("#44455b");
   const { productsContext } = useContext(GlobalContext);
-  const [_, setProducts] = productsContext;
+  const [products, setProducts] = productsContext;
   const formRef = useRef(null);
 
   const router = useRouter();
@@ -34,7 +34,7 @@ const ProductForm = ({ product }) => {
   };
 
   const handleEditProduct = async () => {
-    const newProducts = await editProduct(newProduct);
+    const newProducts = await editProduct(products, newProduct);
     setProducts(newProducts);
   };
 
