@@ -1,33 +1,36 @@
+import { useState, useEffect, useContext } from "react";
 import ProductForm from "../../components/ProductForm";
-import { fetchProductById } from "../../services/products";
+import { GlobalContext } from "../../context/GlobalState";
+// import { fetchProductById } from "../../services/products";
 
 // server-side data pre-rendered on each request
 export async function getServerSideProps(context) {
   const { id } = context.query;
-  console.log("********** id in getSSP in /edit/[id]: ", id);
-
-  const product = await fetchProductById(id);
+  // const product = await fetchProductById(id);
 
   return {
     props: {
-      product,
+      id,
     },
   };
 }
 
-const EditProduct = ({ product }) => {
-  console.log(
-    "********** first time this route is accessed, new product data disappears **********"
-  );
-  console.log(
-    "********** products.length returns to 40 ... **********"
-  );
+const EditProduct = ({ id }) => {
+  const { productsContext } = useContext(GlobalContext);
+  const [products] = productsContext;
+  const [prod, setProd] = useState(null)
 
-  return (
-    <>
-      <ProductForm product={product} />
-    </>
-  );
+  console.log("productsContext: ", productsContext)
+  // console.log("products: ", products)
+
+  useEffect(() => {
+    const product = products.find(
+      (product) => product.id === parseInt(id)
+    ); 
+    setProd(product);
+  }, [id, products]);
+
+  return <>{!prod ? <div>Loading...</div> : <ProductForm product={prod} />}</>;
 };
 
 export default EditProduct;

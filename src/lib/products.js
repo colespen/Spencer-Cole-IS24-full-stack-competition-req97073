@@ -11,10 +11,7 @@ export function addProductToList(newProduct) {
     productId: uuidv4(),
     ...newProduct,
   });
-  console.log("********** new product id in addProductToList: ", data.length);
   return data;
-  // *** this data is not updated when the first GET is made after first POST
-  // return { data, newProduct };
 }
 
 export function updateProduct(productEdit) {

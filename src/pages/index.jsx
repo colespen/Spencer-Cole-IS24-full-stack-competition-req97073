@@ -8,7 +8,6 @@ import ProductTable from "../components/ProductTable";
 // static generation will pre-render at build time
 export async function getStaticProps() {
   const initialProducts = await fetchInitialProducts();
-  console.log("initialProducts.length (40): ", initialProducts.length)
   return {
     props: {
       initialProducts,
@@ -30,8 +29,6 @@ export default function Home({ initialProducts }) {
   // set init length for check when first new product added
   const initLengthRef = useRef(initialProducts.length);
 
-  console.log("products.length (refer to browser console): ", products.length)
-
   useEffect(() => {
     setProducts(initialProducts);
   }, [initialProducts, setProducts]);
@@ -43,7 +40,6 @@ export default function Home({ initialProducts }) {
   }, []);
 
   // for search query
-  // -- this works and no longer resets state between renders :)
   useEffect(() => {
     let filterProducts;
     if (!query) {

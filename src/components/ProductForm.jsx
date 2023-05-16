@@ -5,17 +5,17 @@ import { GlobalContext } from "../context/GlobalState";
 
 import Form from "./Form";
 
-const ProductForm = (props) => {
-  const { product } = props;
-
-  const [newProduct, setNewProduct] = useState(product || {
-    productName: "",
-    productOwnerName: "",
-    Developers: [""],
-    scrumMasterName: "",
-    startDate: "",
-    methodology: "",
-  });
+const ProductForm = ({ product }) => {
+  const [newProduct, setNewProduct] = useState(
+    product || {
+      productName: "",
+      productOwnerName: "",
+      Developers: [""],
+      scrumMasterName: "",
+      startDate: "",
+      methodology: "",
+    }
+  );
   const [formTitle, setFormTitle] = useState("");
   const [btnColor, setBtnColor] = useState("#44455b");
   const { productsContext } = useContext(GlobalContext);
@@ -24,9 +24,8 @@ const ProductForm = (props) => {
 
   const router = useRouter();
   const { asPath } = useRouter();
-  const isCreate = (asPath === "/new");
-  const isHome = (asPath === "/");
-
+  const isCreate = asPath === "/new";
+  const isHome = asPath === "/";
 
   const handleSaveProduct = async () => {
     const newProducts = await saveProduct(newProduct);
@@ -46,7 +45,7 @@ const ProductForm = (props) => {
     if (name === "startDate") newVal = value.replace(/-/g, "/");
     if (name === "methodology") newVal = id;
     // set as array of strings if Developers
-    setNewProduct(prev => ({
+    setNewProduct((prev) => ({
       ...prev,
       [name]: name === "Developers" ? [newVal] : newVal,
     }));
@@ -55,7 +54,7 @@ const ProductForm = (props) => {
   // max 5 dev's
   const handleAddDeveloper = () => {
     if (newProduct.Developers.length < 5) {
-      setNewProduct(prev => ({
+      setNewProduct((prev) => ({
         ...prev,
         Developers: [...prev.Developers, ""],
       }));
@@ -63,14 +62,14 @@ const ProductForm = (props) => {
   };
   // remove dev
   const handleRemoveDeveloper = (index) => {
-    setNewProduct(prev => ({
+    setNewProduct((prev) => ({
       ...prev,
       Developers: prev.Developers.filter((_, i) => i !== index),
     }));
   };
 
   const handleDeveloperChange = (index, value) => {
-    setNewProduct(prev => {
+    setNewProduct((prev) => {
       const newDevelopers = [...prev.Developers];
       newDevelopers[index] = value;
       return {
@@ -84,7 +83,8 @@ const ProductForm = (props) => {
     const { btnId } = formRef.current;
     e.preventDefault();
     if (e.target.type === "reset") handleReset();
-    if ( // check for empty fields and trigger Tooltip on submit
+    if (
+      // check for empty fields and trigger Tooltip on submit
       !newProduct.productName ||
       !newProduct.productOwnerName ||
       !newProduct.Developers.length ||
@@ -114,7 +114,7 @@ const ProductForm = (props) => {
   };
 
   const handleReset = () => {
-    setNewProduct(prev => ({
+    setNewProduct((prev) => ({
       ...prev,
       productName: "",
       productOwnerName: "",
