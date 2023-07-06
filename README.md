@@ -1,6 +1,8 @@
 # Product Tracker
 
-An application designed to easily track and manage web applications developed and maintained by the Province of BC.
+An application designed to easily track and manage web applications developed and maintained by the Province of BC. 
+Built with Next.js
+
 
 ## Getting Started
 
